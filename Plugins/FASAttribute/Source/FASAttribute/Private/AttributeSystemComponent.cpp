@@ -183,11 +183,20 @@ bool UAttributeSystemComponent::HasAttribute(FGameplayTag tag)
 
 bool UAttributeSystemComponent::AddAttribute(const FAttribute& newAttribute)
 {
-	if(!HasAttribute(newAttribute.attributeTag))
+	if(Attributes.IsEmpty())
 	{
 		Attributes.Add(newAttribute);
 		return true;
 	}
+	else
+	{
+		if(!HasAttribute(newAttribute.attributeTag))
+		{
+			Attributes.Add(newAttribute);
+			return true;
+		}
+	}
+	
 	return false;
 	
 }

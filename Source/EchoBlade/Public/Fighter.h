@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "CharacterTrajectoryComponent.h"
 #include "Fighter.generated.h"
 
 
@@ -16,13 +17,18 @@ public:
 	// Sets default values for this character's properties
 	AFighter();
 
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UAttributeSystemComponent* AttributeSystemComponent;
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UAbilitySystemComponent* AbilitySystemComponent;
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UCapsuleComponent* SwordCollision;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	UCharacterTrajectoryComponent* CharacterTrajectory;
 
+	void SwordAttack();
+	void Block();
+	void Dodge();
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

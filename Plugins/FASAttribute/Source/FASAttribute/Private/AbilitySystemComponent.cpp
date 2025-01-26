@@ -80,6 +80,18 @@ void UAbilitySystemComponent::TriggerAbility(FGameplayTag tag)
 	}
 }
 
+bool UAbilitySystemComponent::HasAbility(FGameplayTag AbilityTag)
+{
+	for (auto Ability : Abilities)
+	{
+		if(Ability->AbilityTag == AbilityTag)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 int UAbilitySystemComponent::AddAbilityAddedDelegate(FOnAbilityAdded addedDelegate)
 {
 	
