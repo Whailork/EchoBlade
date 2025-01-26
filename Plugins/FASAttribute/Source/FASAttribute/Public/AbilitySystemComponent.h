@@ -41,11 +41,13 @@ class FASATTRIBUTE_API UAbilitySystemComponent : public UActorComponent
 
 	
 	//les abilities
-	TArray<UAbility*> Abilities;
+
 	TArray<FAbilityAddedHolder> arrAbilityAddedDelegates;
 	TArray<FAbilityRemovedHolder> arrAbilityRemovedDelegates;
 	
-public:	
+public:
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TArray<UAbility*> Abilities;
 	// Sets default values for this component's properties
 	UAbilitySystemComponent();
 
@@ -61,6 +63,8 @@ public:
 	// Start an ability in the list Abilities (if contains it)
 	UFUNCTION(BlueprintCallable, Category="Abilities")
 	void TriggerAbility(FGameplayTag tag);
+	UFUNCTION(BlueprintCallable, Category="Abilities")
+	bool HasAbility(FGameplayTag AbilityTag);
 
 
 	
