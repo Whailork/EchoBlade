@@ -8,11 +8,16 @@
 USwordAttack::USwordAttack()
 {
 	AbilityTag = UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.SwordAttack");
+	AttackCount = 0;
+	isAttacking = false;
 }
 
 void USwordAttack::Start_Implementation(AActor* instigator)
 {
 	Super::Start_Implementation(instigator);
+	isAttacking = true;
+	AttackCount++;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Start in c++"));
 	
 }
 
@@ -33,7 +38,8 @@ void USwordAttack::OnAbilityRemoved_Implementation(AActor* instigator)
 
 void USwordAttack::OnAbilityStarted_Implementation(AActor* instigator)
 {
-	Super::OnAbilityStarted_Implementation(instigator);
+	
+	
 }
 
 void USwordAttack::OnAbilityStopped_Implementation(AActor* instigator)

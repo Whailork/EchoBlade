@@ -92,6 +92,18 @@ bool UAbilitySystemComponent::HasAbility(FGameplayTag AbilityTag)
 	return false;
 }
 
+UAbility* UAbilitySystemComponent::GetAbility(FGameplayTag AbilityTag)
+{
+	for (auto Ability : Abilities)
+	{
+		if(Ability->AbilityTag == AbilityTag)
+		{
+			return Ability;
+		}
+	}
+	return nullptr;
+}
+
 int UAbilitySystemComponent::AddAbilityAddedDelegate(FOnAbilityAdded addedDelegate)
 {
 	

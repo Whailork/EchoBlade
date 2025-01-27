@@ -26,6 +26,9 @@ public:
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UCharacterTrajectoryComponent* CharacterTrajectory;
 
+	UFUNCTION()
+	void OnOverlap(AActor* OverlappedActor, AActor* OtherActor);
+	
 	void SwordAttack();
 	void Block();
 	void Dodge();
@@ -41,3 +44,5 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 };
+
+
