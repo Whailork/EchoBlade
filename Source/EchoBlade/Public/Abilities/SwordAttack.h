@@ -16,6 +16,11 @@ class ECHOBLADE_API USwordAttack : public UAbility
 
 public:
 	USwordAttack();
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int AttackCount;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	bool isAttacking;
+	
 	virtual void Start_Implementation(AActor* instigator) override;
 	virtual void Stop_Implementation(AActor* instigator) override;
 	virtual void OnAbilityAdded_Implementation(AActor* instigator) override;

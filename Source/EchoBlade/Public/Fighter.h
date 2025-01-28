@@ -18,6 +18,8 @@ public:
 	AFighter();
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	bool IsStrafing;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UAttributeSystemComponent* AttributeSystemComponent;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UAbilitySystemComponent* AbilitySystemComponent;
@@ -26,8 +28,12 @@ public:
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UCharacterTrajectoryComponent* CharacterTrajectory;
 
+	UFUNCTION()
+	void OnOverlap(AActor* OverlappedActor, AActor* OtherActor);
+	
 	void SwordAttack();
 	void Block();
+	void StopBlock();
 	void Dodge();
 protected:
 	// Called when the game starts or when spawned
@@ -41,3 +47,5 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 };
+
+

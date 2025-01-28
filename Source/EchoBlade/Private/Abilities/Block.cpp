@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "Abilities/Block.h"
 #include "GameplayTagsManager.h"
-
-
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 UBlock::UBlock()
@@ -12,12 +12,20 @@ UBlock::UBlock()
 
 void UBlock::Start_Implementation(AActor* instigator)
 {
-	Super::Start_Implementation(instigator);
+	
+	ACharacter* Character = Cast<ACharacter>(instigator);
+	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+	Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("BlockStart"));
 }
 
 void UBlock::Stop_Implementation(AActor* instigator)
 {
-	Super::Stop_Implementation(instigator);
+	
+	ACharacter* Character = Cast<ACharacter>(instigator);
+	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("BlockStop"));
 }
 
 void UBlock::OnAbilityAdded_Implementation(AActor* instigator)

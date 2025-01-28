@@ -65,6 +65,11 @@ public:
 	void TriggerAbility(FGameplayTag tag);
 	UFUNCTION(BlueprintCallable, Category="Abilities")
 	bool HasAbility(FGameplayTag AbilityTag);
+	UFUNCTION(BlueprintCallable, Category="Abilities")
+	UAbility* GetAbility(FGameplayTag AbilityTag);
+	UFUNCTION(BlueprintCallable, Category="Abilities")
+	void StopAbility(FGameplayTag AbilityTag);
+	
 
 
 	

@@ -41,7 +41,8 @@ void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		//basic abilities
 		EnhancedInputComponent->BindAction(SwordAttackAction, ETriggerEvent::Triggered, this, &AFighter::SwordAttack);
 		//basic abilities
-		EnhancedInputComponent->BindAction(BlockAction, ETriggerEvent::Triggered, this, &AFighter::Block);
+		EnhancedInputComponent->BindAction(BlockAction, ETriggerEvent::Started, this, &AFighter::Block);
+		EnhancedInputComponent->BindAction(BlockAction, ETriggerEvent::Completed, this, &AFighter::StopBlock);
 		//basic abilities
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AFighter::Dodge);
 	}

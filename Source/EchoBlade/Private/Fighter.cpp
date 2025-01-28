@@ -5,8 +5,10 @@
 
 #include "AbilitySystemComponent.h"
 #include "AttributeSystemComponent.h"
+#include "BoneProxy.h"
 #include "GameplayTagsManager.h"
 #include "MovieSceneSequenceID.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AFighter::AFighter()
@@ -19,8 +21,18 @@ AFighter::AFighter()
 	AddOwnedComponent(AbilitySystemComponent);
 	CharacterTrajectory = CreateDefaultSubobject<UCharacterTrajectoryComponent>("CharacterTrajectory");
 	AddOwnedComponent(CharacterTrajectory);
-	
 
+	SwordCollision = CreateDefaultSubobject<UCapsuleComponent>("SwordCollision");
+	SwordCollision->SetupAttachment(GetMesh());
+	SwordCollision->AttachToComponent(GetMesh(),FAttachmentTransformRules::SnapToTargetNotIncludingScale, "Sword_Tip");
+
+	this->OnActorBeginOverlap.AddDynamic(this,&AFighter::OnOverlap);
+}
+
+
+void AFighter::OnOverlap(AActor* OverlappedActor, AActor* OtherActor)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Sword hit"));
 }
 
 void AFighter::SwordAttack()
@@ -33,10 +45,16 @@ void AFighter::Block()
 	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
 }
 
+void AFighter::StopBlock()
+{
+	AbilitySystemComponent->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
+}
+
 void AFighter::Dodge()
 {
 	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge"));
 }
+
 
 // Called when the game starts or when spawned
 void AFighter::BeginPlay()
