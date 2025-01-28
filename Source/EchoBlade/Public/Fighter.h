@@ -18,6 +18,8 @@ public:
 	AFighter();
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	bool IsStrafing;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UAttributeSystemComponent* AttributeSystemComponent;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UAbilitySystemComponent* AbilitySystemComponent;
@@ -31,6 +33,7 @@ public:
 	
 	void SwordAttack();
 	void Block();
+	void StopBlock();
 	void Dodge();
 protected:
 	// Called when the game starts or when spawned

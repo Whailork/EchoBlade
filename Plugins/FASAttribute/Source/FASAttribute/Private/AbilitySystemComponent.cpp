@@ -104,6 +104,11 @@ UAbility* UAbilitySystemComponent::GetAbility(FGameplayTag AbilityTag)
 	return nullptr;
 }
 
+void UAbilitySystemComponent::StopAbility(FGameplayTag AbilityTag)
+{
+	GetAbility(AbilityTag)->Stop(this->GetOwner());
+}
+
 int UAbilitySystemComponent::AddAbilityAddedDelegate(FOnAbilityAdded addedDelegate)
 {
 	

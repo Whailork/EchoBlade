@@ -46,7 +46,7 @@ public:
 	UFUNCTION(BlueprintNativeEvent, Category="Ability")
 	void OnAbilityStopped(AActor* instigator);
 	// Appelee pour savoir si l’ability peut demarrer
-	UFUNCTION(BlueprintNativeEvent, Category="Ability")
+	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
 	bool CanStartAbility(AActor* instigator);
 	// Appelee pour savoir si l’ability peut s’ajouter a un component
 	UFUNCTION(BlueprintNativeEvent, Category="Ability")
