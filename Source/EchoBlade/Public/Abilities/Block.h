@@ -15,6 +15,9 @@ class ECHOBLADE_API UBlock : public UAbility
 	GENERATED_BODY()
 public:
 	UBlock();
+
+	class AShield* Shield;
+	TSubclassOf<AShield> shieldClass;
 	virtual void Start_Implementation(AActor* instigator) override;
 	virtual void Stop_Implementation(AActor* instigator) override;
 	virtual void OnAbilityAdded_Implementation(AActor* instigator) override;
