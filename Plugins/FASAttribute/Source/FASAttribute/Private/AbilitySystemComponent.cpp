@@ -109,6 +109,18 @@ void UAbilitySystemComponent::StopAbility(FGameplayTag AbilityTag)
 	GetAbility(AbilityTag)->Stop(this->GetOwner());
 }
 
+UAbility* UAbilitySystemComponent::AbilityInUse()
+{
+	for (UAbility* Ability : Abilities)
+	{
+		if(Ability->bIsActive)
+		{
+			return Ability;
+		}
+	}
+	return nullptr;
+}
+
 int UAbilitySystemComponent::AddAbilityAddedDelegate(FOnAbilityAdded addedDelegate)
 {
 	

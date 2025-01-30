@@ -14,12 +14,16 @@ UAbility::UAbility()
 
 void UAbility::Start_Implementation(AActor* instigator)
 {
+	bIsActive = true;
 	OnAbilityStarted(instigator);
+	
 }
 
 void UAbility::Stop_Implementation(AActor* instigator)
 {
+	bIsActive = false;
 	OnAbilityStopped(instigator);
+	
 }
 
 void UAbility::OnAbilityAdded_Implementation(AActor* instigator)
