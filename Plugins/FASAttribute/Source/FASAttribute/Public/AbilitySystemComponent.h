@@ -69,6 +69,9 @@ public:
 	UAbility* GetAbility(FGameplayTag AbilityTag);
 	UFUNCTION(BlueprintCallable, Category="Abilities")
 	void StopAbility(FGameplayTag AbilityTag);
+
+	UFUNCTION(BlueprintCallable, Category="Abilities")
+	UAbility* AbilityInUse();
 	
 
 

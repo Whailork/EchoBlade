@@ -21,34 +21,37 @@ public:
 	FGameplayTagContainer AbilityBlockerTags;
 	bool bCanAdd;
 	bool bCanStart;
+	bool bIsActive;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bCanInterrupt;
 	// Fonctions
 
 	
 	// Demarre l’ability
-	UFUNCTION(BlueprintNativeEvent, Category="Ability")
+	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
 	void Start(AActor* instigator);
 	// Arrete l’ability
-	UFUNCTION(BlueprintNativeEvent, Category="Ability")
+	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
 	void Stop(AActor* instigator);
 
 	// DELEGATES
 
 	// Appelee quand l’ability est ajouter
-	UFUNCTION(BlueprintNativeEvent, Category="Ability")
+	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
 	void OnAbilityAdded(AActor* instigator);
 	// Appelee quand l’ability est supprimer
-	UFUNCTION(BlueprintNativeEvent, Category="Ability")
+	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
 	void OnAbilityRemoved(AActor* instigator);
 	// Appelee quand l’ability demarre
-	UFUNCTION(BlueprintNativeEvent, Category="Ability")
+	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
 	void OnAbilityStarted(AActor* instigator);
 	// Appelee quand l’ability arrete
-	UFUNCTION(BlueprintNativeEvent, Category="Ability")
+	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
 	void OnAbilityStopped(AActor* instigator);
 	// Appelee pour savoir si l’ability peut demarrer
 	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
 	bool CanStartAbility(AActor* instigator);
 	// Appelee pour savoir si l’ability peut s’ajouter a un component
-	UFUNCTION(BlueprintNativeEvent, Category="Ability")
+	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
 	bool CanAddAbility(AActor* instigator);
 };

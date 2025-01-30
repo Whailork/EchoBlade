@@ -37,22 +37,73 @@ void AFighter::OnOverlap(AActor* OverlappedActor, AActor* OtherActor)
 
 void AFighter::SwordAttack()
 {
-	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.SwordAttack"));
+	UAbility* returnAbility = AbilitySystemComponent->AbilityInUse();
+	
+	if(returnAbility != nullptr)
+	{
+		if(returnAbility->bCanInterrupt)
+		{
+			returnAbility->Stop(this);
+			AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.SwordAttack"));
+		}
+	}
+	else
+	{
+		AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.SwordAttack"));
+	}
+	
+	
 }
 
 void AFighter::Block()
 {
-	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
+	UAbility* returnAbility = AbilitySystemComponent->AbilityInUse();
+
+	if(returnAbility != nullptr)
+	{
+		if(returnAbility->bCanInterrupt)
+		{
+			returnAbility->Stop(this);
+			AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
+		}
+	}
+	else
+	{
+		AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
+	}
+	
 }
 
 void AFighter::StopBlock()
 {
-	AbilitySystemComponent->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
+	UAbility* returnAbility = AbilitySystemComponent->AbilityInUse();
+
+	if(returnAbility != nullptr)
+	{
+		if(returnAbility->AbilityTag == UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"))
+		{
+			AbilitySystemComponent->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
+		}
+	}
+	
 }
 
 void AFighter::Dodge()
 {
-	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge"));
+	UAbility* returnAbility = AbilitySystemComponent->AbilityInUse();
+	if(returnAbility != nullptr)
+	{
+		if(returnAbility->bCanInterrupt)
+		{
+			returnAbility->Stop(this);
+			AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge"));
+		}
+	}
+	else
+	{
+		AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge"));
+	}
+	
 }
 
 

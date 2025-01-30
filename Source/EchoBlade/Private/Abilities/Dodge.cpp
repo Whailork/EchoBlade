@@ -2,18 +2,22 @@
 
 #include "Abilities/Dodge.h"
 #include "GameplayTagsManager.h"
-
-
+#include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 UDodge::UDodge()
 {
 	AbilityTag = UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge");
+	bCanInterrupt = false;
 }
 
 void UDodge::Start_Implementation(AActor* instigator)
 {
 	Super::Start_Implementation(instigator);
+	ACharacter* Character = Cast<ACharacter>(instigator);
+	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
 }
 
 void UDodge::Stop_Implementation(AActor* instigator)
@@ -43,7 +47,13 @@ void UDodge::OnAbilityStopped_Implementation(AActor* instigator)
 
 bool UDodge::CanStartAbility_Implementation(AActor* instigator)
 {
-	return Super::CanStartAbility_Implementation(instigator);
+	if(instigator->GetVelocity().Length() > 1 && Super::CanStartAbility_Implementation(instigator))
+	{
+		return true;
+	}
+	return false;
+
+	
 }
 
 bool UDodge::CanAddAbility_Implementation(AActor* instigator)
