@@ -7,7 +7,11 @@
 		{
 			"Name": "EchoBlade",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine",
+				"FASAttribute"
+			]
 		}
 	],
 	"Plugins": [
