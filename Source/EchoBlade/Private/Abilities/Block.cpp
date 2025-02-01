@@ -3,6 +3,7 @@
 #include "GameplayTagsManager.h"
 #include "Abilities/SpawnableActors/Shield.h"
 #include "Components/ArrowComponent.h"
+#include "Effects/Blocking.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -13,10 +14,11 @@ UBlock::UBlock()
 	bCanInterrupt = true;
 
 	ConstructorHelpers::FClassFinder<AActor> ActorToSpawn(TEXT("/Game/Blueprints/BP_AbilityShield"));
-
+	Cost = 10;
 	if (ActorToSpawn.Class) {
 		shieldClass = ActorToSpawn.Class;
 	}
+
 }
 
 void UBlock::Start_Implementation(AActor* instigator)
@@ -27,7 +29,10 @@ void UBlock::Start_Implementation(AActor* instigator)
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	Shield = GetWorld()->SpawnActor<AShield>(shieldClass, Character->GetActorLocation() + Character->GetArrowComponent()->GetForwardVector()*50,Character->GetActorRotation());
 	Shield->AttachToActor(Character,FAttachmentTransformRules::KeepWorldTransform);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("BlockStart"));
+
+	BlockingEffect = NewObject<UBlocking>();
+	BlockingEffect->InitializeValues(0,1,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),Cost,true,true);
+	instigator->GetComponentByClass<UAttributeSystemComponent>()->AddEffect(BlockingEffect);
 
 	Super::Start_Implementation(instigator);
 }
@@ -39,8 +44,8 @@ void UBlock::Stop_Implementation(AActor* instigator)
 	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
 	Shield->Destroy();
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("BlockStop"));
-
+	BlockingEffect->StopPeriodTimer();
+	instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(BlockingEffect->TagToAdd);
 	Super::Stop_Implementation(instigator);
 }
 
@@ -66,7 +71,13 @@ void UBlock::OnAbilityStopped_Implementation(AActor* instigator)
 
 bool UBlock::CanStartAbility_Implementation(AActor* instigator)
 {
-	return Super::CanStartAbility_Implementation(instigator);
+	float outValue = -1;
+	instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),outValue);
+	if(Super::CanStartAbility_Implementation(instigator) && outValue >= Cost)
+	{
+		return true;
+	}
+	return false;
 }
 
 bool UBlock::CanAddAbility_Implementation(AActor* instigator)

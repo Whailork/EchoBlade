@@ -18,6 +18,7 @@ public:
 
 	class AShield* Shield;
 	TSubclassOf<AShield> shieldClass;
+	class UBlocking* BlockingEffect;
 	virtual void Start_Implementation(AActor* instigator) override;
 	virtual void Stop_Implementation(AActor* instigator) override;
 	virtual void OnAbilityAdded_Implementation(AActor* instigator) override;

@@ -25,15 +25,13 @@ AFighter::AFighter()
 	SwordCollision = CreateDefaultSubobject<UCapsuleComponent>("SwordCollision");
 	SwordCollision->SetupAttachment(GetMesh());
 	SwordCollision->AttachToComponent(GetMesh(),FAttachmentTransformRules::SnapToTargetNotIncludingScale, "Sword_Tip");
+	SwordCollision->SetAutoActivate(false);
+	SwordCollision->Deactivate();
 
-	this->OnActorBeginOverlap.AddDynamic(this,&AFighter::OnOverlap);
+	
 }
 
 
-void AFighter::OnOverlap(AActor* OverlappedActor, AActor* OtherActor)
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Sword hit"));
-}
 
 void AFighter::SwordAttack()
 {
@@ -126,5 +124,10 @@ void AFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AFighter::Jump()
+{
+	Super::Jump();
 }
 

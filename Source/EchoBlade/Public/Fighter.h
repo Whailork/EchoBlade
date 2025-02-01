@@ -28,9 +28,7 @@ public:
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UCharacterTrajectoryComponent* CharacterTrajectory;
 
-	UFUNCTION()
-	void OnOverlap(AActor* OverlappedActor, AActor* OtherActor);
-	
+
 	void SwordAttack();
 	void Block();
 	void StopBlock();
@@ -45,6 +43,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void Jump() override;
 
 };
 
