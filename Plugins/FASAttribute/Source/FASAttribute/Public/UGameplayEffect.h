@@ -72,7 +72,7 @@ public:
     UFUNCTION(BlueprintNativeEvent)
     void OnEffectTriggered();
 
-    UFUNCTION(BlueprintNativeEvent)
+    UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
     void InitializeValues(float inDuration, float inPeriod,FGameplayTag AffectedAttributeTag,float effectPower,bool inLooping, bool inStoppedByEvent);
     UFUNCTION()
     void StopPeriodTimer();
