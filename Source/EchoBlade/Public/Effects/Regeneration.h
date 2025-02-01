@@ -13,5 +13,6 @@ UCLASS()
 class ECHOBLADE_API URegeneration : public UGameplayEffect
 {
 	GENERATED_BODY()
-	
+
+	virtual void InitializeValues_Implementation(float inDuration, float inPeriod, FGameplayTag AffectedAttributeTag, float effectPower, bool inLooping, bool inStoppedByEvent) override;
 };
