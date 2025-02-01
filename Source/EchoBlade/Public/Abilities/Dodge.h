@@ -15,6 +15,8 @@ class ECHOBLADE_API UDodge : public UAbility
 	GENERATED_BODY()
 public:
 	UDodge();
+
+	class UDodging* DodgeEffect;
 	virtual void Start_Implementation(AActor* instigator) override;
 	virtual void Stop_Implementation(AActor* instigator) override;
 	virtual void OnAbilityAdded_Implementation(AActor* instigator) override;

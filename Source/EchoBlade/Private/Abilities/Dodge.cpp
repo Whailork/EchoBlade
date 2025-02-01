@@ -2,6 +2,7 @@
 
 #include "Abilities/Dodge.h"
 #include "GameplayTagsManager.h"
+#include "Effects/Dodging.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -10,6 +11,7 @@ UDodge::UDodge()
 {
 	AbilityTag = UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge");
 	bCanInterrupt = false;
+	Cost = 25;
 }
 
 void UDodge::Start_Implementation(AActor* instigator)
@@ -18,11 +20,16 @@ void UDodge::Start_Implementation(AActor* instigator)
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
+	DodgeEffect = NewObject<UDodging>();
+	DodgeEffect->InitializeValues(0,0.0001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),Cost,false,true);
+	instigator->GetComponentByClass<UAttributeSystemComponent>()->AddEffect(DodgeEffect);
+
 }
 
 void UDodge::Stop_Implementation(AActor* instigator)
 {
 	Super::Stop_Implementation(instigator);
+	instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(DodgeEffect->TagToAdd);
 }
 
 void UDodge::OnAbilityAdded_Implementation(AActor* instigator)
@@ -47,13 +54,14 @@ void UDodge::OnAbilityStopped_Implementation(AActor* instigator)
 
 bool UDodge::CanStartAbility_Implementation(AActor* instigator)
 {
-	if(instigator->GetVelocity().Length() > 1 && Super::CanStartAbility_Implementation(instigator))
+	float outValue = -1;
+	ACharacter* character = Cast<ACharacter>(instigator);
+	instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),outValue);
+	if(instigator->GetVelocity().Length() > 1 && Super::CanStartAbility_Implementation(instigator) && outValue >= Cost && character->CanJump())
 	{
 		return true;
 	}
 	return false;
-
-	
 }
 
 bool UDodge::CanAddAbility_Implementation(AActor* instigator)
