@@ -3,6 +3,7 @@
 
 #include "EchoBlade/Public/EnemyFighter.h"
 
+#include "EchoBladeGameInstance.h"
 #include "GameplayTagsManager.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/CapsuleComponent.h"
@@ -33,6 +34,13 @@ void AEnemyFighter::OnHealthChanged(FGameplayTag tag, float min, float current, 
 	}
 }
 
+void AEnemyFighter::Despawn()
+{
+	GetWorldTimerManager().ClearTimer(DespawnTimerHandle);
+	DespawnTimerHandle.Invalidate();
+	this->Destroy();
+}
+
 void AEnemyFighter::OnDeath()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Enemy Death"));
@@ -43,5 +51,7 @@ void AEnemyFighter::OnDeath()
 	{
 		HealthWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
+	GetWorldTimerManager().SetTimer(DespawnTimerHandle, this,&AEnemyFighter::Despawn,2,false);
+	Cast<UEchoBladeGameInstance>(GetGameInstance())->CurrentPoints += 1;
 	
 }

@@ -5,4 +5,6 @@
 
 UEchoBladeGameInstance::UEchoBladeGameInstance()
 {
+	CurrentPoints = 0;
+	SpentPoints = 0;
 }

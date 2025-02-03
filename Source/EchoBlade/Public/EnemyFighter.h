@@ -23,6 +23,9 @@ public:
 	virtual void PostInitializeComponents() override;
 	UFUNCTION()
 	void OnHealthChanged(FGameplayTag tag,float min,float current,float max);
+	UFUNCTION()
+	void Despawn();
 	void OnDeath();
 	FAttributeChangedDelegate DeathDelegate;
+	FTimerHandle DespawnTimerHandle;
 };
