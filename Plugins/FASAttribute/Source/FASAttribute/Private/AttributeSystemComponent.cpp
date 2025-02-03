@@ -79,7 +79,6 @@ bool UAttributeSystemComponent::SetAttributeValue(FGameplayTag tag, float newVal
 			// Notifie les delegates que la valeur a changé.
 			for (auto attribute : arrChangedDelegates)
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, TEXT("IN Notification"));
 				// Exécute delegate en passant les informations de l'attribut
 				attribute.changedDelegate.ExecuteIfBound(tag, Attributes[i].min, Attributes[i].current, Attributes[i].max);
 			}

@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AttributeSystemComponent.h"
 #include "Fighter.h"
+#include "GameplayTagContainer.h"
 #include "InputAction.h"
 #include "InputActionValue.h"
 #include "PlayerFighter.generated.h"
@@ -45,5 +47,9 @@ class ECHOBLADE_API APlayerFighter : public AFighter
 public :
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputMappingContext* DefaultMappingContext;
+	void OnDeath();
+	FAttributeChangedDelegate deathDelegate;
+	UFUNCTION()
+	void OnHealthChanged(FGameplayTag tag,float min,float current,float max);
 	APlayerFighter();
 };
