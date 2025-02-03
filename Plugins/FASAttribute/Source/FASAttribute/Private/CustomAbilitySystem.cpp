@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "AbilitySystemComponent.h"
+#include "..\Public\CustomAbilitySystem.h"
 
 #include "Engine/Engine.h"
 
@@ -9,7 +9,7 @@
 int FAbilityAddedHolder::currentHandle = 0;
 int FAbilityRemovedHolder::currentHandle = 0;
 // Sets default values for this component's properties
-UAbilitySystemComponent::UAbilitySystemComponent()
+UCustomAbilitySystem::UCustomAbilitySystem()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -18,7 +18,7 @@ UAbilitySystemComponent::UAbilitySystemComponent()
 	// ...
 }
 
-void UAbilitySystemComponent::AddAbility(UAbility* NewAbility)
+void UCustomAbilitySystem::AddAbility(UAbility* NewAbility)
 {
 	
 	if (!Abilities.Contains(NewAbility) && NewAbility->CanAddAbility(this->GetOwner()))
@@ -29,7 +29,7 @@ void UAbilitySystemComponent::AddAbility(UAbility* NewAbility)
 	}
 }
 
-void UAbilitySystemComponent::RemoveAbility(FGameplayTag tag)
+void UCustomAbilitySystem::RemoveAbility(FGameplayTag tag)
 {
 	int removeIndex = -1;
 	for (int i = 0; i < Abilities.Num(); i++)
@@ -54,7 +54,7 @@ void UAbilitySystemComponent::RemoveAbility(FGameplayTag tag)
 	}
 }
 
-void UAbilitySystemComponent::RemoveAllAbilities()
+void UCustomAbilitySystem::RemoveAllAbilities()
 {
 	if (!Abilities.IsEmpty())
 	{
@@ -63,7 +63,7 @@ void UAbilitySystemComponent::RemoveAllAbilities()
 	}
 }
 
-void UAbilitySystemComponent::TriggerAbility(FGameplayTag tag)
+void UCustomAbilitySystem::TriggerAbility(FGameplayTag tag)
 {
 	for (auto ability : Abilities)
 	{
@@ -80,7 +80,7 @@ void UAbilitySystemComponent::TriggerAbility(FGameplayTag tag)
 	}
 }
 
-bool UAbilitySystemComponent::HasAbility(FGameplayTag AbilityTag)
+bool UCustomAbilitySystem::HasAbility(FGameplayTag AbilityTag)
 {
 	for (auto Ability : Abilities)
 	{
@@ -92,7 +92,7 @@ bool UAbilitySystemComponent::HasAbility(FGameplayTag AbilityTag)
 	return false;
 }
 
-UAbility* UAbilitySystemComponent::GetAbility(FGameplayTag AbilityTag)
+UAbility* UCustomAbilitySystem::GetAbility(FGameplayTag AbilityTag)
 {
 	for (auto Ability : Abilities)
 	{
@@ -104,12 +104,12 @@ UAbility* UAbilitySystemComponent::GetAbility(FGameplayTag AbilityTag)
 	return nullptr;
 }
 
-void UAbilitySystemComponent::StopAbility(FGameplayTag AbilityTag)
+void UCustomAbilitySystem::StopAbility(FGameplayTag AbilityTag)
 {
 	GetAbility(AbilityTag)->Stop(this->GetOwner());
 }
 
-UAbility* UAbilitySystemComponent::AbilityInUse()
+UAbility* UCustomAbilitySystem::AbilityInUse()
 {
 	for (UAbility* Ability : Abilities)
 	{
@@ -121,7 +121,7 @@ UAbility* UAbilitySystemComponent::AbilityInUse()
 	return nullptr;
 }
 
-int UAbilitySystemComponent::AddAbilityAddedDelegate(FOnAbilityAdded addedDelegate)
+int UCustomAbilitySystem::AddAbilityAddedDelegate(FOnAbilityAdded addedDelegate)
 {
 	
 	FAbilityAddedHolder Holder{FAbilityAddedHolder::currentHandle++,addedDelegate};
@@ -129,7 +129,7 @@ int UAbilitySystemComponent::AddAbilityAddedDelegate(FOnAbilityAdded addedDelega
 	return Holder.i;
 }
 
-void UAbilitySystemComponent::RemoveAbilityAddedDelegate(int i)
+void UCustomAbilitySystem::RemoveAbilityAddedDelegate(int i)
 {
 	int x;
 	for(x = 0; x < arrAbilityAddedDelegates.Num();x++)
@@ -142,14 +142,14 @@ void UAbilitySystemComponent::RemoveAbilityAddedDelegate(int i)
 	arrAbilityAddedDelegates.RemoveAt(x);
 }
 
-int UAbilitySystemComponent::AddAbilityRemovedDelegate(FOnAbilityRemoved removedDelegate)
+int UCustomAbilitySystem::AddAbilityRemovedDelegate(FOnAbilityRemoved removedDelegate)
 {
 	FAbilityRemovedHolder Holder{FAbilityRemovedHolder::currentHandle++,removedDelegate};
 	arrAbilityRemovedDelegates.Add(Holder);
 	return Holder.i;
 }
 
-void UAbilitySystemComponent::RemoveAbilityRemovedDelegate(int i)
+void UCustomAbilitySystem::RemoveAbilityRemovedDelegate(int i)
 {
 	int x;
 	for(x = 0; x < arrAbilityRemovedDelegates.Num();x++)
@@ -164,7 +164,7 @@ void UAbilitySystemComponent::RemoveAbilityRemovedDelegate(int i)
 
 
 // Called when the game starts
-void UAbilitySystemComponent::BeginPlay()
+void UCustomAbilitySystem::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -174,7 +174,7 @@ void UAbilitySystemComponent::BeginPlay()
 
 
 // Called every frame
-void UAbilitySystemComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UCustomAbilitySystem::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 

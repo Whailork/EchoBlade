@@ -3,7 +3,7 @@
 
 #include "EchoBlade/Public/PlayerFighter.h"
 
-#include "AbilitySystemComponent.h"
+#include "..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
 #include "AttributeSystemComponent.h"
 #include "EchoBladeGameInstance.h"
 #include "EnhancedInputComponent.h"

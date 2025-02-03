@@ -3,7 +3,7 @@
 
 #include "Effects/Blocking.h"
 
-#include "AbilitySystemComponent.h"
+#include "..\..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
 #include "GameplayTagsManager.h"
 
 UBlocking::UBlocking()
@@ -31,7 +31,7 @@ void UBlocking::OnEffectTriggered_Implementation()
 	}
 	else
 	{
-		InstigatorActor->GetComponentByClass<UAbilitySystemComponent>()->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
+		InstigatorActor->GetComponentByClass<UCustomAbilitySystem>()->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
 		StopPeriodTimer();
 	}
 }
