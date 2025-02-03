@@ -3,7 +3,7 @@
 
 #include "EchoBlade/Public/Fighter.h"
 
-#include "AbilitySystemComponent.h"
+#include "..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
 #include "AttributeSystemComponent.h"
 #include "BoneProxy.h"
 #include "GameplayTagsManager.h"
@@ -17,7 +17,7 @@ AFighter::AFighter()
 	PrimaryActorTick.bCanEverTick = true;
 	AttributeSystemComponent = CreateDefaultSubobject<UAttributeSystemComponent>("AttributeSystemComponent");
 	AddOwnedComponent(AttributeSystemComponent);
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent = CreateDefaultSubobject<UCustomAbilitySystem>("CustomAbilitySystem");
 	AddOwnedComponent(AbilitySystemComponent);
 	CharacterTrajectory = CreateDefaultSubobject<UCharacterTrajectoryComponent>("CharacterTrajectory");
 	AddOwnedComponent(CharacterTrajectory);

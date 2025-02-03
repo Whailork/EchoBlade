@@ -22,7 +22,7 @@ public:
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UAttributeSystemComponent* AttributeSystemComponent;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
-	class UAbilitySystemComponent* AbilitySystemComponent;
+	class UCustomAbilitySystem* AbilitySystemComponent;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UCapsuleComponent* SwordCollision;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)

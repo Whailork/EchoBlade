@@ -6,7 +6,7 @@
 #include "GameplayTagContainer.h"
 #include "UAbility.h"
 #include "Components/ActorComponent.h"
-#include "AbilitySystemComponent.generated.h"
+#include "CustomAbilitySystem.generated.h"
 
 // Abilities DELEGATES
 DECLARE_DYNAMIC_DELEGATE_TwoParams(FOnAbilityAdded,FGameplayTag,AbilityTag,AActor*,instigator);
@@ -35,7 +35,7 @@ struct FAbilityRemovedHolder
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class FASATTRIBUTE_API UAbilitySystemComponent : public UActorComponent
+class FASATTRIBUTE_API UCustomAbilitySystem : public UActorComponent
 {
 	GENERATED_BODY()
 
@@ -49,7 +49,7 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TArray<UAbility*> Abilities;
 	// Sets default values for this component's properties
-	UAbilitySystemComponent();
+	UCustomAbilitySystem();
 
 	// Add an ability to the list Abilities (if doesn't contain it)
 	UFUNCTION(BlueprintCallable, Category="Abilities")
