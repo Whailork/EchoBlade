@@ -66,7 +66,7 @@ class FASATTRIBUTE_API UAttributeSystemComponent : public UActorComponent
 	GENERATED_BODY()
 
 	//les attributes
-	TArray<FAttribute> Attributes;
+	
 	TArray<FAttributeChangedHolder> arrChangedDelegates;
 	TArray<FAttributeAddedHolder> arrAddedDelegates;
 	TArray<FAttributeRemovedHolder> arrRemovedDelegates;
@@ -82,7 +82,8 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="defaults")
 	UUASAttributeSet* DefaultAttributes;
-
+	TArray<FAttribute> Attributes;
+	
 	void LoadDefaultAttributes();
 	//getters et setters
 	UFUNCTION(BlueprintCallable)

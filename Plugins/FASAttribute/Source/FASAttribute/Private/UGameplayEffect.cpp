@@ -47,20 +47,41 @@ void UGameplayEffect::OnEffectTriggered_Implementation()
 	//fait quelque chose avec l'attribute modifier
 	UAttributeSystemComponent* TargetActionSystem = InstigatorActor->GetComponentByClass<UAttributeSystemComponent>();
 	float attributeValue;
-	
+	float MaxValue;
+	float MinValue;
 	TargetActionSystem->GetAttributeValue(AttributeModifiers.TargetAttribute,attributeValue);
+	TargetActionSystem->GetAttributeMaxValue(AttributeModifiers.TargetAttribute,MaxValue);
+	TargetActionSystem->GetAttributeMinValue(AttributeModifiers.TargetAttribute,MinValue);
 	switch (AttributeModifiers.Operation)
 	{
 	case EModifierOperation::Add :
-		TargetActionSystem->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue + AttributeModifiers.Value);
+
+		if(attributeValue != MaxValue)
+		{
+			TargetActionSystem->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue + AttributeModifiers.Value);
+		}
+		
 		break;
 	case EModifierOperation::Subtract :
-		TargetActionSystem->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue - AttributeModifiers.Value);
+		if(attributeValue != MinValue)
+		{
+			TargetActionSystem->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue - AttributeModifiers.Value);
+		}
+		
 		break;
 	case EModifierOperation::Multiply :
+		if(attributeValue != MaxValue)
+		{
+			TargetActionSystem->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue + AttributeModifiers.Value);
+		}
+		
 		TargetActionSystem->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue * AttributeModifiers.Value);
 		break;
 	case EModifierOperation::Divide :
+		if(attributeValue != MinValue)
+		{
+			TargetActionSystem->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue - AttributeModifiers.Value);
+		}
 		TargetActionSystem->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue / AttributeModifiers.Value);
 		break;
 	}
