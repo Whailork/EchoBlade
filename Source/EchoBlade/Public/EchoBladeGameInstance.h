@@ -34,6 +34,10 @@ class ECHOBLADE_API UEchoBladeGameInstance : public UGameInstance
 public:
 	UEchoBladeGameInstance();
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	int CurrentPoints;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	int SpentPoints;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TMap<FGameplayTag,FUpgradeData> PlayerUpgrades;
 	
 	
