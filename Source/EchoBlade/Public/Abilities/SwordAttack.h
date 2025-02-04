@@ -25,6 +25,7 @@ public:
 	bool bHasHit;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UCapsuleComponent* SwordCollision;
+	float ComboMultiplier;
 	UFUNCTION(BlueprintCallable)
 	void StartSwordCollision();
 	UFUNCTION(BlueprintCallable)

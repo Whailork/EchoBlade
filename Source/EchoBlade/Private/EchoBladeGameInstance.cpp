@@ -8,3 +8,13 @@ UEchoBladeGameInstance::UEchoBladeGameInstance()
 	CurrentPoints = 0;
 	SpentPoints = 0;
 }
+
+void UEchoBladeGameInstance::UpgradeBought(FGameplayTag upgradeTag)
+{
+	FUpgradeData* UpgradeData = PlayerUpgrades.Find(upgradeTag);
+	if(UpgradeData)
+	{
+		UpgradeData->TimesBought++;
+	}
+		
+}

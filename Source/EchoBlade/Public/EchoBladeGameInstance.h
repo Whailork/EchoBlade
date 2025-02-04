@@ -16,14 +16,18 @@ USTRUCT(BlueprintType)
 struct FUpgradeData
 {
 	GENERATED_BODY()
+public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TSubclassOf<UAbility> LinkedAbility;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FAttribute LinkedAttribute;
+	FGameplayTag LinkedAttribute;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TSubclassOf<UGameplayEffect> LinkedEffect;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float UpgradeValue;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float TimesBought;
+	
 	
 };
 
@@ -39,7 +43,9 @@ public:
 	int SpentPoints;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TMap<FGameplayTag,FUpgradeData> PlayerUpgrades;
-	
+
+	UFUNCTION(BlueprintCallable)
+	void UpgradeBought(FGameplayTag upgradeTag);
 	
 	
 };
