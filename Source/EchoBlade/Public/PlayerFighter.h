@@ -24,6 +24,8 @@ class ECHOBLADE_API APlayerFighter : public AFighter
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
+	virtual void BeginPlay() override;
+	virtual void PostInitializeComponents() override;
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JumpAction;

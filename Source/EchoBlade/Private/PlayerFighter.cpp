@@ -99,6 +99,42 @@ void APlayerFighter::Look(const FInputActionValue& Value)
 	}
 }
 
+void APlayerFighter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}
+
+void APlayerFighter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	TMap<FGameplayTag,FUpgradeData> upgrades = Cast<UEchoBladeGameInstance>(GetGameInstance())->PlayerUpgrades;
+	for(auto pair : upgrades.Array())
+	{
+		if(pair.Value.TimesBought > 0)
+		{
+			if(pair.Value.LinkedAbility != nullptr)
+			{
+				AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,pair.Value.LinkedAbility->GetClass()));
+			}
+			if(pair.Value.LinkedEffect != nullptr)
+			{
+				AttributeSystemComponent->AddEffect(NewObject<UGameplayEffect>(this,pair.Value.LinkedEffect->GetClass()));
+			}
+			if(pair.Value.LinkedAttribute.IsValid())
+			{
+				float maxValue;
+				float value;
+				AttributeSystemComponent->GetAttributeMaxValue(pair.Value.LinkedAttribute,maxValue);
+				AttributeSystemComponent->SetAttributeMaxValue(pair.Value.LinkedAttribute,maxValue + (pair.Value.UpgradeValue*pair.Value.TimesBought));
+				AttributeSystemComponent->GetAttributeValue(pair.Value.LinkedAttribute,value);
+				AttributeSystemComponent->SetAttributeValue(pair.Value.LinkedAttribute,value + (pair.Value.UpgradeValue*pair.Value.TimesBought));
+			}
+		}
+		
+	}
+}
+
 void APlayerFighter::OnDeath()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Death"));
