@@ -108,31 +108,35 @@ void APlayerFighter::BeginPlay()
 void APlayerFighter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	TMap<FGameplayTag,FUpgradeData> upgrades = Cast<UEchoBladeGameInstance>(GetGameInstance())->PlayerUpgrades;
-	for(auto pair : upgrades.Array())
+	if(Cast<UEchoBladeGameInstance>(GetGameInstance()))
 	{
-		if(pair.Value.TimesBought > 0)
+		TMap<FGameplayTag,FUpgradeData> upgrades = Cast<UEchoBladeGameInstance>(GetGameInstance())->PlayerUpgrades;
+		for(auto pair : upgrades.Array())
 		{
-			if(pair.Value.LinkedAbility != nullptr)
+			if(pair.Value.TimesBought > 0)
 			{
-				AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,pair.Value.LinkedAbility->GetClass()));
+				if(pair.Value.LinkedAbility != nullptr)
+				{
+					AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,pair.Value.LinkedAbility->GetClass()));
+				}
+				if(pair.Value.LinkedEffect != nullptr)
+				{
+					AttributeSystemComponent->AddEffect(NewObject<UGameplayEffect>(this,pair.Value.LinkedEffect->GetClass()));
+				}
+				if(pair.Value.LinkedAttribute.IsValid())
+				{
+					float maxValue;
+					float value;
+					AttributeSystemComponent->GetAttributeMaxValue(pair.Value.LinkedAttribute,maxValue);
+					AttributeSystemComponent->SetAttributeMaxValue(pair.Value.LinkedAttribute,maxValue + (pair.Value.UpgradeValue*pair.Value.TimesBought));
+					AttributeSystemComponent->GetAttributeValue(pair.Value.LinkedAttribute,value);
+					AttributeSystemComponent->SetAttributeValue(pair.Value.LinkedAttribute,value + (pair.Value.UpgradeValue*pair.Value.TimesBought));
+				}
 			}
-			if(pair.Value.LinkedEffect != nullptr)
-			{
-				AttributeSystemComponent->AddEffect(NewObject<UGameplayEffect>(this,pair.Value.LinkedEffect->GetClass()));
-			}
-			if(pair.Value.LinkedAttribute.IsValid())
-			{
-				float maxValue;
-				float value;
-				AttributeSystemComponent->GetAttributeMaxValue(pair.Value.LinkedAttribute,maxValue);
-				AttributeSystemComponent->SetAttributeMaxValue(pair.Value.LinkedAttribute,maxValue + (pair.Value.UpgradeValue*pair.Value.TimesBought));
-				AttributeSystemComponent->GetAttributeValue(pair.Value.LinkedAttribute,value);
-				AttributeSystemComponent->SetAttributeValue(pair.Value.LinkedAttribute,value + (pair.Value.UpgradeValue*pair.Value.TimesBought));
-			}
-		}
 		
+		}	
 	}
+	
 }
 
 void APlayerFighter::OnDeath()

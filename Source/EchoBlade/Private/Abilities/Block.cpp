@@ -27,7 +27,9 @@ void UBlock::Start_Implementation(AActor* instigator)
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
-	Shield = GetWorld()->SpawnActor<AShield>(shieldClass, Character->GetActorLocation() + Character->GetArrowComponent()->GetForwardVector()*50,Character->GetActorRotation());
+	Shield = GetWorld()->SpawnActor<AShield>(shieldClass);
+	Shield->SetActorLocation(Character->GetActorLocation() + Character->GetComponentByClass<UArrowComponent>()->GetForwardVector()*50);
+	Shield->SetActorRotation(Character->GetActorRotation());
 	Shield->AttachToActor(Character,FAttachmentTransformRules::KeepWorldTransform);
 
 	BlockingEffect = NewObject<UBlocking>();

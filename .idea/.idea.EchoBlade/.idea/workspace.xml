@@ -13,7 +13,19 @@
   <component name="ChangeListManager">
     <list default="true" id="6adbbde4-4393-4f4e-9f29-273aefb087a2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Cave_Ruins/Meshes/SM_Cave_Ruins_Stairs_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Cave_Ruins/Meshes/SM_Cave_Ruins_Stairs_01.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/DamageZone.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/DamageZone.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_MainMenu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_MainMenu.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ParagonAurora/Characters/Global/Hair/Materials/M_HairSheet_Master2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ParagonAurora/Characters/Global/Hair/Materials/M_HairSheet_Master2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/AbilityNode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityNode.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/MainMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/MainMenu.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Block.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Fighter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Fighter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/PlayerFighter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/PlayerFighter.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -615,6 +627,7 @@
       <workItem from="1738623914988" duration="559000" />
       <workItem from="1738624490320" duration="7359000" />
       <workItem from="1738695469474" duration="728000" />
+      <workItem from="1738703028962" duration="5269000" />
     </task>
     <servers />
   </component>
