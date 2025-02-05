@@ -17,6 +17,7 @@ public:
 	UBlock();
 
 	class AShield* Shield;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TSubclassOf<AShield> shieldClass;
 	class UBlocking* BlockingEffect;
 	virtual void Start_Implementation(AActor* instigator) override;

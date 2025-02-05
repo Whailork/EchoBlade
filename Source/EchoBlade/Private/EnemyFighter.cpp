@@ -28,9 +28,12 @@ void AEnemyFighter::PostInitializeComponents()
 
 void AEnemyFighter::OnHealthChanged(FGameplayTag tag, float min, float current, float max)
 {
-	if(current <= min)
+	if(tag.MatchesTag(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health")))
 	{
-		OnDeath();
+		if(current <= min)
+		{
+			OnDeath();
+		}
 	}
 }
 

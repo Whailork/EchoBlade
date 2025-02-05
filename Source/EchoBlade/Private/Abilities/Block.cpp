@@ -13,11 +13,11 @@ UBlock::UBlock()
 	AbilityTag = UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block");
 	bCanInterrupt = true;
 
-	ConstructorHelpers::FClassFinder<AActor> ActorToSpawn(TEXT("/Game/Blueprints/BP_AbilityShield"));
+	//ConstructorHelpers::FClassFinder<AActor> ActorToSpawn(TEXT("/Game/Blueprints/BP_AbilityShield"));
 	Cost = 10;
-	if (ActorToSpawn.Class) {
+	/*if (ActorToSpawn.Class) {
 		shieldClass = ActorToSpawn.Class;
-	}
+	}*/
 
 }
 
@@ -27,8 +27,10 @@ void UBlock::Start_Implementation(AActor* instigator)
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("BeforeSpawn"));
 	Shield = GetWorld()->SpawnActor<AShield>(shieldClass);
-	Shield->SetActorLocation(Character->GetActorLocation() + Character->GetComponentByClass<UArrowComponent>()->GetForwardVector()*50);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("AfterSpawn"));
+	Shield->SetActorLocation(Character->GetActorLocation() + Character->GetActorForwardVector()*50);
 	Shield->SetActorRotation(Character->GetActorRotation());
 	Shield->AttachToActor(Character,FAttachmentTransformRules::KeepWorldTransform);
 
