@@ -5,9 +5,7 @@
 
 #include "..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
 #include "AttributeSystemComponent.h"
-#include "BoneProxy.h"
 #include "GameplayTagsManager.h"
-#include "MovieSceneSequenceID.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -23,8 +21,7 @@ AFighter::AFighter()
 	AddOwnedComponent(CharacterTrajectory);
 
 	SwordCollision = CreateDefaultSubobject<UCapsuleComponent>("SwordCollision");
-	SwordCollision->SetupAttachment(GetMesh());
-	SwordCollision->AttachToComponent(GetMesh(),FAttachmentTransformRules::SnapToTargetNotIncludingScale, "Sword_Tip");
+	SwordCollision->SetupAttachment(GetMesh(),"Sword_Tip");
 	SwordCollision->SetAutoActivate(false);
 	SwordCollision->Deactivate();
 
