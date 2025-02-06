@@ -3,9 +3,14 @@
 
 #include "EchoBlade/Public/PlayerFighter.h"
 
+#include "..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
+#include "AttributeSystemComponent.h"
+#include "EchoBladeGameInstance.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "GameplayTagsManager.h"
 #include "EchoBlade/EchoBladeCharacter.h"
+#include "Kismet/GameplayStatics.h"
 
 
 APlayerFighter::APlayerFighter()
@@ -50,6 +55,11 @@ void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
+
+	//bind death to attribute changed delegate
+	AttributeSystemComponent->AddAttributeChangedDelegate(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),deathDelegate);
+	deathDelegate.BindDynamic(this,&APlayerFighter::OnHealthChanged);
+	
 }
 
 void APlayerFighter::Move(const FInputActionValue& Value)
@@ -88,5 +98,66 @@ void APlayerFighter::Look(const FInputActionValue& Value)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }
+
+void APlayerFighter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+}
+
+void APlayerFighter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	if(Cast<UEchoBladeGameInstance>(GetGameInstance()))
+	{
+		TMap<FGameplayTag,FUpgradeData> upgrades = Cast<UEchoBladeGameInstance>(GetGameInstance())->PlayerUpgrades;
+		for(auto pair : upgrades.Array())
+		{
+			if(pair.Value.TimesBought > 0)
+			{
+				if(pair.Value.LinkedAbility != nullptr)
+				{
+					AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,pair.Value.LinkedAbility->GetClass()));
+				}
+				if(pair.Value.LinkedEffect != nullptr)
+				{
+					AttributeSystemComponent->AddEffect(NewObject<UGameplayEffect>(this,pair.Value.LinkedEffect->GetClass()));
+				}
+				if(pair.Value.LinkedAttribute.IsValid())
+				{
+					float maxValue;
+					float value;
+					AttributeSystemComponent->GetAttributeMaxValue(pair.Value.LinkedAttribute,maxValue);
+					AttributeSystemComponent->SetAttributeMaxValue(pair.Value.LinkedAttribute,maxValue + (pair.Value.UpgradeValue*pair.Value.TimesBought));
+					AttributeSystemComponent->GetAttributeValue(pair.Value.LinkedAttribute,value);
+					AttributeSystemComponent->SetAttributeValue(pair.Value.LinkedAttribute,value + (pair.Value.UpgradeValue*pair.Value.TimesBought));
+				}
+			}
+		
+		}	
+	}
+	
+}
+
+void APlayerFighter::OnDeath()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Death"));
+	UGameplayStatics::OpenLevel(this, FName("/Game/Maps/Lvl_SkillTreeMenu"), true);
+	///Script/Engine.World'/Game/Maps/Lvl_SkillTreeMenu.Lvl_SkillTreeMenu'
+}
+
+void APlayerFighter::OnHealthChanged(FGameplayTag tag,float min,float current,float max)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("HealthChanged"));
+	if(tag.MatchesTag(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health")))
+	{
+		if(current <= min)
+		{
+			OnDeath();
+		}
+	}
+	
+}
+
 
 

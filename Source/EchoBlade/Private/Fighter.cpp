@@ -3,11 +3,9 @@
 
 #include "EchoBlade/Public/Fighter.h"
 
-#include "AbilitySystemComponent.h"
+#include "..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
 #include "AttributeSystemComponent.h"
-#include "BoneProxy.h"
 #include "GameplayTagsManager.h"
-#include "MovieSceneSequenceID.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -17,23 +15,20 @@ AFighter::AFighter()
 	PrimaryActorTick.bCanEverTick = true;
 	AttributeSystemComponent = CreateDefaultSubobject<UAttributeSystemComponent>("AttributeSystemComponent");
 	AddOwnedComponent(AttributeSystemComponent);
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent = CreateDefaultSubobject<UCustomAbilitySystem>("CustomAbilitySystem");
 	AddOwnedComponent(AbilitySystemComponent);
 	CharacterTrajectory = CreateDefaultSubobject<UCharacterTrajectoryComponent>("CharacterTrajectory");
 	AddOwnedComponent(CharacterTrajectory);
 
 	SwordCollision = CreateDefaultSubobject<UCapsuleComponent>("SwordCollision");
-	SwordCollision->SetupAttachment(GetMesh());
-	SwordCollision->AttachToComponent(GetMesh(),FAttachmentTransformRules::SnapToTargetNotIncludingScale, "Sword_Tip");
+	SwordCollision->SetupAttachment(GetMesh(),"Sword_Tip");
+	SwordCollision->SetAutoActivate(false);
+	SwordCollision->Deactivate();
 
-	this->OnActorBeginOverlap.AddDynamic(this,&AFighter::OnOverlap);
+	
 }
 
 
-void AFighter::OnOverlap(AActor* OverlappedActor, AActor* OtherActor)
-{
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Sword hit"));
-}
 
 void AFighter::SwordAttack()
 {
@@ -126,5 +121,10 @@ void AFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AFighter::Jump()
+{
+	Super::Jump();
 }
 

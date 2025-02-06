@@ -20,9 +20,13 @@ USTRUCT(BlueprintType)
 struct FAttribute
 {
 	GENERATED_BODY();
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FGameplayTag attributeTag;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float min;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float current;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float max;
 };
 

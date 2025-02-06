@@ -22,6 +22,7 @@ public:
 	bool bCanAdd;
 	bool bCanStart;
 	bool bIsActive;
+	float Cost;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bCanInterrupt;
 	// Fonctions

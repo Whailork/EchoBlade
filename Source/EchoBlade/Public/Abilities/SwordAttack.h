@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UAbility.h"
+#include "Components/CapsuleComponent.h"
 #include "SwordAttack.generated.h"
 
 /**
@@ -20,6 +21,21 @@ public:
 	int AttackCount;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	bool isAttacking;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	bool bHasHit;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	UCapsuleComponent* SwordCollision;
+	float ComboMultiplier;
+	UFUNCTION(BlueprintCallable)
+	void StartSwordCollision();
+	UFUNCTION(BlueprintCallable)
+	void StopSwordCollision();
+	UFUNCTION(BlueprintCallable)
+	void SetupSwordCollision(UCapsuleComponent* Sword);
+	UFUNCTION(BlueprintCallable)
+	void OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	
+	
 	
 	virtual void Start_Implementation(AActor* instigator) override;
 	virtual void Stop_Implementation(AActor* instigator) override;

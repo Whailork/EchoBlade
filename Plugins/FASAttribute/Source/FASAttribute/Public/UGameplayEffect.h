@@ -42,6 +42,10 @@ public:
     FOnEffectAdded addedDelegate;
     FOnEffectRemoved removedDelegate;
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effect")
+    bool bLooping;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effect")
+    bool bStoppedByEvent;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effect")
     float Duration;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effect")
@@ -56,6 +60,7 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Effect")
     FAttributeModifier AttributeModifiers;
 
+    UPROPERTY()
     AActor* InstigatorActor;
     FTimerHandle effectHandle;
     UFUNCTION(BlueprintNativeEvent)
@@ -67,6 +72,8 @@ public:
     UFUNCTION(BlueprintNativeEvent)
     void OnEffectTriggered();
 
+    UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
+    void InitializeValues(float inDuration, float inPeriod,FGameplayTag AffectedAttributeTag,float effectPower,bool inLooping, bool inStoppedByEvent);
     UFUNCTION()
     void StopPeriodTimer();
 };

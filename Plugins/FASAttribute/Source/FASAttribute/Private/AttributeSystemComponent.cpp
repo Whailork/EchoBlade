@@ -56,13 +56,29 @@ bool UAttributeSystemComponent::SetAttributeValue(FGameplayTag tag, float newVal
 		// Attribut avec tag trouvé
 		if(Attributes[i].attributeTag == tag)
 		{
-			// Met à jour la valeur actuelle de l'attribut avec la nouvelle valeur
-			Attributes[i].current = newValue;
+			if(newValue < Attributes[i].min)
+			{
+				// set la valeur à min
+				Attributes[i].current = Attributes[i].min;
+			}
+			else
+			{
+				if(newValue > Attributes[i].max)
+				{
+					//set la valeur à max
+					Attributes[i].current = Attributes[i].max;
+				}
+				else
+				{
+					// Met à jour la valeur actuelle de l'attribut avec la nouvelle valeur
+					Attributes[i].current = newValue;
+				}
+			}
+			
 
 			// Notifie les delegates que la valeur a changé.
 			for (auto attribute : arrChangedDelegates)
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, TEXT("IN Notification"));
 				// Exécute delegate en passant les informations de l'attribut
 				attribute.changedDelegate.ExecuteIfBound(tag, Attributes[i].min, Attributes[i].current, Attributes[i].max);
 			}
