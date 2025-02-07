@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "CharacterTrajectoryComponent.h"
+#include "Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Fighter.generated.h"
 
 
@@ -27,6 +28,8 @@ public:
 	class UCapsuleComponent* SwordCollision;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UCharacterTrajectoryComponent* CharacterTrajectory;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	UAIPerceptionStimuliSourceComponent* AIStimuliSource;
 
 
 	void SwordAttack();

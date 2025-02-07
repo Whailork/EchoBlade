@@ -7,6 +7,7 @@
 #include "AttributeSystemComponent.h"
 #include "GameplayTagsManager.h"
 #include "Components/CapsuleComponent.h"
+#include "Perception/AISense_Sight.h"
 
 // Sets default values
 AFighter::AFighter()
@@ -25,6 +26,9 @@ AFighter::AFighter()
 	SwordCollision->SetAutoActivate(false);
 	SwordCollision->Deactivate();
 
+	AIStimuliSource = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("StimuliSource");
+	AIStimuliSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
+	AIStimuliSource->RegisterWithPerceptionSystem();
 	
 }
 
