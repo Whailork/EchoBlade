@@ -72,7 +72,7 @@ void UCustomAbilitySystem::TriggerAbility(FGameplayTag tag)
 			if(ability->CanStartAbility(this->GetOwner()))
 			{
 				ability->Start(this->GetOwner());
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Started ability \"") + tag.ToString() + "\"");
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Started ability \"") + tag.ToString() + "\"");
 				break;
 			}
 			

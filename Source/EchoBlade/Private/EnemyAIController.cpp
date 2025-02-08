@@ -57,11 +57,12 @@ void AEnemyAIController::OnPossess(APawn* InPawn)
 
 void AEnemyAIController::OnPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("perception updated"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, TEXT("perception updated"));
 	if(BlackboardComponent->GetValueAsObject("FightersInSight") == nullptr)
 	{
 		//first fighter seen so create perception info
 		UPerceptionInfo* pInfo = NewObject<UPerceptionInfo>();
+		PerceptionInfo = pInfo;
 		if(Stimulus.Type == UAISense::GetSenseID<UAISense_Sight>())
 		{
 			if(Stimulus.WasSuccessfullySensed())
@@ -83,13 +84,18 @@ void AEnemyAIController::OnPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus
 			{
 				if(Actor != GetPawn())
 				{
-					Cast<UPerceptionInfo>(BlackboardComponent->GetValueAsObject("FightersInSight"))->FightersInSight.Add(Cast<AFighter>(Actor));
+					if(!Cast<UPerceptionInfo>(BlackboardComponent->GetValueAsObject("FightersInSight"))->FightersInSight.Contains(Cast<AFighter>(Actor)))
+					{
+						Cast<UPerceptionInfo>(BlackboardComponent->GetValueAsObject("FightersInSight"))->FightersInSight.Add(Cast<AFighter>(Actor));
+					}
 				}
 				
 			}
 		}
 		
 	}
+	BlackboardComponent->SetValueAsBool("PerceptionUpdated",true);
+	
 }
 
 void AEnemyAIController::OnPerceptionForgotten(AActor* Actor)
@@ -97,6 +103,11 @@ void AEnemyAIController::OnPerceptionForgotten(AActor* Actor)
 	if(Actor != GetPawn())
 	{
 		Cast<UPerceptionInfo>(BlackboardComponent->GetValueAsObject("FightersInSight"))->FightersInSight.Remove(Cast<AFighter>(Actor));
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Magenta, "Fighterforgotten");
+	
+			
+		
 	}
 	
 }
