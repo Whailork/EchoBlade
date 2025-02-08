@@ -22,6 +22,8 @@ class ECHOBLADE_API AEnemyAIController : public AAIController
 	class UAIPerceptionComponent* AIPerception;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	class UAISenseConfig_Sight* SightConfig;
+	UPROPERTY()
+	class UPerceptionInfo* PerceptionInfo;
 	AEnemyAIController();
 	UFUNCTION()
 	void OnPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
