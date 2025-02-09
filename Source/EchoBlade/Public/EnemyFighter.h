@@ -22,6 +22,8 @@ public:
 	UUserWidget* HealthWidget;
 	FAttributeChangedDelegate DeathDelegate;
 	FTimerHandle DespawnTimerHandle;
+	FOnEffectAdded HitDelegate;
+	FTimerHandle HitTimerHandlde;
 	UPROPERTY(EditAnywhere)
 	UBehaviorTree* TreeAsset;
 	AEnemyFighter();
@@ -32,5 +34,8 @@ public:
 	UFUNCTION()
 	void Despawn();
 	void OnDeath();
+	void ResetHitBoolean();
+	UFUNCTION()
+	void OnTakeHit(AActor* instigatorActor);
 	
 };

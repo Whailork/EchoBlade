@@ -11,6 +11,22 @@ UBlocking::UBlocking()
     
 }
 
+void UBlocking::OnEffectAdded_Implementation(AActor* instigator)
+{
+	Super::OnEffectAdded_Implementation(instigator);
+	float outValue = -1;
+	InstigatorActor->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(AttributeModifiers.TargetAttribute,outValue);
+	if(outValue < AttributeModifiers.Value)
+	{
+		InstigatorActor->GetComponentByClass<UCustomAbilitySystem>()->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
+		StopPeriodTimer();
+	}
+	else
+	{
+		OnEffectTriggered_Implementation();
+	}
+}
+
 
 void UBlocking::InitializeValues_Implementation(float inDuration, float inPeriod, FGameplayTag AffectedAttributeTag,float effectPower, bool inLooping, bool inStoppedByEvent)
 {
@@ -25,6 +41,7 @@ void UBlocking::OnEffectTriggered_Implementation()
 {
 	float outValue = -1;
 	InstigatorActor->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(AttributeModifiers.TargetAttribute,outValue);
+	
 	if(outValue >= AttributeModifiers.Value)
 	{
 		Super::OnEffectTriggered_Implementation();

@@ -62,16 +62,17 @@ public:
 	void RemoveAllAbilities();
 	// Start an ability in the list Abilities (if contains it)
 	UFUNCTION(BlueprintCallable, Category="Abilities")
-	void TriggerAbility(FGameplayTag tag);
+	bool TriggerAbility(FGameplayTag tag);
 	UFUNCTION(BlueprintCallable, Category="Abilities")
 	bool HasAbility(FGameplayTag AbilityTag);
 	UFUNCTION(BlueprintCallable, Category="Abilities")
 	UAbility* GetAbility(FGameplayTag AbilityTag);
 	UFUNCTION(BlueprintCallable, Category="Abilities")
 	void StopAbility(FGameplayTag AbilityTag);
-
 	UFUNCTION(BlueprintCallable, Category="Abilities")
 	UAbility* AbilityInUse();
+	UFUNCTION(BlueprintCallable, Category="Abilities")
+	TArray<UAbility*> GetAllAvailableAbilitiesWithTag(FGameplayTag TagToMatch, AActor* Instigator);
 	
 
 

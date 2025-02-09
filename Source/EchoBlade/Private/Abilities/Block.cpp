@@ -27,9 +27,9 @@ void UBlock::Start_Implementation(AActor* instigator)
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("BeforeSpawn"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("BeforeSpawn"));
 	Shield = GetWorld()->SpawnActor<AShield>(shieldClass);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("AfterSpawn"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("AfterSpawn"));
 	Shield->SetActorLocation(Character->GetActorLocation() + Character->GetActorForwardVector()*50);
 	Shield->SetActorRotation(Character->GetActorRotation());
 	Shield->AttachToActor(Character,FAttachmentTransformRules::KeepWorldTransform);
@@ -43,7 +43,7 @@ void UBlock::Start_Implementation(AActor* instigator)
 
 void UBlock::Stop_Implementation(AActor* instigator)
 {
-	
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("StopBlock"));
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;

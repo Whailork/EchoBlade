@@ -148,7 +148,6 @@ void APlayerFighter::OnDeath()
 
 void APlayerFighter::OnHealthChanged(FGameplayTag tag,float min,float current,float max)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("HealthChanged"));
 	if(tag.MatchesTag(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health")))
 	{
 		if(current <= min)

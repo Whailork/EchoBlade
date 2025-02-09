@@ -50,13 +50,24 @@ struct FAttributeRemovedHolder
 };
 
 //effect holder
+
+//effect holder
+USTRUCT()
+struct FEffectAddedHolder
+{
+	GENERATED_BODY()
+	static int currentHandle;
+	int i;
+	FOnEffectAdded effectAddeddDelegate;
+};
+
 USTRUCT()
 struct FEffectRemovedHolder
 {
 	GENERATED_BODY()
 	static int currentHandle;
 	int i;
-	FOnEffectRemoved effectRemovdDelegate;
+	FOnEffectRemoved effectRemovedDelegate;
 };
 
 
@@ -75,6 +86,7 @@ class FASATTRIBUTE_API UAttributeSystemComponent : public UActorComponent
 	UPROPERTY(EditAnywhere, Category = "Effects")
 	FGameplayTagContainer EffectsTagContainer;
 	TMap<FGameplayTag,FEffectRemovedHolder> mapEffectRemoved;
+	TMap<FGameplayTag,TArray<FEffectAddedHolder>> mapEffectAdded;
 	
 public:	
 	// Sets default values for this component's properties
@@ -124,7 +136,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemoveEffect(FGameplayTag effectTag);
 	FGameplayTagContainer GetEffectsTagContainer();
-	
+
+	//fonctions pour les delegates
+	UFUNCTION(BlueprintCallable)
+	void AddEffectAddedDelegate(FGameplayTag effectTag ,FOnEffectAdded addedDelegate);
 
 protected:
 	// Called when the game starts
