@@ -63,21 +63,35 @@ void UCustomAbilitySystem::RemoveAllAbilities()
 	}
 }
 
-void UCustomAbilitySystem::TriggerAbility(FGameplayTag tag)
+bool UCustomAbilitySystem::TriggerAbility(FGameplayTag tag)
 {
+	
 	for (auto ability : Abilities)
 	{
 		if(ability->AbilityTag == tag)
 		{
 			if(ability->CanStartAbility(this->GetOwner()))
 			{
+				UAbility* returnAbility = AbilityInUse();
+				if(returnAbility != nullptr)
+				{
+					if(returnAbility->bCanInterrupt)
+					{
+						returnAbility->Stop(GetOwner());
+						ability->Start(this->GetOwner());
+						return true;
+					}
+					return false;
+				}
 				ability->Start(this->GetOwner());
+				return true;
 				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Started ability \"") + tag.ToString() + "\"");
-				break;
 			}
+			return false;
 			
 		}
 	}
+	return false;
 }
 
 bool UCustomAbilitySystem::HasAbility(FGameplayTag AbilityTag)
@@ -119,6 +133,19 @@ UAbility* UCustomAbilitySystem::AbilityInUse()
 		}
 	}
 	return nullptr;
+}
+
+TArray<UAbility*> UCustomAbilitySystem::GetAllAvailableAbilitiesWithTag(FGameplayTag TagToMatch, AActor* Instigator)
+{
+	TArray<UAbility*> MatchingAbilities;
+	for (UAbility* Ability : Abilities)
+	{
+		if(Ability->CanStartAbility(Instigator) && Ability->AbilityTag.MatchesTag(TagToMatch))
+		{
+			MatchingAbilities.Add(Ability);
+		}
+	}
+	return MatchingAbilities;
 }
 
 int UCustomAbilitySystem::AddAbilityAddedDelegate(FOnAbilityAdded addedDelegate)
