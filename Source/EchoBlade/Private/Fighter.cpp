@@ -7,6 +7,7 @@
 #include "AttributeSystemComponent.h"
 #include "GameplayTagsManager.h"
 #include "Components/CapsuleComponent.h"
+#include "Perception/AISense_Sight.h"
 
 // Sets default values
 AFighter::AFighter()
@@ -25,6 +26,9 @@ AFighter::AFighter()
 	SwordCollision->SetAutoActivate(false);
 	SwordCollision->Deactivate();
 
+	AIStimuliSource = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("StimuliSource");
+	AIStimuliSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
+	AIStimuliSource->RegisterWithPerceptionSystem();
 	
 }
 
@@ -32,41 +36,12 @@ AFighter::AFighter()
 
 void AFighter::SwordAttack()
 {
-	UAbility* returnAbility = AbilitySystemComponent->AbilityInUse();
-	
-	if(returnAbility != nullptr)
-	{
-		if(returnAbility->bCanInterrupt)
-		{
-			returnAbility->Stop(this);
-			AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.SwordAttack"));
-		}
-	}
-	else
-	{
-		AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.SwordAttack"));
-	}
-	
-	
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.SwordAttack"));
 }
 
 void AFighter::Block()
 {
-	UAbility* returnAbility = AbilitySystemComponent->AbilityInUse();
-
-	if(returnAbility != nullptr)
-	{
-		if(returnAbility->bCanInterrupt)
-		{
-			returnAbility->Stop(this);
-			AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
-		}
-	}
-	else
-	{
-		AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
-	}
-	
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
 }
 
 void AFighter::StopBlock()
@@ -85,20 +60,7 @@ void AFighter::StopBlock()
 
 void AFighter::Dodge()
 {
-	UAbility* returnAbility = AbilitySystemComponent->AbilityInUse();
-	if(returnAbility != nullptr)
-	{
-		if(returnAbility->bCanInterrupt)
-		{
-			returnAbility->Stop(this);
-			AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge"));
-		}
-	}
-	else
-	{
-		AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge"));
-	}
-	
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge"));
 }
 
 

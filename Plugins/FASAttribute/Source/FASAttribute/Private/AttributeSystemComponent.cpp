@@ -3,6 +3,7 @@
 
 #include "AttributeSystemComponent.h"
 
+#include "BlueprintEditor.h"
 #include "FASAttribute.h"
 
 #include "UGameplayEffect.h"
@@ -12,11 +13,13 @@ int FAttributeChangedHolder::currentHandle = 0;
 int FAttributeAddedHolder::currentHandle = 0;
 int FAttributeRemovedHolder::currentHandle = 0;
 int FEffectRemovedHolder::currentHandle = 0;
+int FEffectAddedHolder::currentHandle = 0;
 
 FGameplayTagContainer UAttributeSystemComponent::GetEffectsTagContainer()
 {
 	return EffectsTagContainer;
 }
+
 
 // Sets default values for this component's properties
 UAttributeSystemComponent::UAttributeSystemComponent()
@@ -306,10 +309,21 @@ void UAttributeSystemComponent::AddEffect(UGameplayEffect* effect)
 	{
 		//on valide s'il peut être lancé
 		EffectsTagContainer.AddTag(effect->TagToAdd);
-		//fire la delegate
+		//fire la delegate de l'effet
 		effect->addedDelegate.ExecuteIfBound(GetOwner());
+		//fire les delegates de l'attributeSystemComponent
+		if(mapEffectAdded.Contains(effect->TagToAdd))
+		{
+			for (FEffectAddedHolder delegateHolder : mapEffectAdded[effect->TagToAdd])
+			{
+				delegateHolder.effectAddeddDelegate.ExecuteIfBound(GetOwner());
+			}
+		}
+		
+
+		//setup la delegate pour effectRemoved
 		FEffectRemovedHolder holder = {FEffectRemovedHolder::currentHandle++,FOnEffectRemoved()};
-		holder.effectRemovdDelegate = effect->removedDelegate;
+		holder.effectRemovedDelegate = effect->removedDelegate;
 		mapEffectRemoved.Add(effect->TagToAdd,holder);
 	}
 }
@@ -321,8 +335,26 @@ void UAttributeSystemComponent::RemoveEffect(FGameplayTag effectTag)
 		EffectsTagContainer.RemoveTag(effectTag);
 	}
 	//fire la delegate
-	mapEffectRemoved[effectTag].effectRemovdDelegate.ExecuteIfBound(GetOwner());
+	if(mapEffectRemoved.Contains(effectTag))
+	{
+		mapEffectRemoved[effectTag].effectRemovedDelegate.ExecuteIfBound(GetOwner());
+	}
 	
+	
+}
+void UAttributeSystemComponent::AddEffectAddedDelegate(FGameplayTag effectTag, FOnEffectAdded addedDelegate)
+{
+	FEffectAddedHolder holder = {FEffectAddedHolder::currentHandle++,addedDelegate};
+	if(mapEffectAdded.Contains(effectTag))
+	{
+		mapEffectAdded[effectTag].Add(holder);
+	}
+	else
+	{
+		TArray<FEffectAddedHolder> newArray;
+		newArray.Add(holder);
+		mapEffectAdded.Add(effectTag,newArray);
+	}
 }
 
 

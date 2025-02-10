@@ -16,6 +16,7 @@ class ECHOBLADE_API UBlocking : public UGameplayEffect
 public:
 	UBlocking();
 
+	virtual void OnEffectAdded_Implementation(AActor* instigator) override;
 	virtual void InitializeValues_Implementation(float inDuration, float inPeriod, FGameplayTag AffectedAttributeTag, float effectPower, bool inLooping, bool inStoppedByEvent) override;
 	virtual void OnEffectTriggered_Implementation() override;
 };

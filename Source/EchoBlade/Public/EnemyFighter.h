@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AttributeSystemComponent.h"
 #include "Fighter.h"
+#include "BehaviorTree/BehaviorTree.h"
 #include "Components/Widget.h"
 #include "EnemyFighter.generated.h"
 
@@ -16,8 +17,15 @@ class ECHOBLADE_API AEnemyFighter : public AFighter
 {
 	GENERATED_BODY()
 public:
+	
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UUserWidget* HealthWidget;
+	FAttributeChangedDelegate DeathDelegate;
+	FTimerHandle DespawnTimerHandle;
+	FOnEffectAdded HitDelegate;
+	FTimerHandle HitTimerHandlde;
+	UPROPERTY(EditAnywhere)
+	UBehaviorTree* TreeAsset;
 	AEnemyFighter();
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;
@@ -26,6 +34,8 @@ public:
 	UFUNCTION()
 	void Despawn();
 	void OnDeath();
-	FAttributeChangedDelegate DeathDelegate;
-	FTimerHandle DespawnTimerHandle;
+	void ResetHitBoolean();
+	UFUNCTION()
+	void OnTakeHit(AActor* instigatorActor);
+	
 };

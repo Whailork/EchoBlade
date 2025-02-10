@@ -13,7 +13,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6adbbde4-4393-4f4e-9f29-273aefb087a2" name="Changes" comment="" />
+    <list default="true" id="6adbbde4-4393-4f4e-9f29-273aefb087a2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BB_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BB_EnemyFighter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BTS_CooldownHandler.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTS_CooldownHandler.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_MeleeAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_MeleeAbility.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_RangedAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_RangedAbility.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_Retreat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_Retreat.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_SelectTarget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_SelectTarget.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BT_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BT_EnemyFighter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/EQS_Wander.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Attributes/FighterDefaultAttributes.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Attributes/FighterDefaultAttributes.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/UGameplayEffect.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/UGameplayEffect.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Block.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Dodge.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Dodge.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +50,64 @@
   }
 }]]></component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_5.4/Engine/Source/Programs/Shared/EpicGames.Redis/RedisSerializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -671,7 +743,14 @@
       <workItem from="1738695469474" duration="728000" />
       <workItem from="1738703028962" duration="5269000" />
       <workItem from="1738786544522" duration="3712000" />
-      <workItem from="1738863069617" duration="748000" />
+      <workItem from="1738855804293" duration="217000" />
+      <workItem from="1738862623119" duration="614000" />
+      <workItem from="1738872684221" duration="10352000" />
+      <workItem from="1738888859042" duration="676000" />
+      <workItem from="1738890161476" duration="382000" />
+      <workItem from="1738974086824" duration="7320000" />
+      <workItem from="1739126971996" duration="9835000" />
+      <workItem from="1739201310633" duration="4050000" />
     </task>
     <servers />
   </component>
