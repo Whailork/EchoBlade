@@ -108,7 +108,11 @@ void UGameplayEffect::StopPeriodTimer()
 {
 	if(effectHandle.IsValid())
 	{
-		InstigatorActor->GetWorld()->GetTimerManager().ClearTimer(effectHandle);
+		if(InstigatorActor)
+		{
+			InstigatorActor->GetWorld()->GetTimerManager().ClearTimer(effectHandle);
+		}
+		
 		effectHandle.Invalidate();
 	}
 	// on enlève l'effet de sur l'actor puisqu'il est terminé

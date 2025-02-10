@@ -43,13 +43,20 @@ void UBlock::Start_Implementation(AActor* instigator)
 
 void UBlock::Stop_Implementation(AActor* instigator)
 {
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("StopBlock"));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("StopBlock"));
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
-	Shield->Destroy();
-	BlockingEffect->StopPeriodTimer();
-	instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(BlockingEffect->TagToAdd);
+	if(Shield)
+	{
+		Shield->Destroy();
+	}
+	if(BlockingEffect)
+	{
+		BlockingEffect->StopPeriodTimer();
+		instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(BlockingEffect->TagToAdd);
+	}
+	
 	Super::Stop_Implementation(instigator);
 }
 
