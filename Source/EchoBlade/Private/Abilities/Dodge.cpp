@@ -2,6 +2,7 @@
 
 #include "Abilities/Dodge.h"
 #include "GameplayTagsManager.h"
+#include "Components/CapsuleComponent.h"
 #include "Effects/Dodging.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -20,6 +21,8 @@ void UDodge::Start_Implementation(AActor* instigator)
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
+	Character->GetMesh()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
+	Character->GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
 	DodgeEffect = NewObject<UDodging>();
 	DodgeEffect->InitializeValues(0,0.0001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),Cost,false,true);
 	instigator->GetComponentByClass<UAttributeSystemComponent>()->AddEffect(DodgeEffect);
@@ -29,6 +32,9 @@ void UDodge::Start_Implementation(AActor* instigator)
 void UDodge::Stop_Implementation(AActor* instigator)
 {
 	Super::Stop_Implementation(instigator);
+	ACharacter* Character = Cast<ACharacter>(instigator);
+	Character->GetMesh()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Block);
+	Character->GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Block);
 	instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(DodgeEffect->TagToAdd);
 }
 
