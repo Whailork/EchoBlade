@@ -14,11 +14,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6adbbde4-4393-4f4e-9f29-273aefb087a2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_SkillTreeMenu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_SkillTreeMenu.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/AbilityNode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityNode.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/MainMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/MainMenu.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -712,6 +711,7 @@
       <workItem from="1739312722480" duration="430000" />
       <workItem from="1739374393431" duration="1816000" />
       <workItem from="1739382566066" duration="1235000" />
+      <workItem from="1739478644014" duration="1049000" />
     </task>
     <servers />
   </component>
