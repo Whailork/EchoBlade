@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySet.h"
 #include "GameplayTagContainer.h"
 #include "UAbility.h"
 #include "Components/ActorComponent.h"
@@ -41,25 +42,22 @@ class FASATTRIBUTE_API UCustomAbilitySystem : public UActorComponent
 
 	
 	//les abilities
-
+	
 	TArray<FAbilityAddedHolder> arrAbilityAddedDelegates;
 	TArray<FAbilityRemovedHolder> arrAbilityRemovedDelegates;
 	
 public:
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="defaults")
+	UAbilitySet* DefaultAbilities;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TArray<UAbility*> Abilities;
 	// Sets default values for this component's properties
 	UCustomAbilitySystem();
 
+	void LoadDefaultAbilities();
 	// Add an ability to the list Abilities (if doesn't contain it)
 	UFUNCTION(BlueprintCallable, Category="Abilities")
 	void AddAbility(UAbility* NewAbility);
-	// Remove an ability from the list Abilities (if contains it)
-	UFUNCTION(BlueprintCallable, Category="Abilities")
-	void RemoveAbility(FGameplayTag tag);
-	// Remove all abilities from the list Abilities (if not empty)
-	UFUNCTION(BlueprintCallable, Category="Abilities")
-	void RemoveAllAbilities();
 	// Start an ability in the list Abilities (if contains it)
 	UFUNCTION(BlueprintCallable, Category="Abilities")
 	bool TriggerAbility(FGameplayTag tag);
@@ -73,10 +71,6 @@ public:
 	UAbility* AbilityInUse();
 	UFUNCTION(BlueprintCallable, Category="Abilities")
 	TArray<UAbility*> GetAllAvailableAbilitiesWithTag(FGameplayTag TagToMatch, AActor* Instigator);
-	
-
-
-	
 	// pour les delegates des abilities
 	UFUNCTION(BlueprintCallable)
 	int AddAbilityAddedDelegate(FOnAbilityAdded addedDelegate);
@@ -87,6 +81,13 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemoveAbilityRemovedDelegate(int i);
 
+
+	// Remove an ability from the list Abilities (if contains it)
+	UFUNCTION(BlueprintCallable, Category="Abilities")
+	void RemoveAbility(FGameplayTag tag);
+	// Remove all abilities from the list Abilities (if not empty)
+	UFUNCTION(BlueprintCallable, Category="Abilities")
+	void RemoveAllAbilities();
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

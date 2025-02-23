@@ -5,6 +5,7 @@
 
 #include "EchoBladeGameInstance.h"
 #include "EnemyAIController.h"
+#include "EnemyWaveSubsystem.h"
 #include "GameplayTagsManager.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Blueprint/UserWidget.h"
@@ -21,6 +22,7 @@ void AEnemyFighter::BeginPlay()
 	DeathDelegate.BindDynamic(this,&AEnemyFighter::OnHealthChanged);
 	HitDelegate.BindDynamic(this,&AEnemyFighter::OnTakeHit);
 	AttributeSystemComponent->AddEffectAddedDelegate(UGameplayTagsManager::Get().RequestGameplayTag("Effect.Hit"),HitDelegate);
+	OnDestroyed.AddDynamic(this,&AEnemyFighter::OnEnemyDestroyed);
 
 }
 
@@ -70,7 +72,8 @@ void AEnemyFighter::OnDeath()
 		HealthWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 	GetWorldTimerManager().SetTimer(DespawnTimerHandle, this,&AEnemyFighter::Despawn,2,false);
-	Cast<UEchoBladeGameInstance>(GetGameInstance())->CurrentPoints += 1;
+	Cast<AEnemyAIController>(GetController())->BehaviorTree->StopTree(EBTStopMode::Forced);
+	
 	
 }
 
@@ -79,6 +82,11 @@ void AEnemyFighter::ResetHitBoolean()
 	Cast<AEnemyAIController>(GetController())->GetBlackboardComponent()->SetValueAsBool("GotHit",false);
 	GetWorldTimerManager().ClearTimer(HitTimerHandlde);
 	HitTimerHandlde.Invalidate();
+}
+
+void AEnemyFighter::OnEnemyDestroyed(AActor* destroyedActor)
+{
+	GetWorld()->GetSubsystem<UEnemyWaveSubsystem>()->OnFighterDefeated();
 }
 
 void AEnemyFighter::OnTakeHit(AActor* instigatorActor)

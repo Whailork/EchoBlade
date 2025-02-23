@@ -4,6 +4,8 @@
 #include "AttributeSystemComponent.h"
 
 #include "BlueprintEditor.h"
+#include "EchoBladeGameInstance.h"
+#include "EchoBladeGameInstance.h"
 #include "FASAttribute.h"
 
 #include "UGameplayEffect.h"
@@ -301,6 +303,14 @@ void UAttributeSystemComponent::RemoveAttributeRemovedDelegate(int i)
 		}
 	}
 	arrRemovedDelegates.RemoveAt(x);
+}
+
+void UAttributeSystemComponent::FillUpAttributes()
+{
+	for (auto Attribute : Attributes)
+	{
+		SetAttributeValue(Attribute.attributeTag,Attribute.max);
+	}
 }
 
 void UAttributeSystemComponent::AddEffect(UGameplayEffect* effect)

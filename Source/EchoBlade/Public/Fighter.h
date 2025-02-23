@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "CharacterTrajectoryComponent.h"
+#include "EchoBladeGameInstance.h"
+#include "GameplayTagContainer.h"
 #include "Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Fighter.generated.h"
 
@@ -36,6 +38,7 @@ public:
 	void Block();
 	void StopBlock();
 	void Dodge();
+	void ProcessUpgrades(TArray<FUpgradeData> upgrades);
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

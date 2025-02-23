@@ -5,6 +5,7 @@
 
 #include "..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
 #include "AttributeSystemComponent.h"
+#include "EchoBladeGameInstance.h"
 #include "GameplayTagsManager.h"
 #include "Components/CapsuleComponent.h"
 #include "Perception/AISense_Sight.h"
@@ -61,6 +62,35 @@ void AFighter::StopBlock()
 void AFighter::Dodge()
 {
 	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge"));
+}
+
+void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
+{
+	for(auto upgrade : upgrades)
+	{
+		if(upgrade.TimesBought > 0)
+		{
+			if(upgrade.LinkedAbility != nullptr)
+			{
+				AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,upgrade.LinkedAbility->GetClass()));
+			}
+			if(upgrade.LinkedEffect != nullptr)
+			{
+				AttributeSystemComponent->AddEffect(NewObject<UGameplayEffect>(this,upgrade.LinkedEffect->GetClass()));
+			}
+			if(upgrade.LinkedAttribute.IsValid())
+			{
+				float maxValue;
+				float value;
+				AttributeSystemComponent->GetAttributeMaxValue(upgrade.LinkedAttribute,maxValue);
+				AttributeSystemComponent->SetAttributeMaxValue(upgrade.LinkedAttribute,maxValue + (upgrade.UpgradeValue*upgrade.TimesBought));
+				AttributeSystemComponent->GetAttributeValue(upgrade.LinkedAttribute,value);
+				AttributeSystemComponent->SetAttributeValue(upgrade.LinkedAttribute,value + (upgrade.UpgradeValue*upgrade.TimesBought));
+			}
+		}
+		
+	}
+	AttributeSystemComponent->FillUpAttributes();
 }
 
 

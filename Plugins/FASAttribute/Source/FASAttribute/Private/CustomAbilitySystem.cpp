@@ -3,6 +3,7 @@
 
 #include "..\Public\CustomAbilitySystem.h"
 
+#include "AbilitySet.h"
 #include "Engine/Engine.h"
 
 
@@ -18,6 +19,17 @@ UCustomAbilitySystem::UCustomAbilitySystem()
 	// ...
 }
 
+void UCustomAbilitySystem::LoadDefaultAbilities()
+{
+	if(DefaultAbilities)
+	{
+		for(int i = 0; i< DefaultAbilities->AbilityData.Num();i++)
+		{
+			AddAbility(NewObject<UAbility>(this,DefaultAbilities->AbilityData[i]));
+		}
+	}
+}
+
 void UCustomAbilitySystem::AddAbility(UAbility* NewAbility)
 {
 	
@@ -25,7 +37,7 @@ void UCustomAbilitySystem::AddAbility(UAbility* NewAbility)
 	{
 		Abilities.Add(NewAbility);
 		NewAbility->OnAbilityAdded(this->GetOwner());
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Added ability \"") + NewAbility->AbilityTag.ToString() + "\"");
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Added ability \"") + NewAbility->AbilityTag.ToString() + "\"");
 	}
 }
 
@@ -195,7 +207,11 @@ void UCustomAbilitySystem::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	//On assigne les valeurs par défaut
+	if(Abilities.IsEmpty())
+	{
+		LoadDefaultAbilities();
+	}
 	
 }
 

@@ -7,6 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "AttributeSystemComponent.generated.h"
 
+class UGameplayEffect;
 class UUASAttributeSet;
 //Attribute Delagates
 DECLARE_DYNAMIC_DELEGATE_FourParams(FAttributeChangedDelegate, FGameplayTag, attributeTag, float, min, float, current,float, max);
@@ -129,6 +130,8 @@ public:
 	int AddAttributeRemovedDelegate(FAttributeRemovedDelegate removedDelegate);
 	UFUNCTION(BlueprintCallable)
 	void RemoveAttributeRemovedDelegate(int i);
+	UFUNCTION(BlueprintCallable)
+	void FillUpAttributes();
 
 	//ajout et suppression des effets
 	UFUNCTION(BlueprintCallable)

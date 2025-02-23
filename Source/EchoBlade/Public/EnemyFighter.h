@@ -26,6 +26,7 @@ public:
 	FTimerHandle HitTimerHandlde;
 	UPROPERTY(EditAnywhere)
 	UBehaviorTree* TreeAsset;
+	FOnActorDestroyed DestroyedDelegate;
 	AEnemyFighter();
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;
@@ -35,6 +36,8 @@ public:
 	void Despawn();
 	void OnDeath();
 	void ResetHitBoolean();
+	UFUNCTION()
+	void OnEnemyDestroyed(AActor* destroyedActor);
 	UFUNCTION()
 	void OnTakeHit(AActor* instigatorActor);
 	
