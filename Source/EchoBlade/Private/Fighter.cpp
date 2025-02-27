@@ -80,11 +80,14 @@ void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
 			}
 			if(upgrade.LinkedAttribute.IsValid())
 			{
-				float maxValue;
-				float value;
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, upgrade.LinkedAttribute.ToString());
+				float maxValue = -1;
+				float value = -1;
 				AttributeSystemComponent->GetAttributeMaxValue(upgrade.LinkedAttribute,maxValue);
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Silver, FString::SanitizeFloat(maxValue));
 				AttributeSystemComponent->SetAttributeMaxValue(upgrade.LinkedAttribute,maxValue + (upgrade.UpgradeValue*upgrade.TimesBought));
 				AttributeSystemComponent->GetAttributeValue(upgrade.LinkedAttribute,value);
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Silver, FString::SanitizeFloat(value));
 				AttributeSystemComponent->SetAttributeValue(upgrade.LinkedAttribute,value + (upgrade.UpgradeValue*upgrade.TimesBought));
 			}
 		}

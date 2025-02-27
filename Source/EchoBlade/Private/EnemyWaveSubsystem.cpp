@@ -24,6 +24,8 @@ void UEnemyWaveSubsystem::SpawnNextWave()
 
 	if(nextWave)
 	{
+		SpawnTimers.Empty();
+		SpawnNumbers.Empty();
 		for (int i = 0; i < nextWave->enemies.Num();i++)
 		{
 			FTimerHandle tempTimerHandle;
