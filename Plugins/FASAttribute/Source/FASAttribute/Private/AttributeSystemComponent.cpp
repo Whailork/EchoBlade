@@ -340,15 +340,19 @@ void UAttributeSystemComponent::AddEffect(UGameplayEffect* effect)
 
 void UAttributeSystemComponent::RemoveEffect(FGameplayTag effectTag)
 {
-	if(EffectsTagContainer.HasTag(effectTag))
+	if(EffectsTagContainer.IsValid())
 	{
-		EffectsTagContainer.RemoveTag(effectTag);
+		if(EffectsTagContainer.HasTag(effectTag))
+		{
+			EffectsTagContainer.RemoveTag(effectTag);
+		}
+		//fire la delegate
+		if(mapEffectRemoved.Contains(effectTag))
+		{
+			mapEffectRemoved[effectTag].effectRemovedDelegate.ExecuteIfBound(GetOwner());
+		}
 	}
-	//fire la delegate
-	if(mapEffectRemoved.Contains(effectTag))
-	{
-		mapEffectRemoved[effectTag].effectRemovedDelegate.ExecuteIfBound(GetOwner());
-	}
+	
 	
 	
 }

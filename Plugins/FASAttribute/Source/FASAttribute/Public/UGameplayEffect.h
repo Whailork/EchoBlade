@@ -29,6 +29,8 @@ struct FAttributeModifier
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
     EModifierOperation Operation;
+
+   
 };
 
 
@@ -62,7 +64,13 @@ public:
 
     UPROPERTY()
     AActor* InstigatorActor;
+    UPROPERTY()
+    UWorld* world;
+    UPROPERTY()
+    UAttributeSystemComponent* InstgatorAttributeComponent;
+    
     FTimerHandle effectHandle;
+    
     UFUNCTION(BlueprintNativeEvent)
     void OnEffectAdded(AActor* instigator);
 
