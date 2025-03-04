@@ -21,19 +21,23 @@ UBlock::UBlock()
 
 }
 
+void UBlock::DestroyShield(AActor* DestroyedActor)
+{
+	if(Shield)
+	{
+		Shield->Destroy();
+	}
+}
+
 void UBlock::Start_Implementation(AActor* instigator)
 {
 	
 	ACharacter* Character = Cast<ACharacter>(instigator);
+	//instigator->OnDestroyed.AddDynamic(this,&UBlock::DestroyShield);
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("BeforeSpawn"));
-	Shield = GetWorld()->SpawnActor<AShield>(shieldClass);
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("AfterSpawn"));
-	Shield->SetActorLocation(Character->GetActorLocation() + Character->GetActorForwardVector()*50);
-	Shield->SetActorRotation(Character->GetActorRotation());
-	Shield->AttachToActor(Character,FAttachmentTransformRules::KeepWorldTransform);
-
+	
 	BlockingEffect = NewObject<UBlocking>();
 	BlockingEffect->InitializeValues(0,1,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),Cost,true,true);
 	instigator->GetComponentByClass<UAttributeSystemComponent>()->AddEffect(BlockingEffect);
@@ -53,8 +57,12 @@ void UBlock::Stop_Implementation(AActor* instigator)
 	}
 	if(BlockingEffect)
 	{
-		BlockingEffect->StopPeriodTimer();
-		instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(BlockingEffect->TagToAdd);
+		if(instigator)
+		{
+			BlockingEffect->StopPeriodTimer();
+			instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(BlockingEffect->TagToAdd);
+		}
+		
 	}
 	
 	Super::Stop_Implementation(instigator);

@@ -96,6 +96,20 @@ void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
 	AttributeSystemComponent->FillUpAttributes();
 }
 
+void AFighter::BeginDestroy()
+{
+	//UAbility* ability = AbilitySystemComponent->AbilityInUse();
+	/*if(ability != nullptr)
+	{
+		ability->Stop(this);
+	}*/
+	
+	
+	
+	Super::BeginDestroy();
+	AttributeSystemComponent->ClearAllEffects();
+}
+
 
 // Called when the game starts or when spawned
 void AFighter::BeginPlay()

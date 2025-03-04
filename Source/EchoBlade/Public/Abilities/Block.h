@@ -20,6 +20,8 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TSubclassOf<AShield> shieldClass;
 	class UBlocking* BlockingEffect;
+	UFUNCTION()
+	void DestroyShield(AActor* DestroyedActor);
 	virtual void Start_Implementation(AActor* instigator) override;
 	virtual void Stop_Implementation(AActor* instigator) override;
 	virtual void OnAbilityAdded_Implementation(AActor* instigator) override;

@@ -15,6 +15,13 @@ AEnemyFighter::AEnemyFighter()
 {
 }
 
+void AEnemyFighter::Destroyed()
+{
+	GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
+
+	Super::Destroyed();
+}
+
 void AEnemyFighter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -39,6 +46,7 @@ void AEnemyFighter::OnHealthChanged(FGameplayTag tag, float min, float current, 
 	{
 		if(current <= min)
 		{
+			Cast<AEnemyAIController>(GetController())->BehaviorTree->StopTree(EBTStopMode::Forced);
 			OnDeath();
 		}
 		//check for low health (under 30 percents)
@@ -71,6 +79,7 @@ void AEnemyFighter::OnDeath()
 	{
 		HealthWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
+	StopAnimMontage();
 	GetWorldTimerManager().SetTimer(DespawnTimerHandle, this,&AEnemyFighter::Despawn,2,false);
 	Cast<AEnemyAIController>(GetController())->BehaviorTree->StopTree(EBTStopMode::Forced);
 	

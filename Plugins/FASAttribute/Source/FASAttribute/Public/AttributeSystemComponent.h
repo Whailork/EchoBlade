@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FASAttribute.h"
 #include "GameplayTagContainer.h"
 #include "Components/ActorComponent.h"
 #include "AttributeSystemComponent.generated.h"
@@ -85,7 +86,7 @@ class FASATTRIBUTE_API UAttributeSystemComponent : public UActorComponent
 
 	// les effects
 	UPROPERTY(EditAnywhere, Category = "Effects")
-	FGameplayTagContainer EffectsTagContainer;
+	TArray<UGameplayEffect*> EffectsContainer;
 	TMap<FGameplayTag,FEffectRemovedHolder> mapEffectRemoved;
 	TMap<FGameplayTag,TArray<FEffectAddedHolder>> mapEffectAdded;
 	
@@ -96,6 +97,7 @@ public:
 	UPROPERTY(EditAnywhere, Category="defaults")
 	UUASAttributeSet* DefaultAttributes;
 	TArray<FAttribute> Attributes;
+
 	
 	void LoadDefaultAttributes();
 	//getters et setters
@@ -139,6 +141,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemoveEffect(FGameplayTag effectTag);
 	FGameplayTagContainer GetEffectsTagContainer();
+	void ClearAllEffects();
 
 	//fonctions pour les delegates
 	UFUNCTION(BlueprintCallable)

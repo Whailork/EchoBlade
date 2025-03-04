@@ -2,7 +2,7 @@
 
 
 #include "UGameplayEffect.h"
-
+#include "TimerManager.h"
 #include "Kismet/GameplayStatics.h"
 
 UGameplayEffect::UGameplayEffect()
@@ -16,7 +16,9 @@ UGameplayEffect::UGameplayEffect()
 void UGameplayEffect::OnEffectAdded_Implementation(AActor* instigator)
 {
 	InstigatorActor = instigator;
+	InstigatorActor->OnDestroyed.AddDynamic(this,&UGameplayEffect::DestroyEffect);
 	world = instigator->GetWorld();
+	tm = &world->GetTimerManager();
 	InstgatorAttributeComponent = instigator->GetComponentByClass<UAttributeSystemComponent>();
 	// le timer pour le période
 	world->GetTimerManager().SetTimer(
@@ -108,16 +110,36 @@ void UGameplayEffect::InitializeValues_Implementation(float inDuration, float in
 	bStoppedByEvent = inStoppedByEvent;
 }
 
+void UGameplayEffect::BeginDestroy()
+{
+	UObject::BeginDestroy();
+	if(InstgatorAttributeComponent)
+	{
+		// on enlève l'effet de sur l'actor puisqu'il est terminé
+		InstgatorAttributeComponent->RemoveEffect(TagToAdd);
+	}
+}
+
+void UGameplayEffect::DestroyEffect(AActor* instigator)
+{
+	tm->ClearAllTimersForObject(this);
+}
+
 void UGameplayEffect::StopPeriodTimer()
 {
 	if(effectHandle.IsValid())
 	{
 		try
 		{
-			if(effectHandle.IsValid())
+			if(world)
 			{
-				world->GetTimerManager().ClearTimer(effectHandle);
-				effectHandle.Invalidate();
+				if(tm){
+					if(effectHandle.IsValid())
+					{
+						tm->ClearTimer(effectHandle);
+						effectHandle.Invalidate();
+					}
+				}
 			}
 			
 		}
@@ -127,7 +149,7 @@ void UGameplayEffect::StopPeriodTimer()
 		}
 	}
 
-	if(InstgatorAttributeComponent)
+	if(InstgatorAttributeComponent.IsValid())
 	{
 		// on enlève l'effet de sur l'actor puisqu'il est terminé
 		InstgatorAttributeComponent->RemoveEffect(TagToAdd);

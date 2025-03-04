@@ -87,12 +87,17 @@ bool UCustomAbilitySystem::TriggerAbility(FGameplayTag tag)
 				UAbility* returnAbility = AbilityInUse();
 				if(returnAbility != nullptr)
 				{
-					if(returnAbility->bCanInterrupt)
+					if(returnAbility->AbilityTag != tag)
 					{
-						returnAbility->Stop(GetOwner());
-						ability->Start(this->GetOwner());
-						return true;
+						if(returnAbility->bCanInterrupt)
+						{
+							returnAbility->Stop(GetOwner());
+							ability->Start(this->GetOwner());
+							return true;
+						}
+						return false;
 					}
+					
 					return false;
 				}
 				ability->Start(this->GetOwner());

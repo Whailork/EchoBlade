@@ -39,6 +39,8 @@ public:
 	void StopBlock();
 	void Dodge();
 	void ProcessUpgrades(TArray<FUpgradeData> upgrades);
+
+	virtual void BeginDestroy() override;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

@@ -5,10 +5,21 @@
 
 #include "..\..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
 #include "GameplayTagsManager.h"
+#include "Abilities/Block.h"
+#include "Abilities/SpawnableActors/Shield.h"
 
 UBlocking::UBlocking()
 {
     
+}
+
+void UBlocking::BeginDestroy()
+{
+	if(Shield)
+	{
+		Shield->Destroy();
+	}
+	Super::BeginDestroy();
 }
 
 void UBlocking::OnEffectAdded_Implementation(AActor* instigator)
@@ -25,6 +36,13 @@ void UBlocking::OnEffectAdded_Implementation(AActor* instigator)
 	{
 		OnEffectTriggered_Implementation();
 	}
+	this->shieldClass = Cast<UBlock>(InstigatorActor->GetComponentByClass<UCustomAbilitySystem>()->GetAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block")))->shieldClass;
+	Shield = instigator->GetWorld()->SpawnActor<AShield>(shieldClass);
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("AfterSpawn"));
+	Shield->SetActorLocation(InstigatorActor->GetActorLocation() + InstigatorActor->GetActorForwardVector()*50);
+	Shield->SetActorRotation(InstigatorActor->GetActorRotation());
+	Shield->AttachToActor(InstigatorActor,FAttachmentTransformRules::KeepWorldTransform);
+
 }
 
 
@@ -50,5 +68,14 @@ void UBlocking::OnEffectTriggered_Implementation()
 	{
 		InstigatorActor->GetComponentByClass<UCustomAbilitySystem>()->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
 		StopPeriodTimer();
+	}
+}
+
+void UBlocking::OnEffectRemoved_Implementation(AActor* instigator)
+{
+	Super::OnEffectRemoved_Implementation(instigator);
+	if(Shield)
+	{
+		Shield->Destroy();
 	}
 }

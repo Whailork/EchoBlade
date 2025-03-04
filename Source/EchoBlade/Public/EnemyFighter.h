@@ -28,6 +28,7 @@ public:
 	UBehaviorTree* TreeAsset;
 	FOnActorDestroyed DestroyedDelegate;
 	AEnemyFighter();
+	virtual void Destroyed() override;
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;
 	UFUNCTION()
