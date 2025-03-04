@@ -3,10 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FASAttribute.h"
 #include "GameplayTagContainer.h"
 #include "Components/ActorComponent.h"
 #include "AttributeSystemComponent.generated.h"
 
+class UGameplayEffect;
 class UUASAttributeSet;
 //Attribute Delagates
 DECLARE_DYNAMIC_DELEGATE_FourParams(FAttributeChangedDelegate, FGameplayTag, attributeTag, float, min, float, current,float, max);
@@ -84,7 +86,7 @@ class FASATTRIBUTE_API UAttributeSystemComponent : public UActorComponent
 
 	// les effects
 	UPROPERTY(EditAnywhere, Category = "Effects")
-	FGameplayTagContainer EffectsTagContainer;
+	TArray<UGameplayEffect*> EffectsContainer;
 	TMap<FGameplayTag,FEffectRemovedHolder> mapEffectRemoved;
 	TMap<FGameplayTag,TArray<FEffectAddedHolder>> mapEffectAdded;
 	
@@ -95,6 +97,7 @@ public:
 	UPROPERTY(EditAnywhere, Category="defaults")
 	UUASAttributeSet* DefaultAttributes;
 	TArray<FAttribute> Attributes;
+
 	
 	void LoadDefaultAttributes();
 	//getters et setters
@@ -129,6 +132,8 @@ public:
 	int AddAttributeRemovedDelegate(FAttributeRemovedDelegate removedDelegate);
 	UFUNCTION(BlueprintCallable)
 	void RemoveAttributeRemovedDelegate(int i);
+	UFUNCTION(BlueprintCallable)
+	void FillUpAttributes();
 
 	//ajout et suppression des effets
 	UFUNCTION(BlueprintCallable)
@@ -136,6 +141,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemoveEffect(FGameplayTag effectTag);
 	FGameplayTagContainer GetEffectsTagContainer();
+	void ClearAllEffects();
 
 	//fonctions pour les delegates
 	UFUNCTION(BlueprintCallable)

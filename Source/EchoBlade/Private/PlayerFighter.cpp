@@ -102,6 +102,7 @@ void APlayerFighter::Look(const FInputActionValue& Value)
 void APlayerFighter::BeginPlay()
 {
 	Super::BeginPlay();
+	AttributeSystemComponent->FillUpAttributes();
 	
 }
 
@@ -110,31 +111,12 @@ void APlayerFighter::PostInitializeComponents()
 	Super::PostInitializeComponents();
 	if(Cast<UEchoBladeGameInstance>(GetGameInstance()))
 	{
-		TMap<FGameplayTag,FUpgradeData> upgrades = Cast<UEchoBladeGameInstance>(GetGameInstance())->PlayerUpgrades;
-		for(auto pair : upgrades.Array())
+		TArray<FUpgradeData> upgrades;
+		for(auto pair :Cast<UEchoBladeGameInstance>(GetGameInstance())->PlayerUpgrades.Array())
 		{
-			if(pair.Value.TimesBought > 0)
-			{
-				if(pair.Value.LinkedAbility != nullptr)
-				{
-					AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,pair.Value.LinkedAbility->GetClass()));
-				}
-				if(pair.Value.LinkedEffect != nullptr)
-				{
-					AttributeSystemComponent->AddEffect(NewObject<UGameplayEffect>(this,pair.Value.LinkedEffect->GetClass()));
-				}
-				if(pair.Value.LinkedAttribute.IsValid())
-				{
-					float maxValue;
-					float value;
-					AttributeSystemComponent->GetAttributeMaxValue(pair.Value.LinkedAttribute,maxValue);
-					AttributeSystemComponent->SetAttributeMaxValue(pair.Value.LinkedAttribute,maxValue + (pair.Value.UpgradeValue*pair.Value.TimesBought));
-					AttributeSystemComponent->GetAttributeValue(pair.Value.LinkedAttribute,value);
-					AttributeSystemComponent->SetAttributeValue(pair.Value.LinkedAttribute,value + (pair.Value.UpgradeValue*pair.Value.TimesBought));
-				}
-			}
-		
-		}	
+			upgrades.Add(pair.Value);
+		}
+		ProcessUpgrades(upgrades);
 	}
 	
 }

@@ -4,6 +4,8 @@
 #include "AttributeSystemComponent.h"
 
 #include "BlueprintEditor.h"
+#include "EchoBladeGameInstance.h"
+#include "EchoBladeGameInstance.h"
 #include "FASAttribute.h"
 
 #include "UGameplayEffect.h"
@@ -17,7 +19,28 @@ int FEffectAddedHolder::currentHandle = 0;
 
 FGameplayTagContainer UAttributeSystemComponent::GetEffectsTagContainer()
 {
+	FGameplayTagContainer EffectsTagContainer;
+	for (auto Effect : EffectsContainer)
+	{
+		EffectsTagContainer.AddTag(Effect->TagToAdd);
+	}
 	return EffectsTagContainer;
+}
+
+void UAttributeSystemComponent::ClearAllEffects()
+{
+	for (auto Effect : EffectsContainer)
+	{
+		//on cancel les timers et on destroy l'object
+		GetOwner()->GetWorldTimerManager().ClearAllTimersForObject(Effect);
+		//fire la delegate
+		if(mapEffectRemoved.Contains(Effect->TagToAdd))
+		{
+			mapEffectRemoved[Effect->TagToAdd].effectRemovedDelegate.ExecuteIfBound(GetOwner());
+		}
+	}
+	EffectsContainer.Empty();
+	
 }
 
 
@@ -303,12 +326,20 @@ void UAttributeSystemComponent::RemoveAttributeRemovedDelegate(int i)
 	arrRemovedDelegates.RemoveAt(x);
 }
 
+void UAttributeSystemComponent::FillUpAttributes()
+{
+	for (auto Attribute : Attributes)
+	{
+		SetAttributeValue(Attribute.attributeTag,Attribute.max);
+	}
+}
+
 void UAttributeSystemComponent::AddEffect(UGameplayEffect* effect)
 {
-	if(!EffectsTagContainer.HasTag(effect->TagToAdd) && !EffectsTagContainer.HasAny(effect->BlockingTags))
+	if(!GetEffectsTagContainer().HasTag(effect->TagToAdd) && !GetEffectsTagContainer().HasAny(effect->BlockingTags))
 	{
 		//on valide s'il peut être lancé
-		EffectsTagContainer.AddTag(effect->TagToAdd);
+		EffectsContainer.Add(effect);
 		//fire la delegate de l'effet
 		effect->addedDelegate.ExecuteIfBound(GetOwner());
 		//fire les delegates de l'attributeSystemComponent
@@ -330,15 +361,27 @@ void UAttributeSystemComponent::AddEffect(UGameplayEffect* effect)
 
 void UAttributeSystemComponent::RemoveEffect(FGameplayTag effectTag)
 {
-	if(EffectsTagContainer.HasTag(effectTag))
+	UGameplayEffect* EffectToRemove = nullptr;
+	for (auto Effect : EffectsContainer)
 	{
-		EffectsTagContainer.RemoveTag(effectTag);
+		if(Effect->TagToAdd.MatchesTagExact(effectTag))
+		{
+			EffectToRemove = Effect;
+		}
+		
 	}
-	//fire la delegate
-	if(mapEffectRemoved.Contains(effectTag))
+	if(EffectToRemove != nullptr)
 	{
-		mapEffectRemoved[effectTag].effectRemovedDelegate.ExecuteIfBound(GetOwner());
+		EffectsContainer.Remove(EffectToRemove);
+		//on cancel les timers et on destroy l'object
+		GetOwner()->GetWorldTimerManager().ClearAllTimersForObject(EffectToRemove);
+		//fire la delegate
+		if(mapEffectRemoved.Contains(effectTag))
+		{
+			mapEffectRemoved[effectTag].effectRemovedDelegate.ExecuteIfBound(GetOwner());
+		}
 	}
+	
 	
 	
 }
