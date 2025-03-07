@@ -103,11 +103,11 @@ void AFighter::BeginDestroy()
 	{
 		ability->Stop(this);
 	}*/
-	
-	
-	
+
+
+	AttributeSystemComponent->EffectsContainer.Empty();
 	Super::BeginDestroy();
-	AttributeSystemComponent->ClearAllEffects();
+	
 }
 
 
