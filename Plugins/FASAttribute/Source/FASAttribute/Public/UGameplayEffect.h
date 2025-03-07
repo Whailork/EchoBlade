@@ -5,6 +5,7 @@
 #include "AttributeSystemComponent.h"
 #include "GameplayTagContainer.h"
 #include "UObject/Object.h"
+#include "TimerManager.h"
 #include "UGameplayEffect.generated.h"
 
 UENUM(BlueprintType)
@@ -29,6 +30,8 @@ struct FAttributeModifier
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Modifier")
     EModifierOperation Operation;
+
+   
 };
 
 
@@ -62,10 +65,17 @@ public:
 
     UPROPERTY()
     AActor* InstigatorActor;
+    UPROPERTY()
+    UWorld* world;
+    UPROPERTY()
+   TSoftObjectPtr<UAttributeSystemComponent> InstgatorAttributeComponent;
+    FTimerManager* tm; 
     FTimerHandle effectHandle;
+    virtual void BeginDestroy() override;
     UFUNCTION(BlueprintNativeEvent)
     void OnEffectAdded(AActor* instigator);
-
+    UFUNCTION()
+    void DestroyEffect(AActor* instigator);
     UFUNCTION(BlueprintNativeEvent)
     void OnEffectRemoved(AActor* instigator);
 

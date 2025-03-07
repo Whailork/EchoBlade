@@ -3,18 +3,29 @@
 
 #include "EchoBladeGameInstance.h"
 
+#include "Kismet/GameplayStatics.h"
+
 UEchoBladeGameInstance::UEchoBladeGameInstance()
 {
-	CurrentPoints = 0;
-	SpentPoints = 0;
+	
 }
 
-void UEchoBladeGameInstance::UpgradeBought(FGameplayTag upgradeTag)
+UPlayerData* UEchoBladeGameInstance::GetPlayerData(APlayerController* playerController)
 {
-	FUpgradeData* UpgradeData = PlayerUpgrades.Find(upgradeTag);
-	if(UpgradeData)
+	int controllerId = UGameplayStatics::GetPlayerControllerID(playerController);
+	
+	//if player data already exists on load les upgrades
+	if (AllPlayersData.Num() > controllerId)
 	{
-		UpgradeData->TimesBought++;
+		return AllPlayersData[controllerId];
 	}
-		
+	//else create new empty data
+	else
+	{
+		UPlayerData* newPlayerData = NewObject<UPlayerData>();
+		AllPlayersData.Add(newPlayerData);
+		return newPlayerData;
+	}
+
 }
+

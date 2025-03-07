@@ -5,6 +5,7 @@
 
 #include "EchoBladeGameInstance.h"
 #include "EnemyAIController.h"
+#include "EnemyWaveSubsystem.h"
 #include "GameplayTagsManager.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Blueprint/UserWidget.h"
@@ -14,6 +15,13 @@ AEnemyFighter::AEnemyFighter()
 {
 }
 
+void AEnemyFighter::Destroyed()
+{
+	GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
+
+	Super::Destroyed();
+}
+
 void AEnemyFighter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -21,6 +29,7 @@ void AEnemyFighter::BeginPlay()
 	DeathDelegate.BindDynamic(this,&AEnemyFighter::OnHealthChanged);
 	HitDelegate.BindDynamic(this,&AEnemyFighter::OnTakeHit);
 	AttributeSystemComponent->AddEffectAddedDelegate(UGameplayTagsManager::Get().RequestGameplayTag("Effect.Hit"),HitDelegate);
+	OnDestroyed.AddDynamic(this,&AEnemyFighter::OnEnemyDestroyed);
 
 }
 
@@ -37,10 +46,11 @@ void AEnemyFighter::OnHealthChanged(FGameplayTag tag, float min, float current, 
 	{
 		if(current <= min)
 		{
+			Cast<AEnemyAIController>(GetController())->BehaviorTree->StopTree(EBTStopMode::Forced);
 			OnDeath();
 		}
 		//check for low health (under 30 percents)
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::SanitizeFloat((current - min)/ (max - min)));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::SanitizeFloat((current - min)/ (max - min)));
 		if((current - min)/ (max - min) < 0.3)
 		{
 			Cast<AEnemyAIController>(GetController())->GetBlackboardComponent()->SetValueAsBool("LowHealth",true);
@@ -69,8 +79,10 @@ void AEnemyFighter::OnDeath()
 	{
 		HealthWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
+	StopAnimMontage();
 	GetWorldTimerManager().SetTimer(DespawnTimerHandle, this,&AEnemyFighter::Despawn,2,false);
-	Cast<UEchoBladeGameInstance>(GetGameInstance())->CurrentPoints += 1;
+	Cast<AEnemyAIController>(GetController())->BehaviorTree->StopTree(EBTStopMode::Forced);
+	
 	
 }
 
@@ -81,9 +93,14 @@ void AEnemyFighter::ResetHitBoolean()
 	HitTimerHandlde.Invalidate();
 }
 
+void AEnemyFighter::OnEnemyDestroyed(AActor* destroyedActor)
+{
+	GetWorld()->GetSubsystem<UEnemyWaveSubsystem>()->OnFighterDefeated();
+}
+
 void AEnemyFighter::OnTakeHit(AActor* instigatorActor)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "GotHit");
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "GotHit");
 	Cast<AEnemyAIController>(GetController())->GetBlackboardComponent()->SetValueAsBool("GotHit",true);
 	GetWorldTimerManager().SetTimer(HitTimerHandlde, this,&AEnemyFighter::ResetHitBoolean,2,false);
 }

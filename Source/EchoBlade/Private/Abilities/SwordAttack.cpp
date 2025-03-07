@@ -66,7 +66,7 @@ void USwordAttack::Start_Implementation(AActor* instigator)
 {
 	Super::Start_Implementation(instigator);
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::FromInt(AttackCount));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::FromInt(AttackCount));
 	if(AttackCount >= 3)
 	{
 		Stop_Implementation(instigator);

@@ -14,8 +14,7 @@ UCLASS()
 class ECHOBLADE_API AEnemyAIController : public AAIController
 {
 	GENERATED_BODY()
-	UPROPERTY(Transient)
-	class UBehaviorTreeComponent* BehaviorTree;
+	
 	UPROPERTY(Transient)
 	class UBlackboardComponent* BlackboardComponent;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
@@ -30,4 +29,7 @@ class ECHOBLADE_API AEnemyAIController : public AAIController
 	UFUNCTION()
 	void OnPerceptionForgotten(AActor* Actor);
 	virtual void OnPossess(APawn* InPawn) override;
+public:
+	UPROPERTY(Transient)
+	class UBehaviorTreeComponent* BehaviorTree;
 };

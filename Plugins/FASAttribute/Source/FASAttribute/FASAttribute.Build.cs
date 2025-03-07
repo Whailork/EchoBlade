@@ -37,7 +37,7 @@ public class FASAttribute : ModuleRules
 				"CoreUObject",
 				"Engine",
 				"Slate",
-				"SlateCore",
+				"SlateCore", "EchoBlade", "EchoBlade",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
