@@ -84,9 +84,7 @@ class FASATTRIBUTE_API UAttributeSystemComponent : public UActorComponent
 	TArray<FAttributeAddedHolder> arrAddedDelegates;
 	TArray<FAttributeRemovedHolder> arrRemovedDelegates;
 
-	// les effects
-	UPROPERTY(EditAnywhere, Category = "Effects")
-	TArray<UGameplayEffect*> EffectsContainer;
+	
 	TMap<FGameplayTag,FEffectRemovedHolder> mapEffectRemoved;
 	TMap<FGameplayTag,TArray<FEffectAddedHolder>> mapEffectAdded;
 	
@@ -97,6 +95,10 @@ public:
 	UPROPERTY(EditAnywhere, Category="defaults")
 	UUASAttributeSet* DefaultAttributes;
 	TArray<FAttribute> Attributes;
+
+	// les effects
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	TArray<UGameplayEffect*> EffectsContainer;
 
 	
 	void LoadDefaultAttributes();

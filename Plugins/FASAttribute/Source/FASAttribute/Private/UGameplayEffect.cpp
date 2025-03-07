@@ -16,7 +16,6 @@ UGameplayEffect::UGameplayEffect()
 void UGameplayEffect::OnEffectAdded_Implementation(AActor* instigator)
 {
 	InstigatorActor = instigator;
-	InstigatorActor->OnDestroyed.AddDynamic(this,&UGameplayEffect::DestroyEffect);
 	world = instigator->GetWorld();
 	tm = &world->GetTimerManager();
 	InstgatorAttributeComponent = instigator->GetComponentByClass<UAttributeSystemComponent>();
@@ -55,45 +54,49 @@ void UGameplayEffect::OnEffectTriggered_Implementation()
 	float attributeValue;
 	float MaxValue;
 	float MinValue;
-	InstgatorAttributeComponent->GetAttributeValue(AttributeModifiers.TargetAttribute,attributeValue);
-	InstgatorAttributeComponent->GetAttributeMaxValue(AttributeModifiers.TargetAttribute,MaxValue);
-	InstgatorAttributeComponent->GetAttributeMinValue(AttributeModifiers.TargetAttribute,MinValue);
-	switch (AttributeModifiers.Operation)
+	if(InstgatorAttributeComponent.IsValid())
 	{
-	case EModifierOperation::Add :
+		InstgatorAttributeComponent->GetAttributeValue(AttributeModifiers.TargetAttribute,attributeValue);
+		InstgatorAttributeComponent->GetAttributeMaxValue(AttributeModifiers.TargetAttribute,MaxValue);
+		InstgatorAttributeComponent->GetAttributeMinValue(AttributeModifiers.TargetAttribute,MinValue);
+		switch (AttributeModifiers.Operation)
+		{
+		case EModifierOperation::Add :
 
-		if(attributeValue != MaxValue)
-		{
-			InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue + AttributeModifiers.Value);
-		}
+			if(attributeValue != MaxValue)
+			{
+				InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue + AttributeModifiers.Value);
+			}
 		
-		break;
-	case EModifierOperation::Subtract :
-		if(attributeValue != MinValue)
-		{
-			InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue - AttributeModifiers.Value);
-		}
+			break;
+		case EModifierOperation::Subtract :
+			if(attributeValue != MinValue)
+			{
+				InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue - AttributeModifiers.Value);
+			}
 		
-		break;
-	case EModifierOperation::Multiply :
-		if(attributeValue != MaxValue)
-		{
-			InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue + AttributeModifiers.Value);
-		}
+			break;
+		case EModifierOperation::Multiply :
+			if(attributeValue != MaxValue)
+			{
+				InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue + AttributeModifiers.Value);
+			}
 		
-		InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue * AttributeModifiers.Value);
-		break;
-	case EModifierOperation::Divide :
-		if(attributeValue != MinValue)
-		{
-			InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue - AttributeModifiers.Value);
+			InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue * AttributeModifiers.Value);
+			break;
+		case EModifierOperation::Divide :
+			if(attributeValue != MinValue)
+			{
+				InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue - AttributeModifiers.Value);
+			}
+			InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue / AttributeModifiers.Value);
+			break;
 		}
-		InstgatorAttributeComponent->SetAttributeValue(AttributeModifiers.TargetAttribute, +attributeValue / AttributeModifiers.Value);
-		break;
+		InstgatorAttributeComponent->GetAttributeValue(AttributeModifiers.TargetAttribute,attributeValue);
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow,FString::SanitizeFloat(attributeValue) );
+
+	
 	}
-	InstgatorAttributeComponent->GetAttributeValue(AttributeModifiers.TargetAttribute,attributeValue);
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow,FString::SanitizeFloat(attributeValue) );
-
 	if(!bLooping && !bStoppedByEvent)
 	{
 		StopPeriodTimer();
@@ -120,10 +123,6 @@ void UGameplayEffect::BeginDestroy()
 	}
 }
 
-void UGameplayEffect::DestroyEffect(AActor* instigator)
-{
-	tm->ClearAllTimersForObject(this);
-}
 
 void UGameplayEffect::StopPeriodTimer()
 {
@@ -148,7 +147,4 @@ void UGameplayEffect::StopPeriodTimer()
 		// on enlève l'effet de sur l'actor puisqu'il est terminé
 		InstgatorAttributeComponent->RemoveEffect(TagToAdd);
 	}
-	
-	
-	
 }

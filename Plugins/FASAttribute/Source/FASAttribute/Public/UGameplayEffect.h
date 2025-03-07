@@ -74,8 +74,6 @@ public:
     virtual void BeginDestroy() override;
     UFUNCTION(BlueprintNativeEvent)
     void OnEffectAdded(AActor* instigator);
-    UFUNCTION()
-    void DestroyEffect(AActor* instigator);
     UFUNCTION(BlueprintNativeEvent)
     void OnEffectRemoved(AActor* instigator);
 

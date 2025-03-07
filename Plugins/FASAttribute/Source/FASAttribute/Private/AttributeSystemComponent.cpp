@@ -41,7 +41,6 @@ void UAttributeSystemComponent::ClearAllEffects()
 			}
 		}
 		EffectsContainer.Empty();
-	
 	}
 	
 }

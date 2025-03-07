@@ -14,37 +14,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6adbbde4-4393-4f4e-9f29-273aefb087a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/PlayerData.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/PlayerData.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_BuffAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_BuffAbility.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_DefenseAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_DefenseAbility.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_MeleeAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_MeleeAbility.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_RangedAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_RangedAbility.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_SelectTarget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_SelectTarget.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Attributes/FighterDefaultAttributes.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Attributes/FighterDefaultAttributes.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_EchoBladeGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_EchoBladeGameMode.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/GM_Spectator.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/GM_Spectator.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_MainMenu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_MainMenu.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_SkillTreeMenu.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_SkillTreeMenu.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/AbilityNode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityNode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/Hud.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/Hud.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/MotionMatching/CHT_States.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MotionMatching/CHT_States.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/AttributeSystemComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/AttributeSystemComponent.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/UGameplayEffect.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/UGameplayEffect.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SwordAttack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SwordAttack.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EchoBladeGameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EchoBladeGameInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyFighter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyFighter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/PlayerFighter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/PlayerFighter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/EchoBladeGameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/EchoBladeGameInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/Fighter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Fighter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/PlayerFighter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/PlayerFighter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/AttributeSystemComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/AttributeSystemComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/UGameplayEffect.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/UGameplayEffect.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Fighter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Fighter.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,28 +58,7 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://1" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -120,7 +78,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.EpicGames.AspNet.executor": "Run",
-    "C++ Project.EchoBlade.executor": "Run",
+    "C++ Project.EchoBlade.executor": "Debug",
     "C/C++ Project.EchoBlade.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -730,6 +688,7 @@
       <workItem from="1741193594664" duration="10486000" />
       <workItem from="1741279414705" duration="4062000" />
       <workItem from="1741308408374" duration="7009000" />
+      <workItem from="1741372103447" duration="8382000" />
     </task>
     <servers />
   </component>
