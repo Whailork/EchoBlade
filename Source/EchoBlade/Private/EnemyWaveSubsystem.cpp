@@ -2,7 +2,7 @@
 
 
 #include "EnemyWaveSubsystem.h"
-
+#include "PlayerFighter.h"
 #include "Kismet/GameplayStatics.h"
 
 void UEnemyWaveSubsystem::Init(UDataTable* waves, TSubclassOf<AEnemyFighter> classToSpawn)
@@ -81,7 +81,14 @@ void UEnemyWaveSubsystem::OnFighterDefeated()
 		{
 			//wave finished
 			SpawnNextWave();
-			Cast<UEchoBladeGameInstance>(GetWorld()->GetGameInstance())->CurrentPoints += 1;
+			TArray<AActor*> players;
+			UGameplayStatics::GetAllActorsOfClass(GetWorld(),APlayerFighter::StaticClass(),players);
+			for (auto Player : players)
+			{
+				UPlayerData* thisPlayerData = Cast<UEchoBladeGameInstance>(Player->GetGameInstance())->GetPlayerData(Cast<APlayerController>(Cast<APlayerFighter>(Player)->GetController()));
+				thisPlayerData->CurrentPoints += 1;
+			}
+			//Cast<UEchoBladeGameInstance>(GetWorld()->GetGameInstance())->CurrentPoints += 1;
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, TEXT("Start new wave"));
 		}
 	}

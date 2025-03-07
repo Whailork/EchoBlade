@@ -32,7 +32,7 @@ public:
 	UCharacterTrajectoryComponent* CharacterTrajectory;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UAIPerceptionStimuliSourceComponent* AIStimuliSource;
-
+	
 
 	void SwordAttack();
 	void Block();

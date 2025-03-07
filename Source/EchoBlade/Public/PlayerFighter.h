@@ -26,6 +26,7 @@ class ECHOBLADE_API APlayerFighter : public AFighter
 
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;
+	virtual void PossessedBy(AController* NewController) override;
 	/** Jump Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* JumpAction;
@@ -49,7 +50,9 @@ class ECHOBLADE_API APlayerFighter : public AFighter
 public :
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputMappingContext* DefaultMappingContext;
+	UFUNCTION()
 	void OnDeath();
+	UPROPERTY()
 	FAttributeChangedDelegate deathDelegate;
 	UFUNCTION()
 	void OnHealthChanged(FGameplayTag tag,float min,float current,float max);

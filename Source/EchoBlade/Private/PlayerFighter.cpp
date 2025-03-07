@@ -56,9 +56,7 @@ void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
 
-	//bind death to attribute changed delegate
-	AttributeSystemComponent->AddAttributeChangedDelegate(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),deathDelegate);
-	deathDelegate.BindDynamic(this,&APlayerFighter::OnHealthChanged);
+	
 	
 }
 
@@ -109,10 +107,26 @@ void APlayerFighter::BeginPlay()
 void APlayerFighter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	if(Cast<UEchoBladeGameInstance>(GetGameInstance()))
+	
+	
+}
+
+void APlayerFighter::PossessedBy(AController* NewController)
+{
+	
+	//bind death to attribute changed delegate
+	deathDelegate.BindDynamic(this,&APlayerFighter::OnHealthChanged);
+	AttributeSystemComponent->AddAttributeChangedDelegate(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),deathDelegate);
+
+	Super::PossessedBy(NewController);
+
+	//load upgrades
+	UPlayerData* thisPlayerData = Cast<UEchoBladeGameInstance>(GetGameInstance())->GetPlayerData(Cast<APlayerController>(NewController));
+	
+	TArray<FUpgradeData> upgrades;
+	if(!thisPlayerData->PlayerUpgrades.IsEmpty())
 	{
-		TArray<FUpgradeData> upgrades;
-		for(auto pair :Cast<UEchoBladeGameInstance>(GetGameInstance())->PlayerUpgrades.Array())
+		for (auto pair : thisPlayerData->PlayerUpgrades.Array())
 		{
 			upgrades.Add(pair.Value);
 		}
@@ -123,16 +137,16 @@ void APlayerFighter::PostInitializeComponents()
 
 void APlayerFighter::OnDeath()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Death"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Death"));
 	UGameplayStatics::OpenLevel(this, FName("/Game/Maps/Lvl_SkillTreeMenu"), true);
 	///Script/Engine.World'/Game/Maps/Lvl_SkillTreeMenu.Lvl_SkillTreeMenu'
 }
 
-void APlayerFighter::OnHealthChanged(FGameplayTag tag,float min,float current,float max)
+void APlayerFighter::OnHealthChanged(FGameplayTag tag, float min, float current, float max)
 {
-	if(tag.MatchesTag(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health")))
+	if (tag.MatchesTag(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health")))
 	{
-		if(current <= min)
+		if (current <= min)
 		{
 			OnDeath();
 		}

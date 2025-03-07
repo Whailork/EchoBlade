@@ -92,7 +92,7 @@ void UGameplayEffect::OnEffectTriggered_Implementation()
 		break;
 	}
 	InstgatorAttributeComponent->GetAttributeValue(AttributeModifiers.TargetAttribute,attributeValue);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow,FString::SanitizeFloat(attributeValue) );
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow,FString::SanitizeFloat(attributeValue) );
 
 	if(!bLooping && !bStoppedByEvent)
 	{
@@ -129,24 +129,18 @@ void UGameplayEffect::StopPeriodTimer()
 {
 	if(effectHandle.IsValid())
 	{
-		try
+		
+		if(world)
 		{
-			if(world)
-			{
-				if(tm){
-					if(effectHandle.IsValid())
-					{
-						tm->ClearTimer(effectHandle);
-						effectHandle.Invalidate();
-					}
+			if(tm){
+				if(effectHandle.IsValid())
+				{
+					tm->ClearTimer(effectHandle);
+					effectHandle.Invalidate();
 				}
 			}
-			
 		}
-		catch(std::exception e)
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red,TEXT("game crashes"));
-		}
+		
 	}
 
 	if(InstgatorAttributeComponent.IsValid())
