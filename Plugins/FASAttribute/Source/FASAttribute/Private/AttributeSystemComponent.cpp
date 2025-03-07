@@ -3,7 +3,6 @@
 
 #include "AttributeSystemComponent.h"
 
-#include "BlueprintEditor.h"
 #include "EchoBladeGameInstance.h"
 #include "EchoBladeGameInstance.h"
 #include "FASAttribute.h"
@@ -29,17 +28,21 @@ FGameplayTagContainer UAttributeSystemComponent::GetEffectsTagContainer()
 
 void UAttributeSystemComponent::ClearAllEffects()
 {
-	for (auto Effect : EffectsContainer)
+	if(!EffectsContainer.IsEmpty())
 	{
-		//on cancel les timers et on destroy l'object
-		GetOwner()->GetWorldTimerManager().ClearAllTimersForObject(Effect);
-		//fire la delegate
-		if(mapEffectRemoved.Contains(Effect->TagToAdd))
+		for (auto Effect : EffectsContainer)
 		{
-			mapEffectRemoved[Effect->TagToAdd].effectRemovedDelegate.ExecuteIfBound(GetOwner());
+			//on cancel les timers et on destroy l'object
+			GetOwner()->GetWorldTimerManager().ClearAllTimersForObject(Effect);
+			//fire la delegate
+			if(mapEffectRemoved.Contains(Effect->TagToAdd))
+			{
+				mapEffectRemoved[Effect->TagToAdd].effectRemovedDelegate.ExecuteIfBound(GetOwner());
+			}
 		}
+		EffectsContainer.Empty();
+	
 	}
-	EffectsContainer.Empty();
 	
 }
 
@@ -106,7 +109,10 @@ bool UAttributeSystemComponent::SetAttributeValue(FGameplayTag tag, float newVal
 			for (auto attribute : arrChangedDelegates)
 			{
 				// Exécute delegate en passant les informations de l'attribut
-				attribute.changedDelegate.ExecuteIfBound(tag, Attributes[i].min, Attributes[i].current, Attributes[i].max);
+				if(attribute.changedDelegate.ExecuteIfBound(tag, Attributes[i].min, Attributes[i].current, Attributes[i].max))
+				{
+					//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Purple, TEXT("execute delegate"));
+				}
 			}
 			return true;
 		}
@@ -264,7 +270,7 @@ bool UAttributeSystemComponent::RemoveAttribute(FGameplayTag tag)
 
 int UAttributeSystemComponent::AddAttributeChangedDelegate(FGameplayTag attributeTag,FAttributeChangedDelegate changedDelegate)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Purple, TEXT("Tag is : ") + attributeTag.ToString());
+	//GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Purple, TEXT("Tag is : ") + attributeTag.ToString());
 	// Crée un conteneur pour le délégué et son identifiant unique (handle) {Incrémente le handle unique pour l'associer à ce délégué, Associe le délégué passé en paramètre.
 	FAttributeChangedHolder Holder = {FAttributeChangedHolder::currentHandle++,changedDelegate};
 

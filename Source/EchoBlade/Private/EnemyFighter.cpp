@@ -50,7 +50,7 @@ void AEnemyFighter::OnHealthChanged(FGameplayTag tag, float min, float current, 
 			OnDeath();
 		}
 		//check for low health (under 30 percents)
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::SanitizeFloat((current - min)/ (max - min)));
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::SanitizeFloat((current - min)/ (max - min)));
 		if((current - min)/ (max - min) < 0.3)
 		{
 			Cast<AEnemyAIController>(GetController())->GetBlackboardComponent()->SetValueAsBool("LowHealth",true);
@@ -100,7 +100,7 @@ void AEnemyFighter::OnEnemyDestroyed(AActor* destroyedActor)
 
 void AEnemyFighter::OnTakeHit(AActor* instigatorActor)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "GotHit");
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "GotHit");
 	Cast<AEnemyAIController>(GetController())->GetBlackboardComponent()->SetValueAsBool("GotHit",true);
 	GetWorldTimerManager().SetTimer(HitTimerHandlde, this,&AEnemyFighter::ResetHitBoolean,2,false);
 }
