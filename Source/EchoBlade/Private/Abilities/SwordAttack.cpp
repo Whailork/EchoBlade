@@ -14,6 +14,7 @@ USwordAttack::USwordAttack()
 	isAttacking = false;
 	bCanInterrupt = false;
 	bHasHit = false;
+	bInterruptOnHit = true;
 	
 }
 

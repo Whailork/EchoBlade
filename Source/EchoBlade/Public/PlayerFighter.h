@@ -50,6 +50,8 @@ class ECHOBLADE_API APlayerFighter : public AFighter
 public :
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputMappingContext* DefaultMappingContext;
+	UPROPERTY(EditAnywhere,BlueprintReadOnly)
+	FVector2D MovementVector;
 	UFUNCTION()
 	void OnDeath();
 	UPROPERTY()
