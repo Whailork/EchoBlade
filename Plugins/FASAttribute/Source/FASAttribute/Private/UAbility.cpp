@@ -1,6 +1,7 @@
 #include "UAbility.h"
 
 #include "ASActionSystemComponent.h"
+#include "CustomAbilitySystem.h"
 #include "GameFramework/Actor.h"
 
 
@@ -51,6 +52,7 @@ void UAbility::OnAbilityStopped_Implementation(AActor* instigator)
 
 bool UAbility::CanStartAbility_Implementation(AActor* instigator)
 {
+	UCustomAbilitySystem* instigatorAbilityComponent = instigator->GetComponentByClass<UCustomAbilitySystem>();
 	if(bCanStart && !instigator->GetComponentByClass<UAttributeSystemComponent>()->GetEffectsTagContainer().HasAny(AbilityBlockerTags))
 	{
 		return true;
