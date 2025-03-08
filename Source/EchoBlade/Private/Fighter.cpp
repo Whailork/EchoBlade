@@ -105,7 +105,7 @@ void AFighter::BeginDestroy()
 	}*/
 
 
-	AttributeSystemComponent->EffectsContainer.Empty();
+	//AttributeSystemComponent->EffectsContainer.Empty();
 	Super::BeginDestroy();
 	
 }

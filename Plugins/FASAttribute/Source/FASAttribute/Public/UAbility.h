@@ -26,6 +26,8 @@ public:
 	float Cost;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bCanInterrupt;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bInterruptOnHit;
 	// Fonctions
 
 	
@@ -56,4 +58,7 @@ public:
 	// Appelee pour savoir si l’ability peut s’ajouter a un component
 	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
 	bool CanAddAbility(AActor* instigator);
+	UFUNCTION(BlueprintCallable)
+	bool IsInterruptOnHit();
+	
 };

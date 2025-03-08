@@ -12,6 +12,11 @@ UAbility::UAbility()
 	bCanStart = false;
 }
 
+bool UAbility::IsInterruptOnHit()
+{
+	return bInterruptOnHit;
+}
+
 
 void UAbility::Start_Implementation(AActor* instigator)
 {

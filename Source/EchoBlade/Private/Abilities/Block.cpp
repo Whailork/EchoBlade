@@ -12,7 +12,7 @@ UBlock::UBlock()
 {
 	AbilityTag = UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block");
 	bCanInterrupt = true;
-
+	bInterruptOnHit = false;
 	//ConstructorHelpers::FClassFinder<AActor> ActorToSpawn(TEXT("/Game/Blueprints/BP_AbilityShield"));
 	Cost = 10;
 	/*if (ActorToSpawn.Class) {
