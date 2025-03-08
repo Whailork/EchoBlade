@@ -8,6 +8,7 @@ public class EchoBlade : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "FASAttribute","GameplayTags", "MotionTrajectory","UMG", "AIModule" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "FASAttribute","GameplayTags", "MotionTrajectory","UMG", "AIModule", "GameplayAbilities", "GameplayTasks", "Niagara"});
+
 	}
 }

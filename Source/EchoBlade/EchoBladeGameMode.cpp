@@ -1,7 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "EchoBladeGameMode.h"
-#include "EchoBladeCharacter.h"
+#include "Gameplay/EchoBladeCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
 AEchoBladeGameMode::AEchoBladeGameMode()
