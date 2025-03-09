@@ -15,11 +15,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6adbbde4-4393-4f4e-9f29-273aefb087a2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_Attack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_Attack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_SelectTarget.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_SelectTarget.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Dodge.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Dodge.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SwordAttack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SwordAttack.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BT_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BT_EnemyFighter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/EQS_Retreat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/EQS_Retreat.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/EQS_exploration.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/EQS_exploration.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -690,6 +690,7 @@
       <workItem from="1741398106188" duration="639000" />
       <workItem from="1741459701671" duration="6942000" />
       <workItem from="1741541760993" duration="2265000" />
+      <workItem from="1741558834456" duration="1264000" />
     </task>
     <servers />
   </component>
