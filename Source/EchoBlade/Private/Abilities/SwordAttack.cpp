@@ -77,7 +77,11 @@ void USwordAttack::Start_Implementation(AActor* instigator)
 		isAttacking = true;
 		AttackCount++;
 		ACharacter* Character = Cast<ACharacter>(instigator);
-		Character->GetCharacterMovement()->DisableMovement();
+		if(auto playerController = Cast<APlayerController>(Character->GetController()))
+		{
+			Character->DisableInput(playerController);
+		}
+		
 		instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Damage"),Cost);
 		instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.ComboMultiplier"),ComboMultiplier);
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Start in c++"));
@@ -91,7 +95,10 @@ void USwordAttack::Stop_Implementation(AActor* instigator)
 	Super::Stop_Implementation(instigator);
 	bHasHit = false;
 	ACharacter* Character = Cast<ACharacter>(instigator);
-	Character->GetCharacterMovement()->MovementMode = MOVE_Walking;
+	if(auto playerController = Cast<APlayerController>(Character->GetController()))
+	{
+		Character->EnableInput(playerController);
+	}
 }
 
 void USwordAttack::OnAbilityAdded_Implementation(AActor* instigator)
