@@ -22,7 +22,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FGameplayTag LinkedAttribute;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TSubclassOf<UGameplayEffect> LinkedEffect;
+	TSubclassOf<UCustomGameplayEffect> LinkedEffect;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float UpgradeValue;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

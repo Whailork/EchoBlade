@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CustomGameplayEffect.h"
 #include "UGameplayEffect.h"
 #include "Dodging.generated.h"
 
@@ -10,7 +11,7 @@
  * 
  */
 UCLASS()
-class ECHOBLADE_API UDodging : public UGameplayEffect
+class ECHOBLADE_API UDodging : public UCustomGameplayEffect
 {
 	GENERATED_BODY()
 public:
