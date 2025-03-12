@@ -73,47 +73,47 @@ public:
 	UEchoBladeAbilitySystemComponent* AvatarASC; // TObjectPtr<>
 
 	// Functions
-	void AddTag(FGameplayTag tag);															// DONE
-	void RemoveTag(FGameplayTag tag);														// DONE
-	virtual void PossessedBy(AController* NewController) override;							// DONE
-	virtual void OnRep_PlayerState() override;												// DONE
+	void AddTag(FGameplayTag tag);
+	void RemoveTag(FGameplayTag tag);
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
 	
 	UFUNCTION(BlueprintCallable, Category= "Ability")
-	void AddAbility(TSubclassOf<UEchoBladeGameplayAbility> NewAbility);							// DONE
+	void AddAbility(TSubclassOf<UEchoBladeGameplayAbility> NewAbility);
 	
 	UFUNCTION(BlueprintCallable, Category = Projectile)
-	void SpawnProjectile(ACharacter* character);											// DONE
+	void SpawnProjectile(ACharacter* character);
 
 	// Setters
 	UFUNCTION(BlueprintCallable)
-	void SetAttribute( const FGameplayAttribute& Attribute,  float NewBaseValue);			// DONE
+	void SetAttribute( const FGameplayAttribute& Attribute,  float NewBaseValue);
 	
 	// Getters
-	virtual void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override;	// DONE
+	virtual void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override;
 	virtual UEchoBladeAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
 	UFUNCTION(BlueprintCallable, Category= "Ability")
-	virtual int32 GetAbilityLevel(EAbilityInputID AbilityID) const;							// DONE
+	virtual int32 GetAbilityLevel(EAbilityInputID AbilityID) const;
 	
 protected:
 
 	/** Called for movement input */
-	void Move(const FInputActionValue& Value);	// DONE
+	void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
-	void Look(const FInputActionValue& Value);	// DONE
+	void Look(const FInputActionValue& Value);
 	
 	// APawn interface
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;	// DONE
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 	// To add mapping context
-	virtual void BeginPlay();							// DONE
+	virtual void BeginPlay();
 
-	virtual void NotifyControllerChanged() override;	// DONE
-	void bindToASC();									// DONE
-	void ActivateFire();								// DONE
-	void GiveAbilities();								// DONE
-	void addCharacterAbilities();						// DONE
+	virtual void NotifyControllerChanged() override;
+	void bindToASC();
+	void ActivateFire();
+	void GiveAbilities();
+	void addCharacterAbilities();
 
 public:
 	/** Returns CameraBoom subobject **/

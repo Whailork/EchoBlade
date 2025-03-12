@@ -8,7 +8,7 @@
 #include "EchoBladeGameInstance.h"
 #include "FASAttribute.h"
 
-#include "UGameplayEffect.h"
+//#include "UGameplayEffect.h"
 
 
 int FAttributeChangedHolder::currentHandle = 0;

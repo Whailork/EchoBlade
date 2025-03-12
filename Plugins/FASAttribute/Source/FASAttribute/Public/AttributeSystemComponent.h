@@ -97,11 +97,6 @@ public:
 	UPROPERTY(EditAnywhere, Category="defaults")
 	UUASAttributeSet* DefaultAttributes;
 	TArray<FAttribute> Attributes;
-
-	// les effects
-	UPROPERTY(EditAnywhere, Category = "Effects")
-	TArray<UGameplayEffect*> EffectsContainer;
-
 	
 	void LoadDefaultAttributes();
 	//getters et setters

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "CustomGameplayEffect.h"
-#include "UGameplayEffect.h"
+//#include "UGameplayEffect.h"
 #include "Regeneration.generated.h"
 
 /**
