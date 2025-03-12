@@ -5,6 +5,7 @@
 
 #include "..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
 #include "AttributeSystemComponent.h"
+#include "CustomGameplayEffect.h"
 #include "EchoBladeGameInstance.h"
 #include "GameplayTagsManager.h"
 #include "Components/CapsuleComponent.h"
@@ -76,7 +77,7 @@ void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
 			}
 			if(upgrade.LinkedEffect != nullptr)
 			{
-				AttributeSystemComponent->AddEffect(NewObject<UGameplayEffect>(this,upgrade.LinkedEffect->GetClass()));
+				AttributeSystemComponent->AddEffect(NewObject<UCustomGameplayEffect>(this,upgrade.LinkedEffect->GetClass()));
 			}
 			if(upgrade.LinkedAttribute.IsValid())
 			{
