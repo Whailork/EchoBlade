@@ -13,6 +13,7 @@ UDodge::UDodge()
 	AbilityTag = UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge");
 	bCanInterrupt = false;
 	Cost = 25;
+	bInterruptOnHit = false;
 }
 
 void UDodge::Start_Implementation(AActor* instigator)
@@ -33,7 +34,7 @@ void UDodge::Stop_Implementation(AActor* instigator)
 {
 	Super::Stop_Implementation(instigator);
 	ACharacter* Character = Cast<ACharacter>(instigator);
-	Character->GetMesh()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Block);
+	Character->GetMesh()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Ignore);
 	Character->GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Block);
 	instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(DodgeEffect->TagToAdd);
 }
@@ -63,7 +64,7 @@ bool UDodge::CanStartAbility_Implementation(AActor* instigator)
 	float outValue = -1;
 	ACharacter* character = Cast<ACharacter>(instigator);
 	instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),outValue);
-	if(instigator->GetVelocity().Length() > 1 && Super::CanStartAbility_Implementation(instigator) && outValue >= Cost && character->CanJump())
+	if(/*instigator->GetVelocity().Length() > 1 && */Super::CanStartAbility_Implementation(instigator) && outValue >= Cost && character->CanJump())
 	{
 		return true;
 	}

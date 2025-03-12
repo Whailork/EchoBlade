@@ -3,10 +3,12 @@
 
 #include "EchoBlade/Public/EnemyFighter.h"
 
+#include "CustomAbilitySystem.h"
 #include "EchoBladeGameInstance.h"
 #include "EnemyAIController.h"
 #include "EnemyWaveSubsystem.h"
 #include "GameplayTagsManager.h"
+#include "Abilities/SwordAttack.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/CapsuleComponent.h"
@@ -102,6 +104,13 @@ void AEnemyFighter::OnTakeHit(AActor* instigatorActor)
 {
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "GotHit");
 	Cast<AEnemyAIController>(GetController())->GetBlackboardComponent()->SetValueAsBool("GotHit",true);
+	Cast<AEnemyAIController>(GetController())->GetBlackboardComponent()->SetValueAsBool("AttackComboStarted",false);
+	UAbility* SwordAttackAbility = AbilitySystemComponent->GetAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.SwordAttack"));
+
+	if(SwordAttackAbility)
+	{
+		Cast<USwordAttack>(SwordAttackAbility)->AttackCount = 0;
+	}
 	GetWorldTimerManager().SetTimer(HitTimerHandlde, this,&AEnemyFighter::ResetHitBoolean,2,false);
 }
 

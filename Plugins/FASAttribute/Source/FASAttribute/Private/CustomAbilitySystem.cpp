@@ -77,7 +77,6 @@ void UCustomAbilitySystem::RemoveAllAbilities()
 
 bool UCustomAbilitySystem::TriggerAbility(FGameplayTag tag)
 {
-	
 	for (auto ability : Abilities)
 	{
 		if(ability->AbilityTag == tag)
@@ -108,6 +107,7 @@ bool UCustomAbilitySystem::TriggerAbility(FGameplayTag tag)
 			
 		}
 	}
+	
 	return false;
 }
 
