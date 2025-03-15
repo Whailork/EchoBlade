@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
 #include "UAbility.h"
+#include "Abilities/EchoBladeGameplayAbility.h"
 #include "UObject/Object.h"
 #include "PlayerData.generated.h"
 
@@ -18,17 +19,15 @@ struct FUpgradeData
 	GENERATED_BODY()
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TSubclassOf<UAbility> LinkedAbility;
+	TSubclassOf<UEchoBladeGameplayAbility> LinkedAbility;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FGameplayTag LinkedAttribute;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TSubclassOf<UGameplayEffect> LinkedEffect;
+	TSubclassOf<UCustomGameplayEffect> LinkedEffect;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float UpgradeValue;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float TimesBought;
-	
-	
 };
 
 

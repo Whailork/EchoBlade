@@ -2,12 +2,17 @@
 
 
 #include "EchoBlade/Public/Fighter.h"
-
+#include "Projectile/Projectile.h"
 #include "..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
 #include "AttributeSystemComponent.h"
+#include "CustomGameplayEffect.h"
 #include "EchoBladeGameInstance.h"
+#include "EchoBladePlayerController.h"
+#include "EnhancedInputSubsystems.h"
 #include "GameplayTagsManager.h"
 #include "Components/CapsuleComponent.h"
+#include "Gameplay/EchoBladeCharacter.h"
+#include "Gameplay/EchoBladePlayerState.h"
 #include "Perception/AISense_Sight.h"
 
 // Sets default values
@@ -30,9 +35,144 @@ AFighter::AFighter()
 	AIStimuliSource = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("StimuliSource");
 	AIStimuliSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
 	AIStimuliSource->RegisterWithPerceptionSystem();
-	
+
+	HealthAS = CreateDefaultSubobject<UHealthAttributeSet>(TEXT("HealthAttributeSet"));
 }
 
+void AFighter::AddTag(FGameplayTag tag)
+{
+	if (AvatarASC && !AvatarASC->HasMatchingGameplayTag(tag))
+	{
+		AvatarASC->AddLooseGameplayTag(tag);
+	}
+}
+
+void AFighter::RemoveTag(FGameplayTag tag)
+{
+	if (AvatarASC && AvatarASC->HasMatchingGameplayTag(tag))
+	{
+		AvatarASC->RemoveLooseGameplayTag(tag);
+	}
+}
+
+void AFighter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	AEchoBladePlayerState* PS = GetPlayerState<AEchoBladePlayerState>();
+
+	if (PS)
+	{
+		// Set the ASC on the Server
+		AvatarASC = Cast<UEchoBladeAbilitySystemComponent>(PS->GetAbilitySystemComponent());
+		InitializeDelegates();
+
+		// AI won't have PlayerControllers so we can init again here just to be sure. No harm in initing twice for heroes that have PlayerControllers.
+		PS->GetAbilitySystemComponent()->InitAbilityActorInfo(PS, this);
+			
+	}
+}
+
+void AFighter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	AEchoBladePlayerState* PS = GetPlayerState<AEchoBladePlayerState>();
+	if (PS)
+	{
+		// Set the ASC for clients
+		AvatarASC = Cast<UEchoBladeAbilitySystemComponent>(PS->GetAbilitySystemComponent());
+		InitializeDelegates();
+
+		// Init ASC Actor Info for clients
+		AvatarASC->InitAbilityActorInfo(PS, this);
+
+		// Bind to AbilitySystemComponent
+		bindToASC();
+	}
+}
+
+void AFighter::HealthChanged(const FOnAttributeChangeData& OnAttributeChangeData)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "New Health : " + FString::SanitizeFloat(HealthAS->GetHealth()));
+}
+
+void AFighter::InitializeDelegates()
+{
+	AvatarASC->AddSpawnedAttribute(HealthAS);
+	HealthAS->SetHealth(HealthAS->GetHealth() - 50);
+	// Responding to Attribute Changes(to update UI or else)
+	AvatarASC->GetGameplayAttributeValueChangeDelegate(HealthAS->GetHealthAttribute()).AddUObject(this, &AFighter::HealthChanged);
+}
+
+void AFighter::AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Magenta, "AddAbilityGAS");
+	
+	if (GetLocalRole() != ROLE_Authority || !HasAuthority() || !AvatarASC) // || AvatarASC->HasMatchingGameplayTag())
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Ability could not be added to the character"));
+		return;
+	}
+
+	// GiveAbility to ASC
+	const FGameplayAbilitySpec& AbilitySpec = FGameplayAbilitySpec(NewAbility, 1, //GetAbilityLevel(NewAbility.GetDefaultObject()->AbilityID),
+			static_cast<int32>(NewAbility.GetDefaultObject()->AbilityInputID), this);
+	AvatarASC->GiveAbility(AbilitySpec);
+}
+
+void AFighter::SpawnProjectile(AActor* character)
+{
+	AFighter* Character = Cast<AFighter>(character);
+	//Character->AddTag(Gameplay_Ability_Fireball); TODO: add it when ability is added not when activated???
+
+	//ProjectileClass = AProjectile::StaticClass();
+
+	if (ProjectileClass)
+	{
+		FVector CameraLocation;
+		FRotator CameraRotation;
+
+		FVector SpawnLocation = Character->GetActorLocation() + Character->GetActorForwardVector() * 100.f;
+		FRotator SpawnRotation = Character->GetActorRotation();
+		FRotator Rotation = CameraRotation;
+		Rotation.Pitch += 10.0f;
+
+		UWorld* World = GetWorld();
+		if (World)
+		{
+			FActorSpawnParameters SpawnParams;
+			SpawnParams.Owner = character;
+			SpawnParams.Instigator = character->GetInstigator();
+
+			if (AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, Rotation, SpawnParams))
+			{
+				//Projectile->InitializeValues(MyElement);
+				//Projectile->ShootInDirection(Rotation.Vector());
+			}
+		}
+	}
+}
+
+void AFighter::SetAttribute(const FGameplayAttribute& Attribute, float NewBaseValue)
+{
+	AvatarASC->SetNumericAttributeBase(Attribute, NewBaseValue);
+}
+
+void AFighter::GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const
+{
+	AvatarASC->GetOwnedGameplayTags(TagContainer);
+}
+
+UEchoBladeAbilitySystemComponent* AFighter::GetAbilitySystemComponent() const
+{
+	return AvatarASC;
+}
+
+int32 AFighter::GetAbilityLevel(EAbilityInputID AbilityID) const
+{
+	return GetAbilityLevel(AbilityID);
+}
 
 
 void AFighter::SwordAttack()
@@ -72,11 +212,14 @@ void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
 		{
 			if(upgrade.LinkedAbility != nullptr)
 			{
-				AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,upgrade.LinkedAbility->GetClass()));
+				// TSubclassOf<UEchoBladeGameplayAbility>
+				AddAbilityGAS(upgrade.LinkedAbility);				
+				//AddAbilityGAS(upgrade.LinkedAbility->GetClass());
+				//AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,upgrade.LinkedAbility->GetClass()));
 			}
 			if(upgrade.LinkedEffect != nullptr)
 			{
-				AttributeSystemComponent->AddEffect(NewObject<UGameplayEffect>(this,upgrade.LinkedEffect->GetClass()));
+				AttributeSystemComponent->AddEffect(NewObject<UCustomGameplayEffect>(this,upgrade.LinkedEffect->GetClass()));
 			}
 			if(upgrade.LinkedAttribute.IsValid())
 			{
@@ -115,14 +258,98 @@ void AFighter::BeginDestroy()
 void AFighter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (AvatarASC)
+	{
+		ASCInputBound = false;
+
+		// gives Startup Abilities
+		GiveAbilities();
+		// TODO: ajouter addAbility a l'endroit voulu
+		//AddAbilityGAS(UFireballAbility::StaticClass());
+	}
+}
+
+void AFighter::NotifyControllerChanged()
+{
+	Super::NotifyControllerChanged();
+
+	// Add Input Mapping Context
+	// TODO: regarder s'il faut AEchoBladePlayerController ou APlayerController
+	if (AEchoBladePlayerController* PlayerController = Cast<AEchoBladePlayerController>(Controller))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<
+			UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			// TODO: voir si son absence fait bugger
+			//Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		}
+	}
+}
+
+void AFighter::bindToASC()
+{
+	if (!ASCInputBound && AvatarASC && IsValid(InputComponent))
+	{
+		FTopLevelAssetPath AbilityEnumAssetPath =
+			FTopLevelAssetPath(FName("/script/EchoBlade"), FName("EAbilityInputID"));
+		AvatarASC->BindAbilityActivationToInputComponent(
+			InputComponent,
+			FGameplayAbilityInputBinds(
+				FString("ConfirmTarget"),
+				FString("CancelTarget"),
+				AbilityEnumAssetPath,
+				static_cast<int32>(EAbilityInputID::Confirm),
+				static_cast<int32>(EAbilityInputID::Cancel)));
+		ASCInputBound = true;
+
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("ASC bind to Enum EAbilityInputID"));
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Could not bind ASC to Enum EAbilityInputID"));
+	}
+}
+
+void AFighter::GiveAbilities()
+{
+	/*
+		if (HasAuthority() && AvatarASC)
+		{
+			TSubclassOf<UGameplayAbility> AbilityToGrant = YOUR_ABILITY_CLASS_HERE;
+			if (AbilityToGrant)
+			{
+				FGameplayAbilitySpec AbilitySpec(AbilityToGrant, 1); // Level 1 ability
+				AvatarASC->GiveAbility(AbilitySpec);
+			}
+		}
+		*/
+}
+
+void AFighter::addCharacterAbilities()
+{
+	// Grant abilities, but only on the server	
+	if (GetLocalRole() != ROLE_Authority || AvatarASC) //  || AvatarASC->HasMatchingGameplayTag())
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Ability could not be added to the character"));
+
+		return;
+	}
+
+	for (TSubclassOf<UEchoBladeGameplayAbility>& StartupAbility : CharacterAbilities)
+	{
+		const FGameplayAbilitySpec& AbilitySpec = FGameplayAbilitySpec(StartupAbility, GetAbilityLevel(StartupAbility.GetDefaultObject()->AbilityID),
+			static_cast<int32>(StartupAbility.GetDefaultObject()->AbilityInputID), this);
+		
+		AvatarASC->GiveAbility(AbilitySpec);
+	}
+	// AvatarASC->bCharacterAbilitiesGiven = true;
 }
 
 // Called every frame
 void AFighter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -130,6 +357,10 @@ void AFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponentTemp = PlayerInputComponent;
+
+	// Bind to AbilitySystemComponent
+	bindToASC();
 }
 
 void AFighter::Jump()

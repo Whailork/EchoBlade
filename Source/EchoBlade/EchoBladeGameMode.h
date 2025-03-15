@@ -14,6 +14,3 @@ class AEchoBladeGameMode : public AGameModeBase
 public:
 	AEchoBladeGameMode();
 };
-
-
-

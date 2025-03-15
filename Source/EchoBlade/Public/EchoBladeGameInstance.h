@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "PlayerData.h"
 #include "UAbility.h"
-#include "UGameplayEffect.h"
+//#include "UGameplayEffect.h"
 #include "Engine/GameInstance.h"
 #include "EchoBladeGameInstance.generated.h"
 
