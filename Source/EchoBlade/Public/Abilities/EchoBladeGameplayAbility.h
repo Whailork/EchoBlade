@@ -15,6 +15,7 @@ class ECHOBLADE_API UEchoBladeGameplayAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
 
+
 	FGameplayAbilitySpecHandle HandleTemp;
 	FGameplayAbilityActorInfo ActorInfoTemp;
 	FGameplayAbilityActivationInfo ActivationInfoTemp;
@@ -22,6 +23,22 @@ class ECHOBLADE_API UEchoBladeGameplayAbility : public UGameplayAbility
 public:
 	UEchoBladeGameplayAbility();
 
+	/*
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FGameplayAbilitySpecHandle HandleTemp;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FGameplayAbilityActorInfo ActorInfoTemp;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FGameplayAbilityActivationInfo ActivationInfoTemp;
+	*/
+
+
+	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
+	                        const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility,
+	                        bool bWasCancelled) override;
+	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo,
+	                             const FGameplayAbilityActivationInfo ActivationInfo,
+	                             const FGameplayEventData* TriggerEventData) override;
 	// Properties
 	FAbilityTriggerData triggerData;
 
@@ -32,7 +49,7 @@ public:
 	EAbilityInputID AbilityID = EAbilityInputID::None;
 
 	// When true, the ability will automatically activate when its bound input is pressed. Set to false to handle activation manually
-	UPROPERTY(BlueprintReadOnly,EditAnywhere, Category = "Ability")
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Ability")
 	bool bActivateOnInput;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Ability")
@@ -49,7 +66,7 @@ public:
 	void SetActorInfoTemp(FGameplayAbilityActorInfo ActorInfo);
 	UFUNCTION(BlueprintCallable)
 	void SetActivationInfoTemp(FGameplayAbilityActivationInfo ActivationInfo);
-	
+
 	// Getters
 	virtual FAbilityTriggerData GetTriggerData();
 	UFUNCTION(BlueprintCallable)
@@ -58,9 +75,8 @@ public:
 	FGameplayAbilityActorInfo GetActorInfoTemp();
 	UFUNCTION(BlueprintCallable)
 	FGameplayAbilityActivationInfo GetActivationInfoTemp();
-	
+
 	// virtual void ApplyAbilityTagsToGameplayEffectSpec(FGameplayEffectSpec& Spec, FGameplayAbilitySpec* AbilitySpec)const override;
 	// OnEndAbility
 	// Clean up
-	
 };

@@ -16,6 +16,7 @@
 #include "EchoBladeGameInstance.h"
 #include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
+#include "Attribute/HealthAttributeSet.h"
 #include "Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Projectile/Projectile.h"
 #include "Fighter.generated.h"
@@ -35,10 +36,13 @@ public:
 	// Sets default values for this character's properties
 	AFighter();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abilities")
+	TObjectPtr<UHealthAttributeSet> HealthAS;
+
 	// Properties
 	bool ASCInputBound;
 	
-	UPROPERTY(EditDefaultsOnly, Category = Projectile)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile)
 	TSubclassOf<AProjectile> ProjectileClass;
 
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Abilities")
@@ -52,12 +56,14 @@ public:
 	void RemoveTag(FGameplayTag tag);
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
+	void HealthChanged(const FOnAttributeChangeData& OnAttributeChangeData);
+	void InitializeDelegates();
 	
 	UFUNCTION(BlueprintCallable, Category= "Ability")
-	void AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility);
+	virtual void AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility);
 	
 	UFUNCTION(BlueprintCallable, Category = Projectile)
-	void SpawnProjectile(ACharacter* character);
+	void SpawnProjectile(AActor* character);
 
 	// Setters
 	UFUNCTION(BlueprintCallable)

@@ -46,22 +46,22 @@ class ECHOBLADE_API UHealthAttributeSet : public UAttributeSet
 protected:
 	UHealthAttributeSet();
 
-	UPROPERTY(BlueprintReadOnly, Category = "Health", ReplicatedUsing = OnRep_Health)
+	UPROPERTY(BlueprintReadWrite, Category = "Health", ReplicatedUsing = OnRep_Health)
 	FGameplayAttributeData Health;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Health", ReplicatedUsing = OnRep_MaxHealth)
+	UPROPERTY(BlueprintReadWrite, Category = "Health", ReplicatedUsing = OnRep_MaxHealth)
 	FGameplayAttributeData MaxHealth;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Mana", ReplicatedUsing = OnRep_Mana)
+	UPROPERTY(BlueprintReadWrite, Category = "Mana", ReplicatedUsing = OnRep_Mana)
 	FGameplayAttributeData Mana;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Mana", ReplicatedUsing = OnRep_MaxMana)
+	UPROPERTY(BlueprintReadWrite, Category = "Mana", ReplicatedUsing = OnRep_MaxMana)
 	FGameplayAttributeData MaxMana;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Shield", ReplicatedUsing = OnRep_Shield)
+	UPROPERTY(BlueprintReadWrite, Category = "Shield", ReplicatedUsing = OnRep_Shield)
 	FGameplayAttributeData Shield;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Shield", ReplicatedUsing = OnRep_MaxShield)
+	UPROPERTY(BlueprintReadWrite, Category = "Shield", ReplicatedUsing = OnRep_MaxShield)
 	FGameplayAttributeData MaxShield;
 
 public:

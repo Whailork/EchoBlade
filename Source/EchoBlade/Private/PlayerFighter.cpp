@@ -9,12 +9,12 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameplayTagsManager.h"
+#include "Attribute/HealthAttributeSet.h"
 #include "Kismet/GameplayStatics.h"
 
 
 APlayerFighter::APlayerFighter()
 {
-	
 }
 
 void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -94,6 +94,11 @@ void APlayerFighter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void APlayerFighter::AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility)
+{
+	Super::AddAbilityGAS(NewAbility);
 }
 
 void APlayerFighter::BeginPlay()

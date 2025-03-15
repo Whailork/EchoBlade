@@ -39,6 +39,8 @@ public:
 	float InitialSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ProjectileComponent")
 	float MaxSpeed;
+	
+	void FireInDirection(const FVector& ShootDirection);
 
 private:
 	//UPROPERTY()

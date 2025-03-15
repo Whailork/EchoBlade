@@ -31,6 +31,12 @@ AProjectile::AProjectile()
 	ProjectileMovementComponent->SetUpdatedComponent(SphereComponent);
 	//ProjectileMovementComponent->InitialSpeed = InitialSpeed;
 	//ProjectileMovementComponent->MaxSpeed = MaxSpeed;
+	ProjectileMovementComponent->InitialSpeed = 3000.0f;
+	ProjectileMovementComponent->MaxSpeed = 3000.0f;
+	ProjectileMovementComponent->bRotationFollowsVelocity = true;
+	ProjectileMovementComponent->bShouldBounce = true;
+	ProjectileMovementComponent->Bounciness = 0.3f;
+	ProjectileMovementComponent->ProjectileGravityScale = 0.0f;
 }
 
 // Called when the game starts or when spawned
@@ -39,8 +45,13 @@ void AProjectile::BeginPlay()
 	Super::BeginPlay();
 }
 
+void AProjectile::FireInDirection(const FVector& ShootDirection)
+{
+	ProjectileMovementComponent->Velocity = ShootDirection * ProjectileMovementComponent->InitialSpeed;
+}
+
 void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	FVector NormalImpulse, const FHitResult& Hit)
+                        FVector NormalImpulse, const FHitResult& Hit)
 {
 	if (!OtherActor || OtherActor == GetOwner()) return;
 

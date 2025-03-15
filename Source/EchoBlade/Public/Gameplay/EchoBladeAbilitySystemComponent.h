@@ -13,10 +13,6 @@ class ECHOBLADE_API UEchoBladeAbilitySystemComponent : public UAbilitySystemComp
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this component's properties
-	UEchoBladeAbilitySystemComponent();
-
-public:
 	UFUNCTION(BlueprintCallable, Category="Ability")
 	virtual void AbilityLocalInputPressed(int32 InputID) override;
 };

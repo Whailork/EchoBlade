@@ -2,7 +2,7 @@
 
 
 #include "EchoBlade/Public/Fighter.h"
-
+#include "Projectile/Projectile.h"
 #include "..\..\..\Plugins\FASAttribute\Source\FASAttribute\Public\CustomAbilitySystem.h"
 #include "AttributeSystemComponent.h"
 #include "CustomGameplayEffect.h"
@@ -35,7 +35,8 @@ AFighter::AFighter()
 	AIStimuliSource = CreateDefaultSubobject<UAIPerceptionStimuliSourceComponent>("StimuliSource");
 	AIStimuliSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
 	AIStimuliSource->RegisterWithPerceptionSystem();
-	
+
+	HealthAS = CreateDefaultSubobject<UHealthAttributeSet>(TEXT("HealthAttributeSet"));
 }
 
 void AFighter::AddTag(FGameplayTag tag)
@@ -58,17 +59,17 @@ void AFighter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Magenta, "PossessedBy AController");
-
 	AEchoBladePlayerState* PS = GetPlayerState<AEchoBladePlayerState>();
 
 	if (PS)
 	{
 		// Set the ASC on the Server
 		AvatarASC = Cast<UEchoBladeAbilitySystemComponent>(PS->GetAbilitySystemComponent());
+		InitializeDelegates();
 
 		// AI won't have PlayerControllers so we can init again here just to be sure. No harm in initing twice for heroes that have PlayerControllers.
 		PS->GetAbilitySystemComponent()->InitAbilityActorInfo(PS, this);
+			
 	}
 }
 
@@ -81,6 +82,7 @@ void AFighter::OnRep_PlayerState()
 	{
 		// Set the ASC for clients
 		AvatarASC = Cast<UEchoBladeAbilitySystemComponent>(PS->GetAbilitySystemComponent());
+		InitializeDelegates();
 
 		// Init ASC Actor Info for clients
 		AvatarASC->InitAbilityActorInfo(PS, this);
@@ -88,6 +90,19 @@ void AFighter::OnRep_PlayerState()
 		// Bind to AbilitySystemComponent
 		bindToASC();
 	}
+}
+
+void AFighter::HealthChanged(const FOnAttributeChangeData& OnAttributeChangeData)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "New Health : " + FString::SanitizeFloat(HealthAS->GetHealth()));
+}
+
+void AFighter::InitializeDelegates()
+{
+	AvatarASC->AddSpawnedAttribute(HealthAS);
+	HealthAS->SetHealth(HealthAS->GetHealth() - 50);
+	// Responding to Attribute Changes(to update UI or else)
+	AvatarASC->GetGameplayAttributeValueChangeDelegate(HealthAS->GetHealthAttribute()).AddUObject(this, &AFighter::HealthChanged);
 }
 
 void AFighter::AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility)
@@ -106,10 +121,12 @@ void AFighter::AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility)
 	AvatarASC->GiveAbility(AbilitySpec);
 }
 
-void AFighter::SpawnProjectile(ACharacter* character)
+void AFighter::SpawnProjectile(AActor* character)
 {
-	AEchoBladeCharacter* Character = Cast<AEchoBladeCharacter>(character);
+	AFighter* Character = Cast<AFighter>(character);
 	//Character->AddTag(Gameplay_Ability_Fireball); TODO: add it when ability is added not when activated???
+
+	//ProjectileClass = AProjectile::StaticClass();
 
 	if (ProjectileClass)
 	{
@@ -195,7 +212,10 @@ void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
 		{
 			if(upgrade.LinkedAbility != nullptr)
 			{
-				AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,upgrade.LinkedAbility->GetClass()));
+				// TSubclassOf<UEchoBladeGameplayAbility>
+				AddAbilityGAS(upgrade.LinkedAbility);				
+				//AddAbilityGAS(upgrade.LinkedAbility->GetClass());
+				//AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,upgrade.LinkedAbility->GetClass()));
 			}
 			if(upgrade.LinkedEffect != nullptr)
 			{
@@ -330,7 +350,6 @@ void AFighter::addCharacterAbilities()
 void AFighter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input

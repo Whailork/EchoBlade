@@ -24,6 +24,8 @@ class ECHOBLADE_API APlayerFighter : public AFighter
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
+	virtual void AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility) override;
+
 	virtual void BeginPlay() override;
 	virtual void PostInitializeComponents() override;
 	virtual void PossessedBy(AController* NewController) override;

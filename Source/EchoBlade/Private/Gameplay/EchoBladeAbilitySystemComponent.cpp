@@ -5,20 +5,9 @@
 
 #include "Abilities/EchoBladeGameplayAbility.h"
 
-
-// Sets default values for this component's properties
-UEchoBladeAbilitySystemComponent::UEchoBladeAbilitySystemComponent()
-{
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
-
-	// ...
-}
-
 void UEchoBladeAbilitySystemComponent::AbilityLocalInputPressed(int32 InputID)
 {
-	Super::AbilityLocalInputPressed(InputID);
+	//Super::AbilityLocalInputPressed(InputID);
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("Pressed!"));
 
 	// Consume the input if this InputID is overloaded with GenericConfirm/Cancel and the GenericConfim/Cancel callback is bound
@@ -62,11 +51,11 @@ void UEchoBladeAbilitySystemComponent::AbilityLocalInputPressed(int32 InputID)
 					const FGameplayAbilitySpecHandle Handle = Spec.Handle;
 					const FGameplayAbilityActorInfo* ActorInfo = AbilityActorInfo.Get();
 					const FGameplayAbilityActivationInfo ActivationInfo = Spec.ActivationInfo;
-
+					
 					GA->SetHandleTemp(Handle);
 					GA->SetActorInfoTemp(*ActorInfo);
 					GA->SetActivationInfoTemp(ActivationInfo);
-
+					
 					if (TryActivateAbility(Handle))
 					{
 						/*
