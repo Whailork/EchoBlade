@@ -29,14 +29,14 @@ AProjectile::AProjectile()
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(
 		TEXT("ProjectileMovementComponent"));
 	ProjectileMovementComponent->SetUpdatedComponent(SphereComponent);
-	//ProjectileMovementComponent->InitialSpeed = InitialSpeed;
-	//ProjectileMovementComponent->MaxSpeed = MaxSpeed;
+	/*
 	ProjectileMovementComponent->InitialSpeed = 3000.0f;
 	ProjectileMovementComponent->MaxSpeed = 3000.0f;
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->Bounciness = 0.3f;
 	ProjectileMovementComponent->ProjectileGravityScale = 0.0f;
+	*/
 }
 
 // Called when the game starts or when spawned
