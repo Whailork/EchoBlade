@@ -3,11 +3,12 @@
 
 #include "AttributeSystemComponent.h"
 
+#include "CustomGameplayEffect.h"
 #include "EchoBladeGameInstance.h"
 #include "EchoBladeGameInstance.h"
 #include "FASAttribute.h"
 
-#include "UGameplayEffect.h"
+//#include "UGameplayEffect.h"
 
 
 int FAttributeChangedHolder::currentHandle = 0;
@@ -339,7 +340,7 @@ void UAttributeSystemComponent::FillUpAttributes()
 	}
 }
 
-void UAttributeSystemComponent::AddEffect(UGameplayEffect* effect)
+void UAttributeSystemComponent::AddEffect(UCustomGameplayEffect* effect)
 {
 	if(!GetEffectsTagContainer().HasTag(effect->TagToAdd) && !GetEffectsTagContainer().HasAny(effect->BlockingTags))
 	{
@@ -366,7 +367,7 @@ void UAttributeSystemComponent::AddEffect(UGameplayEffect* effect)
 
 void UAttributeSystemComponent::RemoveEffect(FGameplayTag effectTag)
 {
-	UGameplayEffect* EffectToRemove = nullptr;
+	UCustomGameplayEffect* EffectToRemove = nullptr;
 	for (auto Effect : EffectsContainer)
 	{
 		if(Effect->TagToAdd.MatchesTagExact(effectTag))

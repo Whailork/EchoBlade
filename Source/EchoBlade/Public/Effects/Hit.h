@@ -3,14 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UGameplayEffect.h"
+#include "CustomGameplayEffect.h"
+//#include "UGameplayEffect.h"
 #include "Hit.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ECHOBLADE_API UHit : public UGameplayEffect
+class ECHOBLADE_API UHit : public UCustomGameplayEffect
 {
 	GENERATED_BODY()
 public:

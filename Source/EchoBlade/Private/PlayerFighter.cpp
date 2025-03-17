@@ -9,13 +9,12 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameplayTagsManager.h"
-#include "EchoBlade/EchoBladeCharacter.h"
+#include "Attribute/HealthAttributeSet.h"
 #include "Kismet/GameplayStatics.h"
 
 
 APlayerFighter::APlayerFighter()
 {
-	
 }
 
 void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -53,7 +52,7 @@ void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	}
 	else
 	{
-		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
+		//UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
 
 	
@@ -95,6 +94,11 @@ void APlayerFighter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void APlayerFighter::AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility)
+{
+	Super::AddAbilityGAS(NewAbility);
 }
 
 void APlayerFighter::BeginPlay()

@@ -5,7 +5,7 @@
 
 #include "AttributeSystemComponent.h"
 #include "UAbility.h"
-#include "UGameplayEffect.h"
+//#include "UGameplayEffect.h"
 
 
 // Sets default values for this component's properties

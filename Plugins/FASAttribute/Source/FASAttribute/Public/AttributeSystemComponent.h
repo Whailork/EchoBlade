@@ -8,7 +8,7 @@
 #include "Components/ActorComponent.h"
 #include "AttributeSystemComponent.generated.h"
 
-class UGameplayEffect;
+class UCustomGameplayEffect;
 class UUASAttributeSet;
 //Attribute Delagates
 DECLARE_DYNAMIC_DELEGATE_FourParams(FAttributeChangedDelegate, FGameplayTag, attributeTag, float, min, float, current,float, max);
@@ -84,7 +84,9 @@ class FASATTRIBUTE_API UAttributeSystemComponent : public UActorComponent
 	TArray<FAttributeAddedHolder> arrAddedDelegates;
 	TArray<FAttributeRemovedHolder> arrRemovedDelegates;
 
-	
+	// les effects
+	UPROPERTY(EditAnywhere, Category = "Effects")
+	TArray<UCustomGameplayEffect*> EffectsContainer;
 	TMap<FGameplayTag,FEffectRemovedHolder> mapEffectRemoved;
 	TMap<FGameplayTag,TArray<FEffectAddedHolder>> mapEffectAdded;
 	
@@ -95,11 +97,6 @@ public:
 	UPROPERTY(EditAnywhere, Category="defaults")
 	UUASAttributeSet* DefaultAttributes;
 	TArray<FAttribute> Attributes;
-
-	// les effects
-	UPROPERTY(EditAnywhere, Category = "Effects")
-	TArray<UGameplayEffect*> EffectsContainer;
-
 	
 	void LoadDefaultAttributes();
 	//getters et setters
@@ -139,7 +136,7 @@ public:
 
 	//ajout et suppression des effets
 	UFUNCTION(BlueprintCallable)
-	void AddEffect(UGameplayEffect* effect);
+	void AddEffect(UCustomGameplayEffect* effect);
 	UFUNCTION(BlueprintCallable)
 	void RemoveEffect(FGameplayTag effectTag);
 	FGameplayTagContainer GetEffectsTagContainer();

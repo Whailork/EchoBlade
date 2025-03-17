@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UGameplayEffect.h"
+#include "CustomGameplayEffect.h"
 #include "Blocking.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ECHOBLADE_API UBlocking : public UGameplayEffect
+class ECHOBLADE_API UBlocking : public UCustomGameplayEffect
 {
 	GENERATED_BODY()
 public:
