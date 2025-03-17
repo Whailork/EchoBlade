@@ -10,6 +10,7 @@
 #include "EchoBladePlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameplayTagsManager.h"
+#include "Chaos/ChaosPerfTest.h"
 #include "Components/CapsuleComponent.h"
 #include "Gameplay/EchoBladeCharacter.h"
 #include "Gameplay/EchoBladePlayerState.h"
@@ -39,19 +40,19 @@ AFighter::AFighter()
 	HealthAS = CreateDefaultSubobject<UHealthAttributeSet>(TEXT("HealthAttributeSet"));
 }
 
-void AFighter::AddTag(FGameplayTag tag)
+void AFighter::AddTag(const FGameplayTag Tag) const
 {
-	if (AvatarASC && !AvatarASC->HasMatchingGameplayTag(tag))
+	if (AvatarASC && !AvatarASC->HasMatchingGameplayTag(Tag))
 	{
-		AvatarASC->AddLooseGameplayTag(tag);
+		AvatarASC->AddLooseGameplayTag(Tag);
 	}
 }
 
-void AFighter::RemoveTag(FGameplayTag tag)
+void AFighter::RemoveTag(const FGameplayTag Tag) const
 {
-	if (AvatarASC && AvatarASC->HasMatchingGameplayTag(tag))
+	if (AvatarASC && AvatarASC->HasMatchingGameplayTag(Tag))
 	{
-		AvatarASC->RemoveLooseGameplayTag(tag);
+		AvatarASC->RemoveLooseGameplayTag(Tag);
 	}
 }
 
@@ -69,7 +70,6 @@ void AFighter::PossessedBy(AController* NewController)
 
 		// AI won't have PlayerControllers so we can init again here just to be sure. No harm in initing twice for heroes that have PlayerControllers.
 		PS->GetAbilitySystemComponent()->InitAbilityActorInfo(PS, this);
-			
 	}
 }
 
@@ -92,7 +92,7 @@ void AFighter::OnRep_PlayerState()
 	}
 }
 
-void AFighter::HealthChanged(const FOnAttributeChangeData& OnAttributeChangeData)
+void AFighter::HealthChanged(const FOnAttributeChangeData& OnAttributeChangeData) const
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "New Health : " + FString::SanitizeFloat(HealthAS->GetHealth()));
 }
@@ -121,7 +121,7 @@ void AFighter::AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility)
 	AvatarASC->GiveAbility(AbilitySpec);
 }
 
-void AFighter::SpawnProjectile(AActor* character)
+void AFighter::SpawnProjectile(AActor* character, UMaterialInterface* Material)
 {
 	AFighter* Character = Cast<AFighter>(character);
 	//Character->AddTag(Gameplay_Ability_Fireball); TODO: add it when ability is added not when activated???
@@ -147,6 +147,12 @@ void AFighter::SpawnProjectile(AActor* character)
 
 			if (AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, Rotation, SpawnParams))
 			{
+				Projectile->SphereMesh->SetMaterial(0, Material);
+
+				// TODO: test Launch Direction
+				FVector LaunchDirection = GetActorLocation() + GetActorForwardVector(); // Rotation.Vector();
+				Projectile->FireInDirection(LaunchDirection);
+				
 				//Projectile->InitializeValues(MyElement);
 				//Projectile->ShootInDirection(Rotation.Vector());
 			}

@@ -52,18 +52,20 @@ public:
 	UEchoBladeAbilitySystemComponent* AvatarASC; // TObjectPtr<>
 
 	// Functions
-	void AddTag(FGameplayTag tag);
-	void RemoveTag(FGameplayTag tag);
+	UFUNCTION(BlueprintCallable, Category = "Tag")
+	void AddTag(FGameplayTag Tag) const;
+	UFUNCTION(BlueprintCallable, Category = "Tag")
+	void RemoveTag(FGameplayTag Tag) const;
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
-	void HealthChanged(const FOnAttributeChangeData& OnAttributeChangeData);
+	void HealthChanged(const FOnAttributeChangeData& OnAttributeChangeData) const;
 	void InitializeDelegates();
 	
 	UFUNCTION(BlueprintCallable, Category= "Ability")
 	virtual void AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility);
 	
 	UFUNCTION(BlueprintCallable, Category = Projectile)
-	void SpawnProjectile(AActor* character);
+	void SpawnProjectile(AActor* character, UMaterialInterface* Material);
 
 	// Setters
 	UFUNCTION(BlueprintCallable)
@@ -88,7 +90,6 @@ public:
 	UCharacterTrajectoryComponent* CharacterTrajectory;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UAIPerceptionStimuliSourceComponent* AIStimuliSource;
-	
 
 	void SwordAttack();
 	void Block();
