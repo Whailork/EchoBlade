@@ -10,7 +10,7 @@
 
 UEchoBladeGameplayAbility::UEchoBladeGameplayAbility()
 {
-	InstancingPolicy = EGameplayAbilityInstancingPolicy::InstancedPerActor;
+	InstancingPolicy = EGameplayAbilityInstancingPolicy::NonInstanced;//::InstancedPerActor;
 
 	// Default tag that block this ability from activating
 	//ActivationBlockedTags.AddTag(); TODO: FGameplayTag::RequestGameplayTag(FName("Gameplay.State.Dead"));
@@ -19,20 +19,25 @@ UEchoBladeGameplayAbility::UEchoBladeGameplayAbility()
 	bActivateOnInput = true;
 }
 
+void UEchoBladeGameplayAbility::EchoEndAbility()
+{
+	EndAbility(GetHandleTemp(), &ActorInfoTemp, GetActivationInfoTemp(), true, true);
+}
+/*
 void UEchoBladeGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
-	const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
-	bool bReplicateEndAbility, bool bWasCancelled)
+                                           const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
+                                           bool bReplicateEndAbility, bool bWasCancelled)
 {
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
 }
-
+*/
 void UEchoBladeGameplayAbility::ActivateAbility(const FGameplayAbilitySpecHandle Handle,
 	const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
 	const FGameplayEventData* TriggerEventData)
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
-	EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
+	//EndAbility(Handle, ActorInfo, ActivationInfo, true, true);
 }
 
 void UEchoBladeGameplayAbility::ApplyEffectToTarget(AActor* Target, TSubclassOf<UGameplayEffect> EffectClass) const
