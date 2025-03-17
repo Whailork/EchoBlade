@@ -15,11 +15,13 @@
   <component name="ChangeListManager">
     <list default="true" id="6adbbde4-4393-4f4e-9f29-273aefb087a2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/BT_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BT_EnemyFighter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/EQS_Retreat.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/EQS_Retreat.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/EQS_exploration.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/EQS_exploration.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_BuffAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_BuffAbility.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_DefenseAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_DefenseAbility.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_MeleeAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_MeleeAbility.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/AI/BTT_RangedAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BTT_RangedAbility.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Abilities/DefaultAbilities.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Abilities/DefaultAbilities.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Attributes/FighterDefaultAttributes.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Attributes/FighterDefaultAttributes.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +29,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -691,6 +698,11 @@
       <workItem from="1741459701671" duration="6942000" />
       <workItem from="1741541760993" duration="2265000" />
       <workItem from="1741558834456" duration="1264000" />
+      <workItem from="1741824028033" duration="114000" />
+      <workItem from="1741824210818" duration="945000" />
+      <workItem from="1741830706411" duration="414000" />
+      <workItem from="1741871908875" duration="2225000" />
+      <workItem from="1741896809060" duration="462000" />
     </task>
     <servers />
   </component>
