@@ -25,7 +25,7 @@ void UAbility::Start_Implementation(AActor* instigator)
 	
 }
 
-void UAbility::Stop_Implementation(AActor* instigator)
+void UAbility::Stop_Implementation(AActor* instigator,bool WasInterrupted)
 {
 	bIsActive = false;
 	OnAbilityStopped(instigator);

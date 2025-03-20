@@ -18,7 +18,7 @@ public:
 
 	class UDodging* DodgeEffect;
 	virtual void Start_Implementation(AActor* instigator) override;
-	virtual void Stop_Implementation(AActor* instigator) override;
+	virtual void Stop_Implementation(AActor* instigator,bool WasInterrupted) override;
 	virtual void OnAbilityAdded_Implementation(AActor* instigator) override;
 	virtual void OnAbilityRemoved_Implementation(AActor* instigator) override;
 	virtual void OnAbilityStarted_Implementation(AActor* instigator) override;

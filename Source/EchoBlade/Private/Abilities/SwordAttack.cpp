@@ -43,8 +43,8 @@ void USwordAttack::SetupSwordCollision(UCapsuleComponent* Sword)
 
 void USwordAttack::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(!bHasHit)
-	{
+	//if(!bHasHit)
+	//{
 		if(OtherActor != SwordCollision->GetOwner())
 		{
 			UAttributeSystemComponent* HitAttributeComponent = OtherActor->GetComponentByClass<UAttributeSystemComponent>();
@@ -60,7 +60,7 @@ void USwordAttack::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 			}
 		}
 		
-	}
+	//}
 }
 
 void USwordAttack::Start_Implementation(AActor* instigator)
@@ -70,7 +70,7 @@ void USwordAttack::Start_Implementation(AActor* instigator)
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::FromInt(AttackCount));
 	if(AttackCount >= 3)
 	{
-		Stop_Implementation(instigator);
+		//Stop_Implementation(instigator,false);
 	}
 	else
 	{
@@ -90,14 +90,18 @@ void USwordAttack::Start_Implementation(AActor* instigator)
 	
 }
 
-void USwordAttack::Stop_Implementation(AActor* instigator)
+void USwordAttack::Stop_Implementation(AActor* instigator,bool WasInterrupted)
 {
-	Super::Stop_Implementation(instigator);
+	Super::Stop_Implementation(instigator,WasInterrupted);
 	bHasHit = false;
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	if(auto playerController = Cast<APlayerController>(Character->GetController()))
 	{
 		Character->EnableInput(playerController);
+	}
+	if(WasInterrupted)
+	{
+		AttackCount = 0;
 	}
 }
 
