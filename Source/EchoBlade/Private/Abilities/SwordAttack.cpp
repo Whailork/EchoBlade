@@ -20,6 +20,7 @@ USwordAttack::USwordAttack()
 
 void USwordAttack::StartSwordCollision()
 {
+	
 	SwordCollision->Activate();
 	SwordCollision->SetGenerateOverlapEvents(true);
 }
@@ -70,17 +71,12 @@ void USwordAttack::Start_Implementation(AActor* instigator)
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::FromInt(AttackCount));
 	if(AttackCount >= 3)
 	{
-		//Stop_Implementation(instigator,false);
+		Stop_Implementation(instigator,false);
 	}
 	else
 	{
-		isAttacking = true;
 		AttackCount++;
 		ACharacter* Character = Cast<ACharacter>(instigator);
-		if(auto playerController = Cast<APlayerController>(Character->GetController()))
-		{
-			Character->DisableInput(playerController);
-		}
 		
 		instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Damage"),Cost);
 		instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.ComboMultiplier"),ComboMultiplier);
@@ -95,14 +91,12 @@ void USwordAttack::Stop_Implementation(AActor* instigator,bool WasInterrupted)
 	Super::Stop_Implementation(instigator,WasInterrupted);
 	bHasHit = false;
 	ACharacter* Character = Cast<ACharacter>(instigator);
-	if(auto playerController = Cast<APlayerController>(Character->GetController()))
-	{
-		Character->EnableInput(playerController);
-	}
-	if(WasInterrupted)
+	
+	if(WasInterrupted || AttackCount >= 3)
 	{
 		AttackCount = 0;
 	}
+	StopSwordCollision();
 }
 
 void USwordAttack::OnAbilityAdded_Implementation(AActor* instigator)
