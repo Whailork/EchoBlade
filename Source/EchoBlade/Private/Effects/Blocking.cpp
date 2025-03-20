@@ -29,7 +29,7 @@ void UBlocking::OnEffectAdded_Implementation(AActor* instigator)
 	InstigatorActor->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(AttributeModifiers.TargetAttribute,outValue);
 	if(outValue < AttributeModifiers.Value)
 	{
-		InstigatorActor->GetComponentByClass<UCustomAbilitySystem>()->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
+		InstigatorActor->GetComponentByClass<UCustomAbilitySystem>()->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"),false);
 		StopPeriodTimer();
 	}
 	else
@@ -66,7 +66,7 @@ void UBlocking::OnEffectTriggered_Implementation()
 	}
 	else
 	{
-		InstigatorActor->GetComponentByClass<UCustomAbilitySystem>()->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"));
+		InstigatorActor->GetComponentByClass<UCustomAbilitySystem>()->StopAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block"),false);
 		StopPeriodTimer();
 	}
 }

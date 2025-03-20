@@ -36,7 +36,7 @@ public:
 	void Start(AActor* instigator);
 	// Arrete l’ability
 	UFUNCTION(BlueprintNativeEvent, Category="Ability",BlueprintCallable)
-	void Stop(AActor* instigator);
+	void Stop(AActor* instigator,bool WasInterrupted);
 
 	// DELEGATES
 

@@ -90,7 +90,7 @@ bool UCustomAbilitySystem::TriggerAbility(FGameplayTag tag)
 					{
 						if(returnAbility->bCanInterrupt)
 						{
-							returnAbility->Stop(GetOwner());
+							returnAbility->Stop(GetOwner(),true);
 							ability->Start(this->GetOwner());
 							return true;
 						}
@@ -135,9 +135,9 @@ UAbility* UCustomAbilitySystem::GetAbility(FGameplayTag AbilityTag)
 	return nullptr;
 }
 
-void UCustomAbilitySystem::StopAbility(FGameplayTag AbilityTag)
+void UCustomAbilitySystem::StopAbility(FGameplayTag AbilityTag,bool WasInterrupted)
 {
-	GetAbility(AbilityTag)->Stop(this->GetOwner());
+	GetAbility(AbilityTag)->Stop(this->GetOwner(),WasInterrupted);
 }
 
 UAbility* UCustomAbilitySystem::AbilityInUse()

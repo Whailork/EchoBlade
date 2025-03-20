@@ -30,9 +30,9 @@ void UDodge::Start_Implementation(AActor* instigator)
 
 }
 
-void UDodge::Stop_Implementation(AActor* instigator)
+void UDodge::Stop_Implementation(AActor* instigator,bool WasInterrupted)
 {
-	Super::Stop_Implementation(instigator);
+	Super::Stop_Implementation(instigator,WasInterrupted);
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetMesh()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Ignore);
 	Character->GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Block);
