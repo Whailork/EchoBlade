@@ -32,8 +32,24 @@ void USwordAttack::StopSwordCollision()
 	bHasHit = false;
 }
 
-void USwordAttack::SetupSwordCollision(UCapsuleComponent* Sword)
+void USwordAttack::SetupSwordCollision(UCapsuleComponent* Sword,AActor* instigator)
 {
+	UAttributeSystemComponent* AttributeSystemComponent = instigator->GetComponentByClass<UAttributeSystemComponent>();
+	if(AttributeSystemComponent->HasAttribute(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.AttackRange")))
+	{
+		float AttackRange = -1;
+		AttributeSystemComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.AttackRange"),AttackRange);
+		if(AttackRange != -1)
+		{
+			float baseHalfSize = Sword->GetRelativeScale3D().Z;
+			
+			Sword->SetRelativeScale3D(FVector(Sword->GetRelativeScale3D().X,Sword->GetRelativeScale3D().Y,AttackRange));
+			//8 et 5 parce que jai teste et un ajout de 5 en capsule size necesite un decalement de 8 dans la position x
+			//Sword->SetWorldLocation(FVector(Sword->GetComponentLocation().X +20,Sword->GetComponentLocation().Y,Sword->GetComponentLocation().Z));
+			//Sword->AddRelativeLocation(FVector((AttackRange - baseHalfSize)* 13 / 0.5,0,0));
+			DrawDebugCapsule(GetWorld(),Sword->GetComponentLocation(),Sword->GetScaledCapsuleHalfHeight(),Sword->GetScaledCapsuleRadius(),Sword->GetComponentRotation().Quaternion(),FColor::Blue,true,5,0,3);
+		}
+	}
 	this->SwordCollision = Sword;
 	this->SwordCollision->OnComponentBeginOverlap.AddDynamic(this,&USwordAttack::OverlapBegin);
 	SwordCollision->SetAutoActivate(false);
@@ -68,6 +84,7 @@ void USwordAttack::Start_Implementation(AActor* instigator)
 {
 	Super::Start_Implementation(instigator);
 
+	
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::FromInt(AttackCount));
 	if(AttackCount >= 3)
 	{

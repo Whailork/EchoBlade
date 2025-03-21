@@ -29,7 +29,7 @@ AFighter::AFighter()
 	AddOwnedComponent(CharacterTrajectory);
 
 	SwordCollision = CreateDefaultSubobject<UCapsuleComponent>("SwordCollision");
-	SwordCollision->SetupAttachment(GetMesh(),"Sword_Tip");
+	SwordCollision->SetupAttachment(GetMesh(),"Sword_Mid");
 	SwordCollision->SetAutoActivate(false);
 	SwordCollision->Deactivate();
 

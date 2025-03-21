@@ -90,6 +90,8 @@ public:
 	UCharacterTrajectoryComponent* CharacterTrajectory;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UAIPerceptionStimuliSourceComponent* AIStimuliSource;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UAnimMontage* DeathAnimMontage;
 
 	void SwordAttack();
 	void Block();
