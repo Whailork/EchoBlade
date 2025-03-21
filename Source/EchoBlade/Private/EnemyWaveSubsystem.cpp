@@ -13,7 +13,6 @@ void UEnemyWaveSubsystem::Init(UDataTable* waves, TSubclassOf<AEnemyFighter> cla
 	}
 	EnemyClass = classToSpawn;
 	WavesTable = waves;
-	SpawnFrequency = 2;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(),ASpawnLocation::StaticClass(), SpawnLocations);
 	SpawnNextWave();
 }
@@ -32,7 +31,7 @@ void UEnemyWaveSubsystem::SpawnNextWave()
 			
 			FTimerDelegate SpawnDelegate = FTimerDelegate::CreateUObject(this, &UEnemyWaveSubsystem::SpawnEnemy, nextWave->enemies[i], tempTimerHandle,i);
 			SpawnDelegate.BindUFunction(this,FName("SpawnEnemy"),nextWave->enemies[i],tempTimerHandle,i);
-			GetWorld()->GetTimerManager().SetTimer(tempTimerHandle,SpawnDelegate,SpawnFrequency,true);
+			GetWorld()->GetTimerManager().SetTimer(tempTimerHandle,SpawnDelegate,nextWave->SpawnRate,true);
 			SpawnTimers.Add(tempTimerHandle);
 			SpawnNumbers.Add(nextWave->enemies[i].enemyNb);
 			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::FromInt(enemyData.enemyNb));
@@ -80,6 +79,7 @@ void UEnemyWaveSubsystem::OnFighterDefeated()
 		if(outActors.Num() == 1)
 		{
 			//wave finished
+			WaveNumber++;
 			SpawnNextWave();
 			TArray<AActor*> players;
 			UGameplayStatics::GetAllActorsOfClass(GetWorld(),APlayerFighter::StaticClass(),players);
