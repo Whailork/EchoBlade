@@ -31,7 +31,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void StopSwordCollision();
 	UFUNCTION(BlueprintCallable)
-	void SetupSwordCollision(UCapsuleComponent* Sword);
+	void SetupSwordCollision(UCapsuleComponent* Sword,AActor* instigator);
 	UFUNCTION(BlueprintCallable)
 	void OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	

@@ -21,9 +21,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
 	UUserWidget* HealthWidget;
 	FAttributeChangedDelegate DeathDelegate;
-	FTimerHandle DespawnTimerHandle;
 	FOnEffectAdded HitDelegate;
 	FTimerHandle HitTimerHandlde;
+	FTimerHandle DespawnTimerHandle;
 	UPROPERTY(EditAnywhere)
 	UBehaviorTree* TreeAsset;
 	FOnActorDestroyed DestroyedDelegate;
@@ -33,13 +33,13 @@ public:
 	virtual void PostInitializeComponents() override;
 	UFUNCTION()
 	void OnHealthChanged(FGameplayTag tag,float min,float current,float max);
-	UFUNCTION()
-	void Despawn();
 	void OnDeath();
 	void ResetHitBoolean();
 	UFUNCTION()
 	void OnEnemyDestroyed(AActor* destroyedActor);
 	UFUNCTION()
 	void OnTakeHit(AActor* instigatorActor);
+	UFUNCTION()
+	void Despawn();
 	
 };
