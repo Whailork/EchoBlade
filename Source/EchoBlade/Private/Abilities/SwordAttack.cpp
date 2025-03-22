@@ -71,9 +71,22 @@ void USwordAttack::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 				UHit* hitEffect = NewObject<UHit>();
 				
 				hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),Cost*(1 +(AttackCount-1)*ComboMultiplier),false,false);
-				HitAttributeComponent->AddEffect(hitEffect);
+				if(HitAttributeComponent->AddEffect(hitEffect))
+				{
+					UCharacterMovementComponent* CharacterMovement = OtherActor->GetComponentByClass<UCharacterMovementComponent>();
+					float Knockback = 0;
+					UAttributeSystemComponent* myAttributeComponent = OverlappedComponent->GetOwner()->GetComponentByClass<UAttributeSystemComponent>();
+					if(myAttributeComponent)
+					{
+						myAttributeComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Knockback"),Knockback);
+					}
+				
+					FVector upForce = OtherActor->GetActorUpVector()* 50000.0 * Knockback;
+					FVector backForce = OtherActor->GetActorForwardVector()* -30000.0 * Knockback;
+				
+					CharacterMovement->AddImpulse(upForce+backForce);
+				}
 				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Black, TEXT("hit"));
-
 			}
 		}
 		
