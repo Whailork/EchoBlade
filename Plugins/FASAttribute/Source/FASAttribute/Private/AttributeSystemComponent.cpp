@@ -340,7 +340,7 @@ void UAttributeSystemComponent::FillUpAttributes()
 	}
 }
 
-void UAttributeSystemComponent::AddEffect(UCustomGameplayEffect* effect)
+bool UAttributeSystemComponent::AddEffect(UCustomGameplayEffect* effect)
 {
 	if(!GetEffectsTagContainer().HasTag(effect->TagToAdd) && !GetEffectsTagContainer().HasAny(effect->BlockingTags))
 	{
@@ -362,7 +362,9 @@ void UAttributeSystemComponent::AddEffect(UCustomGameplayEffect* effect)
 		FEffectRemovedHolder holder = {FEffectRemovedHolder::currentHandle++,FOnEffectRemoved()};
 		holder.effectRemovedDelegate = effect->removedDelegate;
 		mapEffectRemoved.Add(effect->TagToAdd,holder);
+		return true;
 	}
+	return false;
 }
 
 void UAttributeSystemComponent::RemoveEffect(FGameplayTag effectTag)
