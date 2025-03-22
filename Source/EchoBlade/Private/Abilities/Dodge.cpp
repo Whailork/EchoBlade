@@ -1,11 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Abilities/Dodge.h"
+
+#include "Fighter.h"
 #include "GameplayTagsManager.h"
+#include "PlayerFighter.h"
 #include "Components/CapsuleComponent.h"
 #include "Effects/Dodging.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 
 
 UDodge::UDodge()
@@ -14,6 +18,7 @@ UDodge::UDodge()
 	bCanInterrupt = false;
 	Cost = 25;
 	bInterruptOnHit = false;
+	RollForce = 4000000;
 }
 
 void UDodge::Start_Implementation(AActor* instigator)
@@ -30,9 +35,9 @@ void UDodge::Start_Implementation(AActor* instigator)
 
 }
 
-void UDodge::Stop_Implementation(AActor* instigator)
+void UDodge::Stop_Implementation(AActor* instigator,bool WasInterrupted)
 {
-	Super::Stop_Implementation(instigator);
+	Super::Stop_Implementation(instigator,WasInterrupted);
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetMesh()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Ignore);
 	Character->GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Block);
@@ -74,4 +79,24 @@ bool UDodge::CanStartAbility_Implementation(AActor* instigator)
 bool UDodge::CanAddAbility_Implementation(AActor* instigator)
 {
 	return Super::CanAddAbility_Implementation(instigator);
+}
+
+FVector UDodge::FindRollVector(AActor* instigator)
+{
+	AFighter* fighter = Cast<AFighter>(instigator);
+	FRotator rotation = FRotator(0,fighter->GetControlRotation().Yaw,0);
+	FVector rightVector = UKismetMathLibrary::GetRightVector(rotation);
+	FVector forwardVector = UKismetMathLibrary::GetForwardVector(rotation);
+	if(instigator->IsA(APlayerFighter::StaticClass()))
+	{
+		
+		FVector2d movementVector  = Cast<APlayerFighter>(fighter)->MovementVector;
+		UKismetMathLibrary::Normalize2D(movementVector);
+		return (rightVector * movementVector.X * RollForce) + (forwardVector * movementVector.Y * RollForce);
+	}
+	
+		float randomForward = UKismetMathLibrary::RandomFloatInRange(-1,0);
+		float randomRight = UKismetMathLibrary::RandomFloatInRange(-1,1);
+		return (forwardVector * randomForward * RollForce) +(rightVector * randomRight * RollForce);
+	
 }

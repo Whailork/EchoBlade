@@ -31,14 +31,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void StopSwordCollision();
 	UFUNCTION(BlueprintCallable)
-	void SetupSwordCollision(UCapsuleComponent* Sword);
+	void SetupSwordCollision(UCapsuleComponent* Sword,AActor* instigator);
 	UFUNCTION(BlueprintCallable)
 	void OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	
 	
 	
 	virtual void Start_Implementation(AActor* instigator) override;
-	virtual void Stop_Implementation(AActor* instigator) override;
+	virtual void Stop_Implementation(AActor* instigator,bool WasInterrupted) override;
 	virtual void OnAbilityAdded_Implementation(AActor* instigator) override;
 	virtual void OnAbilityRemoved_Implementation(AActor* instigator) override;
 	virtual void OnAbilityStarted_Implementation(AActor* instigator) override;

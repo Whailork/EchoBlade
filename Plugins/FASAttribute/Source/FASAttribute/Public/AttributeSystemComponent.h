@@ -136,7 +136,7 @@ public:
 
 	//ajout et suppression des effets
 	UFUNCTION(BlueprintCallable)
-	void AddEffect(UCustomGameplayEffect* effect);
+	bool AddEffect(UCustomGameplayEffect* effect);
 	UFUNCTION(BlueprintCallable)
 	void RemoveEffect(FGameplayTag effectTag);
 	FGameplayTagContainer GetEffectsTagContainer();

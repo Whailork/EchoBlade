@@ -42,6 +42,8 @@ struct  FWaveInfoDataTable : public FTableRowBase
 	GENERATED_BODY();
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TArray<FEnemyData> enemies;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	float SpawnRate;
 	
 };
 

@@ -64,26 +64,22 @@ void AEnemyFighter::OnHealthChanged(FGameplayTag tag, float min, float current, 
 	}
 }
 
-void AEnemyFighter::Despawn()
-{
-	GetWorldTimerManager().ClearTimer(DespawnTimerHandle);
-	DespawnTimerHandle.Invalidate();
-	this->Destroy();
-}
 
 void AEnemyFighter::OnDeath()
 {
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Enemy Death"));
-	GetMesh()->SetSimulatePhysics(true);
-	GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	//GetMesh()->SetSimulatePhysics(true);
+	//GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	if(HealthWidget)
 	{
 		HealthWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
-	StopAnimMontage();
-	GetWorldTimerManager().SetTimer(DespawnTimerHandle, this,&AEnemyFighter::Despawn,2,false);
 	Cast<AEnemyAIController>(GetController())->BehaviorTree->StopTree(EBTStopMode::Forced);
+	PlayAnimMontage(DeathAnimMontage);
+	//StopAnimMontage();
+	GetWorldTimerManager().SetTimer(DespawnTimerHandle, this,&AEnemyFighter::Despawn,2,false);
+	
 	
 	
 }
@@ -112,5 +108,10 @@ void AEnemyFighter::OnTakeHit(AActor* instigatorActor)
 		Cast<USwordAttack>(SwordAttackAbility)->AttackCount = 0;
 	}
 	GetWorldTimerManager().SetTimer(HitTimerHandlde, this,&AEnemyFighter::ResetHitBoolean,2,false);
+}
+
+void AEnemyFighter::Despawn()
+{
+	Destroy();
 }
 

@@ -20,6 +20,7 @@ USwordAttack::USwordAttack()
 
 void USwordAttack::StartSwordCollision()
 {
+	
 	SwordCollision->Activate();
 	SwordCollision->SetGenerateOverlapEvents(true);
 }
@@ -31,8 +32,24 @@ void USwordAttack::StopSwordCollision()
 	bHasHit = false;
 }
 
-void USwordAttack::SetupSwordCollision(UCapsuleComponent* Sword)
+void USwordAttack::SetupSwordCollision(UCapsuleComponent* Sword,AActor* instigator)
 {
+	UAttributeSystemComponent* AttributeSystemComponent = instigator->GetComponentByClass<UAttributeSystemComponent>();
+	if(AttributeSystemComponent->HasAttribute(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.AttackRange")))
+	{
+		float AttackRange = -1;
+		AttributeSystemComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.AttackRange"),AttackRange);
+		if(AttackRange != -1)
+		{
+			float baseHalfSize = Sword->GetRelativeScale3D().Z;
+			
+			Sword->SetRelativeScale3D(FVector(Sword->GetRelativeScale3D().X,Sword->GetRelativeScale3D().Y,AttackRange));
+			//8 et 5 parce que jai teste et un ajout de 5 en capsule size necesite un decalement de 8 dans la position x
+			//Sword->SetWorldLocation(FVector(Sword->GetComponentLocation().X +20,Sword->GetComponentLocation().Y,Sword->GetComponentLocation().Z));
+			//Sword->AddRelativeLocation(FVector((AttackRange - baseHalfSize)* 13 / 0.5,0,0));
+			DrawDebugCapsule(GetWorld(),Sword->GetComponentLocation(),Sword->GetScaledCapsuleHalfHeight(),Sword->GetScaledCapsuleRadius(),Sword->GetComponentRotation().Quaternion(),FColor::Blue,true,5,0,3);
+		}
+	}
 	this->SwordCollision = Sword;
 	this->SwordCollision->OnComponentBeginOverlap.AddDynamic(this,&USwordAttack::OverlapBegin);
 	SwordCollision->SetAutoActivate(false);
@@ -43,8 +60,8 @@ void USwordAttack::SetupSwordCollision(UCapsuleComponent* Sword)
 
 void USwordAttack::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if(!bHasHit)
-	{
+	//if(!bHasHit)
+	//{
 		if(OtherActor != SwordCollision->GetOwner())
 		{
 			UAttributeSystemComponent* HitAttributeComponent = OtherActor->GetComponentByClass<UAttributeSystemComponent>();
@@ -54,33 +71,42 @@ void USwordAttack::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 				UHit* hitEffect = NewObject<UHit>();
 				
 				hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),Cost*(1 +(AttackCount-1)*ComboMultiplier),false,false);
-				HitAttributeComponent->AddEffect(hitEffect);
+				if(HitAttributeComponent->AddEffect(hitEffect))
+				{
+					UCharacterMovementComponent* CharacterMovement = OtherActor->GetComponentByClass<UCharacterMovementComponent>();
+					float Knockback = 0;
+					UAttributeSystemComponent* myAttributeComponent = OverlappedComponent->GetOwner()->GetComponentByClass<UAttributeSystemComponent>();
+					if(myAttributeComponent)
+					{
+						myAttributeComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Knockback"),Knockback);
+					}
+				
+					FVector upForce = OtherActor->GetActorUpVector()* 50000.0 * Knockback;
+					FVector backForce = OtherActor->GetActorForwardVector()* -30000.0 * Knockback;
+				
+					CharacterMovement->AddImpulse(upForce+backForce);
+				}
 				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Black, TEXT("hit"));
-
 			}
 		}
 		
-	}
+	//}
 }
 
 void USwordAttack::Start_Implementation(AActor* instigator)
 {
 	Super::Start_Implementation(instigator);
 
+	
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::FromInt(AttackCount));
 	if(AttackCount >= 3)
 	{
-		Stop_Implementation(instigator);
+		Stop_Implementation(instigator,false);
 	}
 	else
 	{
-		isAttacking = true;
 		AttackCount++;
 		ACharacter* Character = Cast<ACharacter>(instigator);
-		if(auto playerController = Cast<APlayerController>(Character->GetController()))
-		{
-			Character->DisableInput(playerController);
-		}
 		
 		instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Damage"),Cost);
 		instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.ComboMultiplier"),ComboMultiplier);
@@ -90,15 +116,17 @@ void USwordAttack::Start_Implementation(AActor* instigator)
 	
 }
 
-void USwordAttack::Stop_Implementation(AActor* instigator)
+void USwordAttack::Stop_Implementation(AActor* instigator,bool WasInterrupted)
 {
-	Super::Stop_Implementation(instigator);
+	Super::Stop_Implementation(instigator,WasInterrupted);
 	bHasHit = false;
 	ACharacter* Character = Cast<ACharacter>(instigator);
-	if(auto playerController = Cast<APlayerController>(Character->GetController()))
+	
+	if(WasInterrupted || AttackCount >= 3)
 	{
-		Character->EnableInput(playerController);
+		AttackCount = 0;
 	}
+	StopSwordCollision();
 }
 
 void USwordAttack::OnAbilityAdded_Implementation(AActor* instigator)
