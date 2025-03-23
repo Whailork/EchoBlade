@@ -65,7 +65,7 @@ public:
 	virtual void AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility);
 	
 	UFUNCTION(BlueprintCallable, Category = Projectile)
-	void SpawnProjectile(AActor* character, UMaterialInterface* Material);
+	void SpawnProjectile(AActor* character, UMaterialInterface* Material, TSubclassOf<UCustomGameplayEffect> linkedEffectClass);
 
 	// Setters
 	UFUNCTION(BlueprintCallable)

@@ -5,6 +5,7 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
+#include "GameplayTagsManager.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
@@ -55,16 +56,30 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 {
 	if (!OtherActor || OtherActor == GetOwner()) return;
 
-	/*
-	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(OtherActor);
-	if (TargetASC && FireballEffect)
+	
+	UAttributeSystemComponent* TargetAttributeSystem = OtherActor->GetComponentByClass<UAttributeSystemComponent>();
+	
+	if(TargetAttributeSystem && LinkedEffectClass)
+	{
+		UAttributeSystemComponent* ownerAttributes = GetOwner()->GetComponentByClass<UAttributeSystemComponent>();
+		float OwnerDamage = 0;
+		if(ownerAttributes)
+		{
+			ownerAttributes->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Damage"),OwnerDamage);
+		}
+		
+		UCustomGameplayEffect* Effect = NewObject<UCustomGameplayEffect>(GetOwner(),LinkedEffectClass);
+		Effect->InitializeValues(0,0.001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),OwnerDamage,false,false);
+		TargetAttributeSystem->AddEffect(Effect);
+	}
+	/*if (TargetASC && FireballEffect)
 	{
 		FGameplayEffectContextHandle EffectContext = TargetASC->MakeEffectContext();
 		EffectContext.AddSourceObject(this);
 
 		FGameplayEffectSpecHandle EffectSpec = TargetASC->MakeOutgoingSpec(FireballEffect, 1.f, EffectContext);
 		TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpec.Data.Get());
-	}
-	*/
+	}*/
+	
 	Destroy();
 }

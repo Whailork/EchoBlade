@@ -42,31 +42,39 @@ void UEnemyWaveSubsystem::SpawnNextWave()
 
 void UEnemyWaveSubsystem::SpawnEnemy(FEnemyData spawnData,FTimerHandle SpawnTimerHandle, int i)
 {
-	if(SpawnNumbers[i] > 0)
+	if(SpawnNumbers.Num() > i)
 	{
-		if(!SpawnLocations.IsEmpty())
+		if(SpawnNumbers[i] > 0)
 		{
-			FActorSpawnParameters spawnInfo;
-			int locationIndex = FMath::RandRange(0,SpawnLocations.Num() -1);
-			FVector location = SpawnLocations[locationIndex]->GetActorLocation();
-			FRotator rotation = SpawnLocations[locationIndex]->GetActorRotation();
-			AEnemyFighter* newActor = Cast<AEnemyFighter>(GetWorld()->SpawnActor(EnemyClass,&location,&rotation,spawnInfo));
-			if(newActor)
+			if(!SpawnLocations.IsEmpty())
 			{
-				newActor->GetMesh()->SetSkeletalMesh(spawnData.type.EnemyMesh);
-				newActor->ProcessUpgrades(spawnData.type.enemyUpgrades);
-				SpawnNumbers[i]--;
+				FActorSpawnParameters spawnInfo;
+				int locationIndex = FMath::RandRange(0,SpawnLocations.Num() -1);
+				FVector location = SpawnLocations[locationIndex]->GetActorLocation();
+				FRotator rotation = SpawnLocations[locationIndex]->GetActorRotation();
+				AEnemyFighter* newActor = Cast<AEnemyFighter>(GetWorld()->SpawnActor(EnemyClass,&location,&rotation,spawnInfo));
+				if(newActor)
+				{
+					newActor->GetMesh()->SetSkeletalMesh(spawnData.type.EnemyMesh);
+					newActor->ProcessUpgrades(spawnData.type.enemyUpgrades);
+					SpawnNumbers[i]--;
+				}
+			
+			}
+		}
+		else
+		{
+			if(SpawnTimers.Num() > i)
+			{
+				GetWorld()->GetTimerManager().ClearTimer(SpawnTimers[i]);
+				SpawnTimers.RemoveAt(i);
+				SpawnTimerHandle.Invalidate();
 			}
 			
+		
 		}
 	}
-	else
-	{
-		GetWorld()->GetTimerManager().ClearTimer(SpawnTimers[i]);
-		SpawnTimers.RemoveAt(i);
-		SpawnTimerHandle.Invalidate();
-		
-	}
+	
 }
 
 void UEnemyWaveSubsystem::OnFighterDefeated()
