@@ -121,7 +121,7 @@ void AFighter::AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility)
 	AvatarASC->GiveAbility(AbilitySpec);
 }
 
-void AFighter::SpawnProjectile(AActor* character, UMaterialInterface* Material)
+void AFighter::SpawnProjectile(AActor* character, UMaterialInterface* Material,TSubclassOf<UCustomGameplayEffect> linkedEffectClass)
 {
 	AFighter* Character = Cast<AFighter>(character);
 	//Character->AddTag(Gameplay_Ability_Fireball); TODO: add it when ability is added not when activated???
@@ -148,6 +148,7 @@ void AFighter::SpawnProjectile(AActor* character, UMaterialInterface* Material)
 			if (AProjectile* Projectile = World->SpawnActor<AProjectile>(ProjectileClass, SpawnLocation, Rotation, SpawnParams))
 			{
 				Projectile->SphereMesh->SetMaterial(0, Material);
+				Projectile->LinkedEffectClass = linkedEffectClass;
 
 				// TODO: test Launch Direction
 				FVector LaunchDirection = GetActorLocation() + GetActorForwardVector(); // Rotation.Vector();

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CustomGameplayEffect.h"
 #include "GameplayEffect.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Actor.h"
@@ -39,6 +40,8 @@ public:
 	float InitialSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ProjectileComponent")
 	float MaxSpeed;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<UCustomGameplayEffect> LinkedEffectClass;
 	
 	void FireInDirection(const FVector& ShootDirection);
 
