@@ -8,6 +8,8 @@
 #include "Abilities/SwordAttack.h"
 #include "Effects/Hit.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraComponent.h"
 
 
 UCircleSlash::UCircleSlash()
@@ -30,6 +32,10 @@ void UCircleSlash::Start_Implementation(AActor* instigator)
 		}
 	}
 	HitActors.Add(instigator);
+	UNiagaraComponent* NiagaraComponent = Instigator->GetComponentByClass<UNiagaraComponent>();
+	UAttributeSystemComponent* AttributeSystemComponent = instigator->GetComponentByClass<UAttributeSystemComponent>();
+	PassiveEffects = AttributeSystemComponent->GetPassiveEffects();
+	Trail = UNiagaraFunctionLibrary::SpawnSystemAttached(SlashParticles,NiagaraComponent,FName(""),FVector(0,0,0),FRotator(0,0,0),EAttachLocation::SnapToTarget,true);
 	
 }
 
@@ -37,6 +43,12 @@ void UCircleSlash::Stop_Implementation(AActor* instigator, bool WasInterrupted)
 {
 	Super::Stop_Implementation(instigator, WasInterrupted);
 	HitActors.Empty();
+	if(Trail)
+	{
+		Trail->Deactivate();
+	}
+	
+	
 }
 
 void UCircleSlash::OnAbilityAdded_Implementation(AActor* instigator)
@@ -98,6 +110,5 @@ void UCircleSlash::Slash()
 			AttributeSystemComponent->AddEffect(hitEffect);
 		}
 		HitActors.Add(Hit.GetActor());
-			
 	}
 }

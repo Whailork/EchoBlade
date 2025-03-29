@@ -10,6 +10,7 @@
 #include "EchoBladePlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameplayTagsManager.h"
+#include "NiagaraComponent.h"
 #include "RewindData.h"
 #include "Chaos/ChaosPerfTest.h"
 #include "Components/CapsuleComponent.h"
@@ -28,6 +29,9 @@ AFighter::AFighter()
 	AddOwnedComponent(AbilitySystemComponent);
 	CharacterTrajectory = CreateDefaultSubobject<UCharacterTrajectoryComponent>("CharacterTrajectory");
 	AddOwnedComponent(CharacterTrajectory);
+
+	SwordTrail = CreateDefaultSubobject<UNiagaraComponent>("SwordTrail");
+	SwordTrail->SetupAttachment(GetMesh(),"Sword_Mid");
 
 	SwordCollision = CreateDefaultSubobject<UCapsuleComponent>("SwordCollision");
 	SwordCollision->SetupAttachment(GetMesh(),"Sword_Mid");

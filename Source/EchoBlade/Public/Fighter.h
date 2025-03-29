@@ -92,6 +92,8 @@ public:
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UCapsuleComponent* SwordCollision;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	class UNiagaraComponent* SwordTrail;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UCharacterTrajectoryComponent* CharacterTrajectory;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UAIPerceptionStimuliSourceComponent* AIStimuliSource;

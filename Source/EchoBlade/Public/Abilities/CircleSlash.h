@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NiagaraComponentPool.h"
 #include "SwordAttack.h"
 #include "UAbility.h"
 #include "Components/CapsuleComponent.h"
@@ -27,6 +28,11 @@ public:
 	AActor* Instigator;
 	FTimerHandle SlashTimerHandle;
 	TArray<AActor*> HitActors;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	class UNiagaraSystem* SlashParticles;
+	UPROPERTY()
+	UNiagaraComponent* Trail;
+	TArray<UCustomGameplayEffect*> PassiveEffects;
 	UCircleSlash();
 	virtual void Start_Implementation(AActor* instigator) override;
 	virtual void Stop_Implementation(AActor* instigator,bool WasInterrupted) override;
