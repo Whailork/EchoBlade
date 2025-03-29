@@ -7,20 +7,20 @@
 UENUM(BlueprintType)
 enum class EAbilityInputID : uint8
 {
-	// 0 None
+	//None
 	None					UMETA(DisplayName = "None"),
-	// 1 Confirm
+	//Confirm
 	Confirm					UMETA(DisplayName = "Confirm"),
-	// 2 Cancel
+	//Cancel
 	Cancel					UMETA(DisplayName = "Cancel"),
-	// 3 Fireball
+	//Fireball
 	FireballAbility			UMETA(DisplayName = "Fireball"),
-	// 4 Iceball
+	//Iceball
 	IceballAbility			UMETA(DisplayName = "Iceball"),
-	// 5 Mind Control
+	//Mind Control
 	MindControlAbility		UMETA(DisplayName = "Mind Control"),
-	// 6 Area Slash
-	AreaSlashAbility		UMETA(DisplayName = "Area Slash"),
+	// Area Slash
+	CircleSlashAbility		UMETA(DisplayName = "Circle Slash"),
 	// 7 Electricity Attack
 	ElectricityAbility		UMETA(DisplayName = "Electricity"),
 	// 8 Super Armor
