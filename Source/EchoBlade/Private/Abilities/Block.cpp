@@ -14,7 +14,7 @@ UBlock::UBlock()
 	bCanInterrupt = true;
 	bInterruptOnHit = false;
 	//ConstructorHelpers::FClassFinder<AActor> ActorToSpawn(TEXT("/Game/Blueprints/BP_AbilityShield"));
-	Cost = 10;
+	ManaCost = 10;
 	/*if (ActorToSpawn.Class) {
 		shieldClass = ActorToSpawn.Class;
 	}*/
@@ -39,7 +39,7 @@ void UBlock::Start_Implementation(AActor* instigator)
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("BeforeSpawn"));
 	
 	BlockingEffect = NewObject<UBlocking>();
-	BlockingEffect->InitializeValues(0,1,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),Cost,true,true);
+	BlockingEffect->InitializeValues(0,1,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),ManaCost,true,true);
 	instigator->GetComponentByClass<UAttributeSystemComponent>()->AddEffect(BlockingEffect);
 
 	Super::Start_Implementation(instigator);
@@ -92,7 +92,7 @@ bool UBlock::CanStartAbility_Implementation(AActor* instigator)
 {
 	float outValue = -1;
 	instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),outValue);
-	if(Super::CanStartAbility_Implementation(instigator) && outValue >= Cost)
+	if(Super::CanStartAbility_Implementation(instigator) && outValue >= ManaCost)
 	{
 		return true;
 	}

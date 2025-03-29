@@ -19,7 +19,7 @@ struct FUpgradeData
 	GENERATED_BODY()
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TSubclassOf<UEchoBladeGameplayAbility> LinkedAbility;
+	TSubclassOf<UAbility> LinkedAbility;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FGameplayTag LinkedAttribute;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

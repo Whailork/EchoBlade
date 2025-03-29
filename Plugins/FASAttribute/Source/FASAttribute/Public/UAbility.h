@@ -22,8 +22,10 @@ public:
 	bool bCanAdd;
 	bool bCanStart;
 	bool bIsActive;
-	UPROPERTY(BlueprintReadWrite)
-	float Cost;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cost")
+	float ManaCost;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Cost")
+	float HealthCost;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bCanInterrupt;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

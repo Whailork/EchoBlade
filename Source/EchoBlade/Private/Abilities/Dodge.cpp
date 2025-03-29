@@ -16,7 +16,7 @@ UDodge::UDodge()
 {
 	AbilityTag = UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge");
 	bCanInterrupt = false;
-	Cost = 25;
+	ManaCost = 25;
 	bInterruptOnHit = false;
 	RollForce = 4000000;
 }
@@ -30,7 +30,7 @@ void UDodge::Start_Implementation(AActor* instigator)
 	Character->GetMesh()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
 	Character->GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
 	DodgeEffect = NewObject<UDodging>();
-	DodgeEffect->InitializeValues(0,0.0001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),Cost,false,true);
+	DodgeEffect->InitializeValues(0,0.0001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),ManaCost,false,true);
 	instigator->GetComponentByClass<UAttributeSystemComponent>()->AddEffect(DodgeEffect);
 
 }
@@ -69,7 +69,7 @@ bool UDodge::CanStartAbility_Implementation(AActor* instigator)
 	float outValue = -1;
 	ACharacter* character = Cast<ACharacter>(instigator);
 	instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),outValue);
-	if(/*instigator->GetVelocity().Length() > 1 && */Super::CanStartAbility_Implementation(instigator) && outValue >= Cost && character->CanJump())
+	if(/*instigator->GetVelocity().Length() > 1 && */Super::CanStartAbility_Implementation(instigator) && outValue >= ManaCost && character->CanJump())
 	{
 		return true;
 	}
