@@ -177,8 +177,8 @@ int32 AFighter::GetAbilityLevel(EAbilityInputID AbilityID) const
 
 void AFighter::Shoot()
 {
-	//AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.Ranged.FireBall"));
-	AbilitySystemComponent->TriggerAbility(FGameplayTag::RequestGameplayTag(FName("Ability.Offensive.Ranged.FireBall")));
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.Ranged.FireBall"));
+	//AbilitySystemComponent->TriggerAbility(FGameplayTag::RequestGameplayTag(FName("Ability.Offensive.Ranged.FireBall")));
 }
 
 bool AFighter::SystemHasAbility(UAbility* AbilityInstance)

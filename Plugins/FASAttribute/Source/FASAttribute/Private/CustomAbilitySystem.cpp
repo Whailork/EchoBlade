@@ -79,7 +79,7 @@ bool UCustomAbilitySystem::TriggerAbility(FGameplayTag tag)
 {
 	for (auto ability : Abilities)
 	{
-		if(ability->AbilityTag == tag)
+		if(ability->AbilityTag.MatchesTagExact(tag))
 		{
 			if(ability->CanStartAbility(this->GetOwner()))
 			{

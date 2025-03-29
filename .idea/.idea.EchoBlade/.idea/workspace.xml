@@ -12,41 +12,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c4b9094-a463-4c06-9144-f6ad7dffdf64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/FlamingSwordPassive.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Effects/Burning.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/FlamingSwordPassive.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Effects/Burning.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Fireball.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/Fireball.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Abilities/BP_CircleSlash.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Abilities/BP_CircleSlash.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Abilities/DefaultAbilities.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Abilities/DefaultAbilities.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Abilities/EchoBladeAbilities/BP_FireballAbility.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_01.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_02.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_03.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_03.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_04.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_04.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_05.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_05.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_06.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_06.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_07.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_07.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_08.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_08.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_09.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_09.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_10.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_10.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_11.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_11.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_12.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_12.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_13.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_13.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_14.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_14.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_15.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_15.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_16.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_16.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_17.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_17.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_18.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/SwordTrailVFX/VFX/NS_Trail_18.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/AttributeSystemComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/AttributeSystemComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/AttributeSystemComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/AttributeSystemComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/CircleSlash.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/CircleSlash.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SwordAttack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SwordAttack.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Effects/Hit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Effects/Hit.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Input/IMC_Default.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Input/IMC_Default.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/CustomAbilitySystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/CustomAbilitySystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/FireballAbility.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Fighter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Fighter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/CircleSlash.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/CircleSlash.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/Effects/Hit.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Effects/Hit.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/Fighter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Fighter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/FireballAbility.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +34,26 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -136,27 +133,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;C++ Project.EchoBlade.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Cath&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "C++ Project.EchoBlade.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Cath",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\berge\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\berge\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\berge\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\berge\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
+      "C:\\Users\\berge\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
+      "C:\\Users\\berge\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="C++ Project.EchoBlade">
     <configuration name="EchoBlade" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -682,7 +679,7 @@
       <workItem from="1742762195967" duration="775000" />
       <workItem from="1742779706139" duration="2475000" />
       <workItem from="1743262914712" duration="15676000" />
-      <workItem from="1743280353231" duration="3278000" />
+      <workItem from="1743280353231" duration="6303000" />
     </task>
     <servers />
   </component>
@@ -691,5 +688,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/CustomAbilitySystem.cpp</url>
+          <line>101</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
