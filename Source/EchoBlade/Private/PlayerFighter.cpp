@@ -15,6 +15,7 @@
 
 APlayerFighter::APlayerFighter()
 {
+	//ProjectileClass = 
 }
 
 void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -49,6 +50,8 @@ void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		EnhancedInputComponent->BindAction(BlockAction, ETriggerEvent::Completed, this, &AFighter::StopBlock);
 		//basic abilities
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AFighter::Dodge);
+		
+		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Triggered, this, &AFighter::Shoot);
 	}
 	else
 	{

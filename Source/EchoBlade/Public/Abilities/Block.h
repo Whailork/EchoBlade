@@ -30,5 +30,4 @@ public:
 	virtual void OnAbilityStopped_Implementation(AActor* instigator) override;
 	virtual bool CanStartAbility_Implementation(AActor* instigator) override;
 	virtual bool CanAddAbility_Implementation(AActor* instigator) override;
-	
 };

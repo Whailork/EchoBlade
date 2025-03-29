@@ -10,6 +10,7 @@
 #include "EchoBladePlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameplayTagsManager.h"
+#include "RewindData.h"
 #include "Chaos/ChaosPerfTest.h"
 #include "Components/CapsuleComponent.h"
 #include "Gameplay/EchoBladeCharacter.h"
@@ -124,17 +125,12 @@ void AFighter::AddAbilityGAS(TSubclassOf<UEchoBladeGameplayAbility> NewAbility)
 void AFighter::SpawnProjectile(AActor* character, UMaterialInterface* Material,TSubclassOf<UCustomGameplayEffect> linkedEffectClass)
 {
 	AFighter* Character = Cast<AFighter>(character);
-	//Character->AddTag(Gameplay_Ability_Fireball); TODO: add it when ability is added not when activated???
+	FRotator CameraRotation;
 
-	//ProjectileClass = AProjectile::StaticClass();
-
-	if (ProjectileClass)
+	if (ProjectileClass && IsValid(Character))
 	{
-		FVector CameraLocation;
-		FRotator CameraRotation;
-
-		FVector SpawnLocation = Character->GetActorLocation() + Character->GetActorForwardVector() * 100.f;
-		FRotator SpawnRotation = Character->GetActorRotation();
+		FVector CharacterForwardVector = character->GetActorForwardVector();
+		FVector SpawnLocation = character->GetActorLocation() + CharacterForwardVector * 100.f;
 		FRotator Rotation = CameraRotation;
 		Rotation.Pitch += 10.0f;
 
@@ -149,13 +145,7 @@ void AFighter::SpawnProjectile(AActor* character, UMaterialInterface* Material,T
 			{
 				Projectile->SphereMesh->SetMaterial(0, Material);
 				Projectile->LinkedEffectClass = linkedEffectClass;
-
-				// TODO: test Launch Direction
-				FVector LaunchDirection = GetActorLocation() + GetActorForwardVector(); // Rotation.Vector();
-				Projectile->FireInDirection(LaunchDirection);
-				
-				//Projectile->InitializeValues(MyElement);
-				//Projectile->ShootInDirection(Rotation.Vector());
+				Projectile->FireInDirection(CharacterForwardVector);
 			}
 		}
 	}
@@ -181,6 +171,16 @@ int32 AFighter::GetAbilityLevel(EAbilityInputID AbilityID) const
 	return GetAbilityLevel(AbilityID);
 }
 
+void AFighter::Shoot()
+{
+	//AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.Ranged.FireBall"));
+	AbilitySystemComponent->TriggerAbility(FGameplayTag::RequestGameplayTag(FName("Ability.Offensive.Ranged.FireBall")));
+}
+
+bool AFighter::SystemHasAbility(UAbility* AbilityInstance)
+{
+	return AbilitySystemComponent->Abilities.Contains(AbilityInstance);
+}
 
 void AFighter::SwordAttack()
 {
@@ -219,10 +219,10 @@ void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
 		{
 			if(upgrade.LinkedAbility != nullptr)
 			{
-				// TSubclassOf<UEchoBladeGameplayAbility>
-				AddAbilityGAS(upgrade.LinkedAbility);				
-				//AddAbilityGAS(upgrade.LinkedAbility->GetClass());
-				//AbilitySystemComponent->AddAbility(NewObject<UAbility>(this,upgrade.LinkedAbility->GetClass()));
+				//AddAbilityGAS(upgrade.LinkedAbility);
+
+				//AbilitySystemComponent->AddAbility(NewObject<UAbility>(this, upgrade.LinkedAbility->GetClass()));
+				AbilitySystemComponent->AddAbility(NewObject<UAbility>(this, upgrade.LinkedAbility));
 			}
 			if(upgrade.LinkedEffect != nullptr)
 			{
