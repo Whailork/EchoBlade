@@ -12,6 +12,7 @@ UHit::UHit()
 void UHit::OnEffectAdded_Implementation(AActor* instigator)
 {
 	Super::OnEffectAdded_Implementation(instigator);
+	
 }
 
 void UHit::OnEffectRemoved_Implementation(AActor* instigator)
@@ -34,3 +35,5 @@ void UHit::InitializeValues_Implementation(float inDuration, float inPeriod, FGa
 	AttributeModifiers.Value = effectPower;
 	AttributeModifiers.TargetAttribute = AffectedAttributeTag;
 }
+
+

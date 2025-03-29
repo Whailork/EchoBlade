@@ -69,17 +69,19 @@ void USwordAttack::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 			{
 				bHasHit = true;
 				UHit* hitEffect = NewObject<UHit>();
-				
+
+				UCharacterMovementComponent* CharacterMovement = OtherActor->GetComponentByClass<UCharacterMovementComponent>();
+				float Knockback = 0;
+				UAttributeSystemComponent* myAttributeComponent = OverlappedComponent->GetOwner()->GetComponentByClass<UAttributeSystemComponent>();
+				if(myAttributeComponent)
+				{
+					myAttributeComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Knockback"),Knockback);
+				}
 				hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),ManaCost*(1 +(AttackCount-1)*ComboMultiplier),false,false);
+				
 				if(HitAttributeComponent->AddEffect(hitEffect))
 				{
-					UCharacterMovementComponent* CharacterMovement = OtherActor->GetComponentByClass<UCharacterMovementComponent>();
-					float Knockback = 0;
-					UAttributeSystemComponent* myAttributeComponent = OverlappedComponent->GetOwner()->GetComponentByClass<UAttributeSystemComponent>();
-					if(myAttributeComponent)
-					{
-						myAttributeComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Knockback"),Knockback);
-					}
+					
 				
 					FVector upForce = OtherActor->GetActorUpVector()* 50000.0 * Knockback;
 					FVector backForce = OtherActor->GetActorForwardVector()* -30000.0 * Knockback;

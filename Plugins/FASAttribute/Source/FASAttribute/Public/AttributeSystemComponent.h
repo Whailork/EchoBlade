@@ -141,6 +141,10 @@ public:
 	void RemoveEffect(FGameplayTag effectTag);
 	FGameplayTagContainer GetEffectsTagContainer();
 	void ClearAllEffects();
+	bool HasEffect(FGameplayTag effectTag);
+
+	UFUNCTION(BlueprintCallable)
+	TArray<UCustomGameplayEffect*> GetPassiveEffects();
 
 	//fonctions pour les delegates
 	UFUNCTION(BlueprintCallable)

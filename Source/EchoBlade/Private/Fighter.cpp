@@ -10,6 +10,7 @@
 #include "EchoBladePlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameplayTagsManager.h"
+#include "NiagaraComponent.h"
 #include "RewindData.h"
 #include "Chaos/ChaosPerfTest.h"
 #include "Components/CapsuleComponent.h"
@@ -28,6 +29,9 @@ AFighter::AFighter()
 	AddOwnedComponent(AbilitySystemComponent);
 	CharacterTrajectory = CreateDefaultSubobject<UCharacterTrajectoryComponent>("CharacterTrajectory");
 	AddOwnedComponent(CharacterTrajectory);
+
+	SwordTrail = CreateDefaultSubobject<UNiagaraComponent>("SwordTrail");
+	SwordTrail->SetupAttachment(GetMesh(),"Sword_Mid");
 
 	SwordCollision = CreateDefaultSubobject<UCapsuleComponent>("SwordCollision");
 	SwordCollision->SetupAttachment(GetMesh(),"Sword_Mid");
@@ -173,8 +177,8 @@ int32 AFighter::GetAbilityLevel(EAbilityInputID AbilityID) const
 
 void AFighter::Shoot()
 {
-	//AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.Ranged.FireBall"));
-	AbilitySystemComponent->TriggerAbility(FGameplayTag::RequestGameplayTag(FName("Ability.Offensive.Ranged.FireBall")));
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.Ranged.FireBall"));
+	//AbilitySystemComponent->TriggerAbility(FGameplayTag::RequestGameplayTag(FName("Ability.Offensive.Ranged.FireBall")));
 }
 
 bool AFighter::SystemHasAbility(UAbility* AbilityInstance)
@@ -209,6 +213,16 @@ void AFighter::StopBlock()
 void AFighter::Dodge()
 {
 	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge"));
+}
+
+void AFighter::CircleSlash()
+{
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.Melee.CircleSlash"));
+}
+
+void AFighter::EarthQuake()
+{
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.Ranged.EarthQuake"));
 }
 
 void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
