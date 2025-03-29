@@ -102,6 +102,8 @@ public:
 	void Block();
 	void StopBlock();
 	void Dodge();
+	void CircleSlash();
+	void EarthQuake();
 	void ProcessUpgrades(TArray<FUpgradeData> upgrades);
 
 	virtual void BeginDestroy() override;

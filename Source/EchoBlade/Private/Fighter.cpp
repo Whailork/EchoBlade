@@ -211,6 +211,16 @@ void AFighter::Dodge()
 	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Dodge"));
 }
 
+void AFighter::CircleSlash()
+{
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.Melee.CircleSlash"));
+}
+
+void AFighter::EarthQuake()
+{
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.Ranged.EarthQuake"));
+}
+
 void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
 {
 	for(auto upgrade : upgrades)
