@@ -22,14 +22,12 @@ void UAbility::Start_Implementation(AActor* instigator)
 {
 	bIsActive = true;
 	OnAbilityStarted(instigator);
-	
 }
 
 void UAbility::Stop_Implementation(AActor* instigator,bool WasInterrupted)
 {
 	bIsActive = false;
 	OnAbilityStopped(instigator);
-	
 }
 
 void UAbility::OnAbilityAdded_Implementation(AActor* instigator)
@@ -64,12 +62,9 @@ bool UAbility::CanStartAbility_Implementation(AActor* instigator)
 	}
 
 	return false;
-	
-	
 }
 
 bool UAbility::CanAddAbility_Implementation(AActor* instigator)
 {
-	
 	return bCanAdd;
 }

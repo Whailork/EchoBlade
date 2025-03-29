@@ -16,6 +16,7 @@
 #include "EchoBladeGameInstance.h"
 #include "GameplayTagAssetInterface.h"
 #include "GameplayTagContainer.h"
+#include "InputActionValue.h"
 #include "Attribute/HealthAttributeSet.h"
 #include "Perception/AIPerceptionStimuliSourceComponent.h"
 #include "Projectile/Projectile.h"
@@ -41,6 +42,8 @@ public:
 
 	// Properties
 	bool ASCInputBound;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Abilities")
+	FGameplayTagContainer AbilityTags;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Projectile)
 	TSubclassOf<AProjectile> ProjectileClass;
@@ -77,6 +80,8 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category= "Ability")
 	virtual int32 GetAbilityLevel(EAbilityInputID AbilityID) const;
+	void Shoot();
+	bool SystemHasAbility(UAbility* AbilityInstance);
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	bool IsStrafing;

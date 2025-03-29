@@ -15,7 +15,6 @@ class ECHOBLADE_API UEchoBladeGameplayAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
 
-
 	FGameplayAbilitySpecHandle HandleTemp;
 	FGameplayAbilityActorInfo ActorInfoTemp;
 	FGameplayAbilityActivationInfo ActivationInfoTemp;

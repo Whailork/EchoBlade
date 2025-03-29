@@ -70,7 +70,7 @@ void USwordAttack::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 				bHasHit = true;
 				UHit* hitEffect = NewObject<UHit>();
 				
-				hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),Cost*(1 +(AttackCount-1)*ComboMultiplier),false,false);
+				hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),ManaCost*(1 +(AttackCount-1)*ComboMultiplier),false,false);
 				if(HitAttributeComponent->AddEffect(hitEffect))
 				{
 					UCharacterMovementComponent* CharacterMovement = OtherActor->GetComponentByClass<UCharacterMovementComponent>();
@@ -108,7 +108,7 @@ void USwordAttack::Start_Implementation(AActor* instigator)
 		AttackCount++;
 		ACharacter* Character = Cast<ACharacter>(instigator);
 		
-		instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Damage"),Cost);
+		instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Damage"),ManaCost);
 		instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.ComboMultiplier"),ComboMultiplier);
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Start in c++"));
 	}
