@@ -15,6 +15,7 @@ class ECHOBLADE_API UHit : public UCustomGameplayEffect
 {
 	GENERATED_BODY()
 public:
+	
 	UHit();
 	virtual void OnEffectAdded_Implementation(AActor* instigator) override;
 	virtual void OnEffectRemoved_Implementation(AActor* instigator) override;

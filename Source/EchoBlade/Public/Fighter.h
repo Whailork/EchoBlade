@@ -92,6 +92,8 @@ public:
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UCapsuleComponent* SwordCollision;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	class UNiagaraComponent* SwordTrail;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UCharacterTrajectoryComponent* CharacterTrajectory;
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UAIPerceptionStimuliSourceComponent* AIStimuliSource;
@@ -102,6 +104,8 @@ public:
 	void Block();
 	void StopBlock();
 	void Dodge();
+	void CircleSlash();
+	void EarthQuake();
 	void ProcessUpgrades(TArray<FUpgradeData> upgrades);
 
 	virtual void BeginDestroy() override;

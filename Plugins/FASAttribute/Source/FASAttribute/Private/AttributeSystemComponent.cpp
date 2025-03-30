@@ -7,6 +7,7 @@
 #include "EchoBladeGameInstance.h"
 #include "EchoBladeGameInstance.h"
 #include "FASAttribute.h"
+#include "GameplayTagsManager.h"
 
 //#include "UGameplayEffect.h"
 
@@ -44,6 +45,31 @@ void UAttributeSystemComponent::ClearAllEffects()
 		EffectsContainer.Empty();
 	}
 	
+}
+
+bool UAttributeSystemComponent::HasEffect(FGameplayTag effectTag)
+{
+	for (auto Effect : EffectsContainer)
+	{
+		if(Effect->TagToAdd.MatchesTag(effectTag))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+TArray<UCustomGameplayEffect*> UAttributeSystemComponent::GetPassiveEffects()
+{
+	TArray<UCustomGameplayEffect*> PassiveEffects;
+	for (auto Effect : EffectsContainer)
+	{
+		if(Effect->TagToAdd.MatchesTag(UGameplayTagsManager::Get().RequestGameplayTag("Effect.Passive")))
+		{
+			PassiveEffects.Add(Effect);
+		}
+	}
+	return PassiveEffects;
 }
 
 
