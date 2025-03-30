@@ -3,7 +3,9 @@
 
 #include "Effects/Hit.h"
 
+#include "CustomAbilitySystem.h"
 #include "GameplayTagsManager.h"
+#include "Effects/Burning.h"
 
 UHit::UHit()
 {
@@ -12,6 +14,22 @@ UHit::UHit()
 void UHit::OnEffectAdded_Implementation(AActor* instigator)
 {
 	Super::OnEffectAdded_Implementation(instigator);
+	//TODO: add some random so that effect is not always applied
+	if(auto Outer = Cast<AActor>(GetOuter()))
+	{
+		
+		UCustomAbilitySystem* AbilitySystem = Outer->GetComponentByClass<UCustomAbilitySystem>();
+		UAttributeSystemComponent* AttributeSystemComponent = instigator->GetComponentByClass<UAttributeSystemComponent>();
+		if(AbilitySystem && AttributeSystemComponent){
+			if(AbilitySystem->HasAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Passive.FlamingSword")))
+			{
+				UCustomGameplayEffect* BurningEffect = NewObject<UBurning>(GetOuter());
+				BurningEffect->InitializeValues(5,1,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),AttributeModifiers.Value/2,true,false);
+				AttributeSystemComponent->AddEffect(BurningEffect);
+				
+			}
+		}
+	}
 	
 }
 

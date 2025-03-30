@@ -52,6 +52,8 @@ void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AFighter::Dodge);
 		//CircleSlash
 		EnhancedInputComponent->BindAction(CircleSlashAction, ETriggerEvent::Triggered, this, &AFighter::CircleSlash);
+		//Earthquake
+		EnhancedInputComponent->BindAction(EarthquakeAction, ETriggerEvent::Triggered, this, &AFighter::EarthQuake);
 		
 		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Triggered, this, &AFighter::Shoot);
 	}

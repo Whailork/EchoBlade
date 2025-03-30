@@ -68,8 +68,8 @@ void USwordAttack::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 			if(HitAttributeComponent != nullptr)
 			{
 				bHasHit = true;
-				UHit* hitEffect = NewObject<UHit>();
-
+				UHit* hitEffect = NewObject<UHit>(SwordCollision->GetOwner());
+		
 				UCharacterMovementComponent* CharacterMovement = OtherActor->GetComponentByClass<UCharacterMovementComponent>();
 				float Knockback = 0;
 				UAttributeSystemComponent* myAttributeComponent = OverlappedComponent->GetOwner()->GetComponentByClass<UAttributeSystemComponent>();
