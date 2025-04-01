@@ -87,7 +87,7 @@ class FASATTRIBUTE_API UAttributeSystemComponent : public UActorComponent
 	// les effects
 	UPROPERTY(EditAnywhere, Category = "Effects")
 	TArray<UCustomGameplayEffect*> EffectsContainer;
-	TMap<FGameplayTag,FEffectRemovedHolder> mapEffectRemoved;
+	TMap<FGameplayTag,TArray<FEffectRemovedHolder>> mapEffectRemoved;
 	TMap<FGameplayTag,TArray<FEffectAddedHolder>> mapEffectAdded;
 	
 public:	
@@ -149,6 +149,9 @@ public:
 	//fonctions pour les delegates
 	UFUNCTION(BlueprintCallable)
 	void AddEffectAddedDelegate(FGameplayTag effectTag ,FOnEffectAdded addedDelegate);
+	//fonctions pour les delegates
+	UFUNCTION(BlueprintCallable)
+	void AddEffectRemovedDelegate(FGameplayTag effectTag ,FOnEffectRemoved removedDelegate);
 
 protected:
 	// Called when the game starts

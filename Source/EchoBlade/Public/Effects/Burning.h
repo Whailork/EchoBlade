@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "CustomGameplayEffect.h"
+#include "NiagaraSystem.h"
 #include "Burning.generated.h"
 
 /**

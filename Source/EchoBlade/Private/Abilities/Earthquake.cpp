@@ -4,6 +4,7 @@
 #include "Abilities/Earthquake.h"
 
 #include "GameplayTagsManager.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Effects/Hit.h"
 #include "GameFramework/Character.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -67,4 +68,5 @@ void UEarthquake::TriggerEarthquake(AActor* instigator)
 			AttributeSystemComponent->AddEffect(hitEffect);
 		}
 	}
+	SpawnedVFX = UNiagaraFunctionLibrary::SpawnSystemAtLocation(instigator,VFX,instigator->GetActorLocation(),instigator->GetActorRotation());
 }

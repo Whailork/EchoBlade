@@ -76,6 +76,11 @@ void AEnemyFighter::OnDeath()
 		HealthWidget->SetVisibility(ESlateVisibility::Collapsed);
 	}
 	Cast<AEnemyAIController>(GetController())->BehaviorTree->StopTree(EBTStopMode::Forced);
+	UAbility* AinUse = AbilitySystemComponent->AbilityInUse();
+	if(AinUse)
+	{
+		AbilitySystemComponent->StopAbility(AinUse->AbilityTag,true);
+	}
 	PlayAnimMontage(DeathAnimMontage);
 	//StopAnimMontage();
 	GetWorldTimerManager().SetTimer(DespawnTimerHandle, this,&AEnemyFighter::Despawn,2,false);

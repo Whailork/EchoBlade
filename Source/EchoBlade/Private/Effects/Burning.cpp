@@ -19,11 +19,12 @@ void UBurning::OnEffectAdded_Implementation(AActor* instigator)
 {
 	Super::OnEffectAdded_Implementation(instigator);
 	//spawn particles on actor
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Burning"));
+	
 }
 
 void UBurning::OnEffectRemoved_Implementation(AActor* instigator)
 {
 	Super::OnEffectRemoved_Implementation(instigator);
+	
 	//remove particles from actor
 }
