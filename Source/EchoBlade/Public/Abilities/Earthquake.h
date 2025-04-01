@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NiagaraSystem.h"
 #include "UAbility.h"
 #include "Earthquake.generated.h"
 
@@ -14,6 +15,9 @@ class ECHOBLADE_API UEarthquake : public UAbility
 {
 	GENERATED_BODY()
 public:
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UNiagaraSystem* VFX;
+	UNiagaraComponent* SpawnedVFX;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float EarthquakeRange;
 	UEarthquake();
