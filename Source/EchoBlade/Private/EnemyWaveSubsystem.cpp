@@ -79,23 +79,46 @@ void UEnemyWaveSubsystem::SpawnEnemy(FEnemyData spawnData,FTimerHandle SpawnTime
 
 void UEnemyWaveSubsystem::OnFighterDefeated()
 {
-	
+	TArray<AActor*> players;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),APlayerFighter::StaticClass(),players);
+
+	//add point with kill number
+	UEchoBladeGameInstance* GameInstance = Cast<UEchoBladeGameInstance>(GetWorld()->GetGameInstance());
+	GameInstance->CurrentKills++;
+	if(GameInstance->CurrentKills == GameInstance->KillsForLevelUp)
+	{
+		GameInstance->CurrentKills = 0;
+		GameInstance->KillsForLevelUp += GameInstance->KillsForLevelUp/2;
+		for (auto Player : players)
+		{
+			UPlayerData* thisPlayerData = GameInstance->GetPlayerData(Cast<APlayerController>(Cast<APlayerFighter>(Player)->GetController()));
+			thisPlayerData->CurrentPoints += 1;
+		}
+			
+	}
+	//if wave spawning is finished
 	if(SpawnTimers.IsEmpty())
 	{
 		TArray<AActor*> outActors;
 		UGameplayStatics::GetAllActorsOfClass(GetWorld(),AEnemyFighter::StaticClass(),outActors);
+		// if only one actor left (the one currently dying)
 		if(outActors.Num() == 1)
 		{
 			//wave finished
 			WaveNumber++;
 			SpawnNextWave();
-			TArray<AActor*> players;
 			UGameplayStatics::GetAllActorsOfClass(GetWorld(),APlayerFighter::StaticClass(),players);
-			for (auto Player : players)
+			//add point if new best wave
+			if(WaveNumber > GameInstance->BestWaveNumber)
 			{
-				UPlayerData* thisPlayerData = Cast<UEchoBladeGameInstance>(Player->GetGameInstance())->GetPlayerData(Cast<APlayerController>(Cast<APlayerFighter>(Player)->GetController()));
-				thisPlayerData->CurrentPoints += 1;
+				for (auto Player : players)
+				{
+					UPlayerData* thisPlayerData = GameInstance->GetPlayerData(Cast<APlayerController>(Cast<APlayerFighter>(Player)->GetController()));
+					thisPlayerData->CurrentPoints += 1;
+					GameInstance->BestWaveNumber = WaveNumber;
+				}
 			}
+			
 			//Cast<UEchoBladeGameInstance>(GetWorld()->GetGameInstance())->CurrentPoints += 1;
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, TEXT("Start new wave"));
 		}

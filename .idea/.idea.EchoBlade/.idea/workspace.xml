@@ -13,11 +13,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4c4b9094-a463-4c06-9144-f6ad7dffdf64" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Abilities/BP_CircleSlash.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Abilities/BP_CircleSlash.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Abilities/BP_Earthquake.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Abilities/BP_Earthquake.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EchoBladeGameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EchoBladeGameInstance.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/EchoBladeGameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/EchoBladeGameInstance.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -593,7 +592,7 @@
       <workItem from="1743354705153" duration="7835000" />
       <workItem from="1743364900915" duration="1185000" />
       <workItem from="1743462537345" duration="3998000" />
-      <workItem from="1743554722535" duration="716000" />
+      <workItem from="1743554722535" duration="4668000" />
     </task>
     <servers />
   </component>
