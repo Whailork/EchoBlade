@@ -13,6 +13,8 @@
 /**
  * 
  */
+
+DECLARE_DYNAMIC_DELEGATE(FFadeToBlackDelegate);
 UCLASS()
 class ECHOBLADE_API APlayerFighter : public AFighter
 {
@@ -51,6 +53,10 @@ class ECHOBLADE_API APlayerFighter : public AFighter
 	UInputAction* BlockAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* CircleSlashAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* EarthquakeAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* InstantHealAction;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* ShootAction;
@@ -61,9 +67,13 @@ public :
 	FVector2D MovementVector;
 	UFUNCTION()
 	void OnDeath();
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	 FFadeToBlackDelegate FadeToBlackDelegate;
 	UPROPERTY()
 	FAttributeChangedDelegate deathDelegate;
 	UFUNCTION()
 	void OnHealthChanged(FGameplayTag tag,float min,float current,float max);
+	UFUNCTION()
+	void Despawn();
 	APlayerFighter();
 };

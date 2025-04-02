@@ -39,7 +39,11 @@ void UAttributeSystemComponent::ClearAllEffects()
 			//fire la delegate
 			if(mapEffectRemoved.Contains(Effect->TagToAdd))
 			{
-				mapEffectRemoved[Effect->TagToAdd].effectRemovedDelegate.ExecuteIfBound(GetOwner());
+				for (auto Element : mapEffectRemoved[Effect->TagToAdd])
+				{
+					Element.effectRemovedDelegate.ExecuteIfBound(GetOwner());
+				}
+				
 			}
 		}
 		EffectsContainer.Empty();
@@ -382,12 +386,6 @@ bool UAttributeSystemComponent::AddEffect(UCustomGameplayEffect* effect)
 				delegateHolder.effectAddeddDelegate.ExecuteIfBound(GetOwner());
 			}
 		}
-		
-
-		//setup la delegate pour effectRemoved
-		FEffectRemovedHolder holder = {FEffectRemovedHolder::currentHandle++,FOnEffectRemoved()};
-		holder.effectRemovedDelegate = effect->removedDelegate;
-		mapEffectRemoved.Add(effect->TagToAdd,holder);
 		return true;
 	}
 	return false;
@@ -412,7 +410,11 @@ void UAttributeSystemComponent::RemoveEffect(FGameplayTag effectTag)
 		//fire la delegate
 		if(mapEffectRemoved.Contains(effectTag))
 		{
-			mapEffectRemoved[effectTag].effectRemovedDelegate.ExecuteIfBound(GetOwner());
+			for (auto Element : mapEffectRemoved[effectTag])
+			{
+				Element.effectRemovedDelegate.ExecuteIfBound(GetOwner());
+			}
+			
 		}
 	}
 	
@@ -431,6 +433,21 @@ void UAttributeSystemComponent::AddEffectAddedDelegate(FGameplayTag effectTag, F
 		TArray<FEffectAddedHolder> newArray;
 		newArray.Add(holder);
 		mapEffectAdded.Add(effectTag,newArray);
+	}
+}
+
+void UAttributeSystemComponent::AddEffectRemovedDelegate(FGameplayTag effectTag, FOnEffectRemoved removedDelegate)
+{
+	FEffectRemovedHolder holder = {FEffectRemovedHolder::currentHandle++,removedDelegate};
+	if(mapEffectRemoved.Contains(effectTag))
+	{
+		mapEffectRemoved[effectTag].Add(holder);
+	}
+	else
+	{
+		TArray<FEffectRemovedHolder> newArray;
+		newArray.Add(holder);
+		mapEffectRemoved.Add(effectTag,newArray);
 	}
 }
 

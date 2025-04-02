@@ -52,6 +52,10 @@ void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Triggered, this, &AFighter::Dodge);
 		//CircleSlash
 		EnhancedInputComponent->BindAction(CircleSlashAction, ETriggerEvent::Triggered, this, &AFighter::CircleSlash);
+		//Earthquake
+		EnhancedInputComponent->BindAction(EarthquakeAction, ETriggerEvent::Triggered, this, &AFighter::EarthQuake);
+		//InstantHeal
+		EnhancedInputComponent->BindAction(InstantHealAction, ETriggerEvent::Triggered, this, &AFighter::InstantHeal);
 		
 		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Triggered, this, &AFighter::Shoot);
 	}
@@ -146,8 +150,12 @@ void APlayerFighter::PossessedBy(AController* NewController)
 
 void APlayerFighter::OnDeath()
 {
+	PlayAnimMontage(DeathAnimMontage);
+	FadeToBlackDelegate.ExecuteIfBound();
+	FTimerHandle despawnHandle;
+	GetWorldTimerManager().SetTimer(despawnHandle, this,&APlayerFighter::Despawn,1,false);
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Death"));
-	UGameplayStatics::OpenLevel(this, FName("/Game/Maps/Lvl_SkillTreeMenu"), true);
+	
 	///Script/Engine.World'/Game/Maps/Lvl_SkillTreeMenu.Lvl_SkillTreeMenu'
 }
 
@@ -161,6 +169,11 @@ void APlayerFighter::OnHealthChanged(FGameplayTag tag, float min, float current,
 		}
 	}
 	
+}
+
+void APlayerFighter::Despawn()
+{
+	UGameplayStatics::OpenLevel(this, FName("/Game/Maps/Lvl_SkillTreeMenu"), true);
 }
 
 

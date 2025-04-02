@@ -47,7 +47,7 @@ void UBlock::Start_Implementation(AActor* instigator)
 
 void UBlock::Stop_Implementation(AActor* instigator,bool WasInterrupted)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("StopBlock"));
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("StopBlock"));
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
