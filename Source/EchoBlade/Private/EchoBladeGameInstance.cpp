@@ -7,7 +7,8 @@
 
 UEchoBladeGameInstance::UEchoBladeGameInstance()
 {
-	
+	KillsForLevelUp = 200;
+	CurrentKills = 0;
 }
 
 UPlayerData* UEchoBladeGameInstance::GetPlayerData(APlayerController* playerController)
