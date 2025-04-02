@@ -13,6 +13,8 @@
 /**
  * 
  */
+
+DECLARE_DYNAMIC_DELEGATE(FFadeToBlackDelegate);
 UCLASS()
 class ECHOBLADE_API APlayerFighter : public AFighter
 {
@@ -63,9 +65,13 @@ public :
 	FVector2D MovementVector;
 	UFUNCTION()
 	void OnDeath();
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	 FFadeToBlackDelegate FadeToBlackDelegate;
 	UPROPERTY()
 	FAttributeChangedDelegate deathDelegate;
 	UFUNCTION()
 	void OnHealthChanged(FGameplayTag tag,float min,float current,float max);
+	UFUNCTION()
+	void Despawn();
 	APlayerFighter();
 };
