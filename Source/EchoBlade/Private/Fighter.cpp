@@ -225,6 +225,11 @@ void AFighter::EarthQuake()
 	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Offensive.Ranged.EarthQuake"));
 }
 
+void AFighter::InstantHeal()
+{
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Buff.InstantHeal"));
+}
+
 void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
 {
 	for(auto upgrade : upgrades)

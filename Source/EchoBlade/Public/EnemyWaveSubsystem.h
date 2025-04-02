@@ -12,6 +12,9 @@
 /**
  * 
  */
+
+DECLARE_LOG_CATEGORY_EXTERN(WaveLog, Log, All);
+
 USTRUCT(BlueprintType)
 struct  FEnemyTypeData
 {

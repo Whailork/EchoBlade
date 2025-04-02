@@ -106,6 +106,7 @@ public:
 	void Dodge();
 	void CircleSlash();
 	void EarthQuake();
+	void InstantHeal();
 	void ProcessUpgrades(TArray<FUpgradeData> upgrades);
 
 	virtual void BeginDestroy() override;

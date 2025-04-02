@@ -56,7 +56,7 @@ void UEarthquake::TriggerEarthquake(AActor* instigator)
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(instigator);
 	auto channel = UEngineTypes::ConvertToTraceType(ECC_GameTraceChannel1);
-	UKismetSystemLibrary::SphereTraceMulti(instigator->GetWorld(),instigator->GetActorLocation(),instigator->GetActorLocation() + Direction*EarthquakeRange,80,channel,false,ActorsToIgnore,EDrawDebugTrace::ForDuration,outHits,true);
+	UKismetSystemLibrary::SphereTraceMulti(instigator->GetWorld(),instigator->GetActorLocation(),instigator->GetActorLocation() + Direction*EarthquakeRange,120,channel,false,ActorsToIgnore,EDrawDebugTrace::ForDuration,outHits,true);
 	for (auto Hit : outHits)
 	{
 		UHit* hitEffect = NewObject<UHit>();
