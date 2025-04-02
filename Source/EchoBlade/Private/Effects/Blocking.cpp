@@ -36,12 +36,14 @@ void UBlocking::OnEffectAdded_Implementation(AActor* instigator)
 	{
 		OnEffectTriggered_Implementation();
 	}
-	this->shieldClass = Cast<UBlock>(InstigatorActor->GetComponentByClass<UCustomAbilitySystem>()->GetAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block")))->shieldClass;
+	UBlock* blockAbility = Cast<UBlock>(InstigatorActor->GetComponentByClass<UCustomAbilitySystem>()->GetAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Defensive.Block")));
+	this->shieldClass = blockAbility->shieldClass;
 	Shield = instigator->GetWorld()->SpawnActor<AShield>(shieldClass);
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("AfterSpawn"));
 	Shield->SetActorLocation(InstigatorActor->GetActorLocation() + InstigatorActor->GetActorForwardVector()*50);
 	Shield->SetActorRotation(InstigatorActor->GetActorRotation());
 	Shield->AttachToActor(InstigatorActor,FAttachmentTransformRules::KeepWorldTransform);
+	blockAbility->Shield = Shield;
 
 }
 
@@ -73,9 +75,10 @@ void UBlocking::OnEffectTriggered_Implementation()
 
 void UBlocking::OnEffectRemoved_Implementation(AActor* instigator)
 {
-	Super::OnEffectRemoved_Implementation(instigator);
 	if(Shield)
 	{
 		Shield->Destroy();
 	}
+	Super::OnEffectRemoved_Implementation(instigator);
+	
 }

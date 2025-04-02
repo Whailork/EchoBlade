@@ -5,6 +5,7 @@
 #include "PlayerFighter.h"
 #include "Kismet/GameplayStatics.h"
 
+DEFINE_LOG_CATEGORY(WaveLog);
 void UEnemyWaveSubsystem::Init(UDataTable* waves, TSubclassOf<AEnemyFighter> classToSpawn)
 {
 	if(!waves->IsValidLowLevel())
@@ -96,31 +97,34 @@ void UEnemyWaveSubsystem::OnFighterDefeated()
 		}
 			
 	}
-	//if wave spawning is finished
-	if(SpawnTimers.IsEmpty())
+	
+	TArray<AActor*> outActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(),AEnemyFighter::StaticClass(),outActors);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, FString::FromInt(outActors.Num()));
+	UE_LOG(WaveLog,Log,TEXT("%d"),outActors.Num());
+	// if only one actor left (the one currently dying)
+	if(outActors.Num() <= 1)
 	{
-		TArray<AActor*> outActors;
-		UGameplayStatics::GetAllActorsOfClass(GetWorld(),AEnemyFighter::StaticClass(),outActors);
-		// if only one actor left (the one currently dying)
-		if(outActors.Num() == 1)
+		//wave finished
+		UE_LOG(WaveLog,Warning,TEXT("Spawn next wave"));
+		WaveNumber++;
+		SpawnNextWave();
+		UGameplayStatics::GetAllActorsOfClass(GetWorld(),APlayerFighter::StaticClass(),players);
+		//add point if new best wave
+		if(WaveNumber > GameInstance->BestWaveNumber)
 		{
-			//wave finished
-			WaveNumber++;
-			SpawnNextWave();
-			UGameplayStatics::GetAllActorsOfClass(GetWorld(),APlayerFighter::StaticClass(),players);
-			//add point if new best wave
-			if(WaveNumber > GameInstance->BestWaveNumber)
+			for (auto Player : players)
 			{
-				for (auto Player : players)
-				{
-					UPlayerData* thisPlayerData = GameInstance->GetPlayerData(Cast<APlayerController>(Cast<APlayerFighter>(Player)->GetController()));
-					thisPlayerData->CurrentPoints += 1;
-					GameInstance->BestWaveNumber = WaveNumber;
-				}
+				UPlayerData* thisPlayerData = GameInstance->GetPlayerData(Cast<APlayerController>(Cast<APlayerFighter>(Player)->GetController()));
+				thisPlayerData->CurrentPoints += 1;
+				GameInstance->BestWaveNumber = WaveNumber;
 			}
-			
-			//Cast<UEchoBladeGameInstance>(GetWorld()->GetGameInstance())->CurrentPoints += 1;
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, TEXT("Start new wave"));
 		}
+			
+		//Cast<UEchoBladeGameInstance>(GetWorld()->GetGameInstance())->CurrentPoints += 1;
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Purple, TEXT("Start new wave"));
 	}
+		
+		
+	
 }
