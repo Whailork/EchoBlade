@@ -148,8 +148,12 @@ void APlayerFighter::PossessedBy(AController* NewController)
 
 void APlayerFighter::OnDeath()
 {
+	PlayAnimMontage(DeathAnimMontage);
+	FadeToBlackDelegate.ExecuteIfBound();
+	FTimerHandle despawnHandle;
+	GetWorldTimerManager().SetTimer(despawnHandle, this,&APlayerFighter::Despawn,1,false);
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Death"));
-	UGameplayStatics::OpenLevel(this, FName("/Game/Maps/Lvl_SkillTreeMenu"), true);
+	
 	///Script/Engine.World'/Game/Maps/Lvl_SkillTreeMenu.Lvl_SkillTreeMenu'
 }
 
@@ -163,6 +167,11 @@ void APlayerFighter::OnHealthChanged(FGameplayTag tag, float min, float current,
 		}
 	}
 	
+}
+
+void APlayerFighter::Despawn()
+{
+	UGameplayStatics::OpenLevel(this, FName("/Game/Maps/Lvl_SkillTreeMenu"), true);
 }
 
 
