@@ -24,6 +24,11 @@ void UInstantHeal::Start_Implementation(AActor* instigator)
 	AttributeComp->GetAttributeMinValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),MinValue);
 	AttributeComp->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),Value);
 
+	//remove cost
+	float StaminaValue;
+	AttributeComp->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),StaminaValue);
+	AttributeComp->SetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),StaminaValue - ManaCost);
+	
 	float EffectPower = UKismetMathLibrary::Clamp(Value + MaxValue/2,MinValue,MaxValue);
 	URegeneration* RegenEffect = NewObject<URegeneration>(instigator);
 	RegenEffect->InitializeValues(0,0.0001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),EffectPower,false,false);

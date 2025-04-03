@@ -107,6 +107,7 @@ public:
 	void CircleSlash();
 	void EarthQuake();
 	void InstantHeal();
+	void Haste();
 	void ProcessUpgrades(TArray<FUpgradeData> upgrades);
 
 	virtual void BeginDestroy() override;

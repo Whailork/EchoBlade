@@ -12,29 +12,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c4b9094-a463-4c06-9144-f6ad7dffdf64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/InstantHeal.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/InstantHeal.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/GrowingRagePassive.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/GrowingRagePassive.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/HasteAbility.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SecondWindPassive.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/TemporaryInvincibilityPassive.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/ThornsPassive.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Effects/HasteEffect.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/HasteAbility.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/SecondWindPassive.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/TemporaryInvincibilityPassive.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/ThornsPassive.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Effects/HasteEffect.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/BT_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/BT_EnemyFighter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/AI/EQS_exploration.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/AI/EQS_exploration.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Abilities/BP_Dodge.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Abilities/BP_Dodge.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultGameplayTags.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGameplayTags.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Abilities/DefaultAbilities.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Abilities/DefaultAbilities.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Attributes/EnemyDefaultAttributes.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Attributes/EnemyDefaultAttributes.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Attributes/FighterDefaultAttributes.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Attributes/FighterDefaultAttributes.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_EnemyFighter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/KTP_Effect/Particles/Bottom/Bottom03-01.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/KTP_Effect/Particles/Bottom/Bottom03-01.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/MixedVFX/Particles/Mix/NS_HealingAura.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MixedVFX/Particles/Mix/NS_HealingAura.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/ABP_MQ.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Blueprints/ABP_MQ.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/MotionMatching/CHT_States.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MotionMatching/CHT_States.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/ThirdPerson/Input/IMC_Default.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPerson/Input/IMC_Default.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Block.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Earthquake.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Earthquake.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Effects/Blocking.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Effects/Blocking.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/AttributeSystemComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/AttributeSystemComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/CustomGameplayEffect.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/CustomGameplayEffect.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/InstantHeal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/InstantHeal.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Fighter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Fighter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/PlayerFighter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/PlayerFighter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/EnemyWaveSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/EnemyWaveSubsystem.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/Fighter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Fighter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/PlayerFighter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/PlayerFighter.h" afterDir="false" />
     </list>
@@ -47,6 +53,20 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -695,7 +715,8 @@
       <workItem from="1743364900915" duration="1185000" />
       <workItem from="1743462537345" duration="3998000" />
       <workItem from="1743554722535" duration="4668000" />
-      <workItem from="1743606439517" duration="14827000" />
+      <workItem from="1743606439517" duration="15432000" />
+      <workItem from="1743634220450" duration="6081000" />
     </task>
     <servers />
   </component>
@@ -712,6 +733,11 @@
           <url>file://$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SwordAttack.cpp</url>
           <line>23</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Source/EchoBlade/Private/Effects/HasteEffect.cpp</url>
+          <line>26</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

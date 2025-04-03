@@ -47,6 +47,7 @@ void UCustomGameplayEffect::StopPeriodTimer()
 	{
 		// on enlève l'effet de sur l'actor puisqu'il est terminé
 		InstgatorAttributeComponent->RemoveEffect(TagToAdd);
+		//OnEffectRemoved(InstigatorActor);
 	}
 }
 

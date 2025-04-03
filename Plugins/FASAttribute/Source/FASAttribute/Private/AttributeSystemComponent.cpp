@@ -386,6 +386,16 @@ bool UAttributeSystemComponent::AddEffect(UCustomGameplayEffect* effect)
 				delegateHolder.effectAddeddDelegate.ExecuteIfBound(GetOwner());
 			}
 		}
+		//bind la delegate d'effect removed
+		if(mapEffectRemoved.Contains(effect->TagToAdd))
+		{
+			mapEffectRemoved[effect->TagToAdd].Add(FEffectRemovedHolder(FEffectRemovedHolder::currentHandle++,effect->removedDelegate));
+		}
+		else
+		{
+			TArray<FEffectRemovedHolder> newArray = {FEffectRemovedHolder(FEffectRemovedHolder::currentHandle++,effect->removedDelegate)};
+			mapEffectRemoved.Add(effect->TagToAdd,newArray);
+		}
 		return true;
 	}
 	return false;
