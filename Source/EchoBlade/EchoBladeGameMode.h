@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UAbility.h"
 #include "GameFramework/GameModeBase.h"
 #include "EchoBladeGameMode.generated.h"
 
@@ -13,4 +14,7 @@ class AEchoBladeGameMode : public AGameModeBase
 
 public:
 	AEchoBladeGameMode();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Dictionary")
+	TMap<FGameplayTag, UTexture*> AbilityTextures;
 };

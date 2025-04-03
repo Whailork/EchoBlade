@@ -79,8 +79,3 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void OnFighterDefeated();
 };
-
-
-
-
-
