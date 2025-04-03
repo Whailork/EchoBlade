@@ -14,6 +14,8 @@
  */
 
 DECLARE_LOG_CATEGORY_EXTERN(WaveLog, Log, All);
+DECLARE_DYNAMIC_DELEGATE(FNewWaveDelegate);
+DECLARE_DYNAMIC_DELEGATE(FNewUpgradePoint);
 
 USTRUCT(BlueprintType)
 struct  FEnemyTypeData
@@ -56,8 +58,12 @@ class ECHOBLADE_API UEnemyWaveSubsystem : public UWorldSubsystem
 	GENERATED_BODY()
 
 public:
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	int WaveNumber;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TArray<FNewWaveDelegate> NewWaveDelegates;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TArray<FNewUpgradePoint> NewUpgradePointsDelegates;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TSoftObjectPtr<UDataTable> WavesTable;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
@@ -78,6 +84,10 @@ public:
 	void SpawnEnemy(FEnemyData spawnData, FTimerHandle SpawnTimerHandle, int i);
 	UFUNCTION(BlueprintCallable)
 	void OnFighterDefeated();
+	UFUNCTION(BlueprintCallable)
+	void AddNewWaveDelegate(FNewWaveDelegate delegate);
+	UFUNCTION(BlueprintCallable)
+	void AddNewUpgradePointDelegate(FNewUpgradePoint delegate);
 };
 
 

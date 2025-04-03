@@ -22,8 +22,11 @@ class ECHOBLADE_API UEchoBladeGameInstance : public UGameInstance
 	GENERATED_BODY()
 public:
 	UEchoBladeGameInstance();
+	UPROPERTY(BlueprintReadOnly)
 	int BestWaveNumber;
+	UPROPERTY(BlueprintReadOnly)
 	int KillsForLevelUp;
+	UPROPERTY(BlueprintReadOnly)
 	int CurrentKills;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<UPlayerData*> AllPlayersData;
