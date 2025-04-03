@@ -56,6 +56,8 @@ void APlayerFighter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 		EnhancedInputComponent->BindAction(EarthquakeAction, ETriggerEvent::Triggered, this, &AFighter::EarthQuake);
 		//InstantHeal
 		EnhancedInputComponent->BindAction(InstantHealAction, ETriggerEvent::Triggered, this, &AFighter::InstantHeal);
+		//Haste
+		EnhancedInputComponent->BindAction(HasteAction, ETriggerEvent::Triggered, this, &AFighter::Haste);
 		
 		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Triggered, this, &AFighter::Shoot);
 	}

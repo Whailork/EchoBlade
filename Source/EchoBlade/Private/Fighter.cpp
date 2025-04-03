@@ -230,6 +230,11 @@ void AFighter::InstantHeal()
 	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Buff.InstantHeal"));
 }
 
+void AFighter::Haste()
+{
+	AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Buff.Haste"));
+}
+
 void AFighter::ProcessUpgrades(TArray<FUpgradeData> upgrades)
 {
 	for(auto upgrade : upgrades)
