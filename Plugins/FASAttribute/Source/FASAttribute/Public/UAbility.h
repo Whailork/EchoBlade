@@ -2,8 +2,8 @@
 
 #include "CoreMinimal.h"
 #include "ASActionSystemComponent.h"
-
 #include "GameplayTagContainer.h"
+#include "Components/Image.h"
 #include "UObject/Object.h"
 #include "UAbility.generated.h"
 
@@ -14,6 +14,11 @@ class FASATTRIBUTE_API UAbility : public UObject
 
 public:
 	UAbility();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+	float AbilityCooldown = 0.5f;
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite, Category="UI")
+	UImage* ImageTop;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Ability")
 	FGameplayTag AbilityTag;
@@ -62,5 +67,8 @@ public:
 	bool CanAddAbility(AActor* instigator);
 	UFUNCTION(BlueprintCallable)
 	bool IsInterruptOnHit();
-	
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeOpacity();
+	void ResetOpacity();
 };
