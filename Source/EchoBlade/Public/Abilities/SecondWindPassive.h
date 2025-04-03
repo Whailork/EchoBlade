@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "NiagaraSystem.h"
 #include "UAbility.h"
 #include "SecondWindPassive.generated.h"
 
@@ -13,4 +14,13 @@ UCLASS()
 class ECHOBLADE_API USecondWindPassive : public UAbility
 {
 	GENERATED_BODY()
+
+public:
+	bool UsedOnce;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UNiagaraSystem* ReviveParticles;
+	USecondWindPassive();
+	virtual void Start_Implementation(AActor* instigator) override;
+	virtual void Stop_Implementation(AActor* instigator, bool WasInterrupted) override;
+	virtual bool CanStartAbility_Implementation(AActor* instigator) override;
 };

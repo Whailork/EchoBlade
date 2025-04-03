@@ -164,7 +164,17 @@ void APlayerFighter::OnHealthChanged(FGameplayTag tag, float min, float current,
 	{
 		if (current <= min)
 		{
-			OnDeath();
+			//apply second wind if the fighter has the ability
+			if(AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Passive.SecondWind")))
+			{
+				
+			}
+			else
+			{
+				//else die
+				OnDeath();
+			}
+			
 		}
 	}
 	
