@@ -27,6 +27,7 @@ public class FASAttribute : ModuleRules
 			{
 				"Core",
 				"GameplayTags",
+				"UMG",
 			}
 			);
 			

@@ -128,12 +128,9 @@ void APlayerFighter::PostInitializeComponents()
 
 void APlayerFighter::PossessedBy(AController* NewController)
 {
-	
 	//bind death to attribute changed delegate
 	deathDelegate.BindDynamic(this,&APlayerFighter::OnHealthChanged);
 	AttributeSystemComponent->AddAttributeChangedDelegate(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),deathDelegate);
-
-	Super::PossessedBy(NewController);
 
 	//load upgrades
 	UPlayerData* thisPlayerData = Cast<UEchoBladeGameInstance>(GetGameInstance())->GetPlayerData(Cast<APlayerController>(NewController));
@@ -147,7 +144,7 @@ void APlayerFighter::PossessedBy(AController* NewController)
 		}
 		ProcessUpgrades(upgrades);
 	}
-	
+	Super::PossessedBy(NewController);
 }
 
 void APlayerFighter::OnDeath()
@@ -167,7 +164,17 @@ void APlayerFighter::OnHealthChanged(FGameplayTag tag, float min, float current,
 	{
 		if (current <= min)
 		{
-			OnDeath();
+			//apply second wind if the fighter has the ability
+			if(AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Passive.SecondWind")))
+			{
+				
+			}
+			else
+			{
+				//else die
+				OnDeath();
+			}
+			
 		}
 	}
 	

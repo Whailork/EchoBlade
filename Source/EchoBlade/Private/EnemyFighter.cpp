@@ -8,6 +8,7 @@
 #include "EnemyAIController.h"
 #include "EnemyWaveSubsystem.h"
 #include "GameplayTagsManager.h"
+#include "Abilities/SecondWindPassive.h"
 #include "Abilities/SwordAttack.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Blueprint/UserWidget.h"
@@ -46,10 +47,26 @@ void AEnemyFighter::OnHealthChanged(FGameplayTag tag, float min, float current, 
 {
 	if(tag.MatchesTag(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health")))
 	{
+		
 		if(current <= min)
 		{
-			Cast<AEnemyAIController>(GetController())->BehaviorTree->StopTree(EBTStopMode::Forced);
-			OnDeath();
+			
+			//apply second wind if the fighter has the ability
+			if(AbilitySystemComponent->TriggerAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Passive.SecondWind")))
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("SecondWind"));
+				
+			}
+			else
+			{
+				//else die
+			
+				Cast<AEnemyAIController>(GetController())->BehaviorTree->StopTree(EBTStopMode::Forced);
+				OnDeath();
+			}
+
+			
+			
 		}
 		//check for low health (under 30 percents)
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::SanitizeFloat((current - min)/ (max - min)));

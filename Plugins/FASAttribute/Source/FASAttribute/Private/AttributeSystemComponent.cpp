@@ -372,7 +372,7 @@ void UAttributeSystemComponent::FillUpAttributes()
 
 bool UAttributeSystemComponent::AddEffect(UCustomGameplayEffect* effect)
 {
-	if(!GetEffectsTagContainer().HasTag(effect->TagToAdd) && !GetEffectsTagContainer().HasAny(effect->BlockingTags))
+	if(!GetEffectsTagContainer().HasAny(effect->BlockingTags))
 	{
 		//on valide s'il peut être lancé
 		EffectsContainer.Add(effect);

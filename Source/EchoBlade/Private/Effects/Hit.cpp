@@ -10,6 +10,7 @@
 
 UHit::UHit()
 {
+	TagToAdd = UGameplayTagsManager::Get().RequestGameplayTag("Effect.Hit");
 }
 
 void UHit::OnEffectAdded_Implementation(AActor* instigator)
@@ -24,15 +25,17 @@ void UHit::OnEffectAdded_Implementation(AActor* instigator)
 		if(AbilitySystem && AttributeSystemComponent){
 			if(AbilitySystem->HasAbility(UGameplayTagsManager::Get().RequestGameplayTag("Ability.Passive.FlamingSword")))
 			{
-				
 				bool ApplyBurn = UKismetMathLibrary::RandomBool();
 				if(ApplyBurn){
+					
 					UCustomGameplayEffect* BurningEffect = NewObject<UBurning>(GetOuter());
-					BurningEffect->InitializeValues(5,1,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),AttributeModifiers.Value/2,true,false);
-					AttributeSystemComponent->AddEffect(BurningEffect);
+					if(!AttributeSystemComponent->HasEffect(BurningEffect->TagToAdd))
+					{
+						BurningEffect->InitializeValues(5,1,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),AttributeModifiers.Value/2,true,false);
+						AttributeSystemComponent->AddEffect(BurningEffect);
+					}
+					
 				}
-				
-				
 			}
 		}
 	}

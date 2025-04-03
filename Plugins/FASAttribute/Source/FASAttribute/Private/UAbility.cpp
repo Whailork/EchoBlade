@@ -3,11 +3,11 @@
 #include "ASActionSystemComponent.h"
 #include "CustomAbilitySystem.h"
 #include "GameFramework/Actor.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 
 UAbility::UAbility()
 {
-
 	bCanAdd = true;
 	bCanStart = false;
 }
@@ -46,6 +46,19 @@ void UAbility::OnAbilityRemoved_Implementation(AActor* instigator)
 void UAbility::OnAbilityStarted_Implementation(AActor* instigator)
 {
 	bCanStart = false;
+}
+
+void UAbility::ChangeOpacity()
+{
+	ImageTop->SetOpacity(1.f);
+
+	FTimerHandle TimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UAbility::ResetOpacity, AbilityCooldown, false);
+}
+
+void UAbility::ResetOpacity()
+{
+	ImageTop->SetOpacity(.0f);
 }
 
 void UAbility::OnAbilityStopped_Implementation(AActor* instigator)

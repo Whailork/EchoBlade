@@ -67,27 +67,31 @@ void USwordAttack::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 			UAttributeSystemComponent* HitAttributeComponent = OtherActor->GetComponentByClass<UAttributeSystemComponent>();
 			if(HitAttributeComponent != nullptr)
 			{
+				
 				bHasHit = true;
 				UHit* hitEffect = NewObject<UHit>(SwordCollision->GetOwner());
-		
-				UCharacterMovementComponent* CharacterMovement = OtherActor->GetComponentByClass<UCharacterMovementComponent>();
-				float Knockback = 0;
-				UAttributeSystemComponent* myAttributeComponent = OverlappedComponent->GetOwner()->GetComponentByClass<UAttributeSystemComponent>();
-				if(myAttributeComponent)
+				if(!HitAttributeComponent->HasEffect(hitEffect->TagToAdd))
 				{
-					myAttributeComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Knockback"),Knockback);
-				}
-				hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),ManaCost*(1 +(AttackCount-1)*ComboMultiplier),false,false);
+					UCharacterMovementComponent* CharacterMovement = OtherActor->GetComponentByClass<UCharacterMovementComponent>();
+					float Knockback = 0;
+					UAttributeSystemComponent* myAttributeComponent = OverlappedComponent->GetOwner()->GetComponentByClass<UAttributeSystemComponent>();
+					if(myAttributeComponent)
+					{
+						myAttributeComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Knockback"),Knockback);
+					}
+					hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),ManaCost*(1 +(AttackCount-1)*ComboMultiplier),false,false);
 				
-				if(HitAttributeComponent->AddEffect(hitEffect))
-				{
+					if(HitAttributeComponent->AddEffect(hitEffect))
+					{
 					
 				
-					FVector upForce = OtherActor->GetActorUpVector()* 50000.0 * Knockback;
-					FVector backForce = OtherActor->GetActorForwardVector()* -30000.0 * Knockback;
+						FVector upForce = OtherActor->GetActorUpVector()* 50000.0 * Knockback;
+						FVector backForce = OtherActor->GetActorForwardVector()* -30000.0 * Knockback;
 				
-					CharacterMovement->AddImpulse(upForce+backForce);
+						CharacterMovement->AddImpulse(upForce+backForce);
+					}
 				}
+				
 				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Black, TEXT("hit"));
 			}
 		}
