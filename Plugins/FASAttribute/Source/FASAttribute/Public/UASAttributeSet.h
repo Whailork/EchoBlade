@@ -22,6 +22,8 @@ struct FASAttributeData
 	float current;
 	UPROPERTY(EditAnywhere)
 	float max;
+	UPROPERTY(EditAnywhere)
+	bool FillUpOnLoad;
 };
 
 UCLASS()
