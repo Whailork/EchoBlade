@@ -105,7 +105,7 @@ void UAttributeSystemComponent::LoadDefaultAttributes()
 	{
 		for(FASAttributeData AttributeData : DefaultAttributes->AttributeData)
 		{
-			FAttribute newAttribute = {AttributeData.attributeTag, AttributeData.min, AttributeData.current, AttributeData.max};
+			FAttribute newAttribute = {AttributeData.attributeTag, AttributeData.min, AttributeData.current, AttributeData.max, AttributeData.FillUpOnLoad};
 			AddAttribute(newAttribute);
 		}
 	}
@@ -378,7 +378,10 @@ void UAttributeSystemComponent::FillUpAttributes()
 {
 	for (auto Attribute : Attributes)
 	{
-		SetAttributeValue(Attribute.attributeTag,Attribute.max);
+		if(Attribute.FillUpOnLoad)
+		{
+			SetAttributeValue(Attribute.attributeTag,Attribute.max);
+		}
 	}
 }
 
