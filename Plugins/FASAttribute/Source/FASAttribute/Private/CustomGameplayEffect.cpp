@@ -57,6 +57,7 @@ void UCustomGameplayEffect::InitializeValues_Implementation(float inDuration, fl
 	Period = inPeriod;
 	bLooping = inLooping;
 	bStoppedByEvent = inStoppedByEvent;
+	EffectPower = effectPower;
 }
 
 void UCustomGameplayEffect::OnEffectTriggered_Implementation()

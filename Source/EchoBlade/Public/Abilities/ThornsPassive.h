@@ -13,4 +13,12 @@ UCLASS()
 class ECHOBLADE_API UThornsPassive : public UAbility
 {
 	GENERATED_BODY()
+public:
+	UThornsPassive();
+	FOnEffectAdded OnHitDelegate;
+	UPROPERTY()
+	UAttributeSystemComponent* AttributeComp;
+	virtual void OnAbilityAdded_Implementation(AActor* instigator) override;
+	UFUNCTION()
+	void OnHit(AActor* instigator);
 };

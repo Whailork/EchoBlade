@@ -142,6 +142,8 @@ public:
 	FGameplayTagContainer GetEffectsTagContainer();
 	void ClearAllEffects();
 	bool HasEffect(FGameplayTag effectTag);
+	UFUNCTION(BlueprintCallable)
+	UCustomGameplayEffect* GetEffect(FGameplayTag effectTag);
 
 	UFUNCTION(BlueprintCallable)
 	TArray<UCustomGameplayEffect*> GetPassiveEffects();

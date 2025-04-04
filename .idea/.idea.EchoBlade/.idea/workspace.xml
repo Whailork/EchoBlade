@@ -12,61 +12,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c4b9094-a463-4c06-9144-f6ad7dffdf64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/Abilities/BP_SecondWindPassive.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Blueprint/BP_Leg_armor.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Blueprint/BP_boots.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Blueprint/BP_cuirass.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Blueprint/BP_helmet.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Curve/Curve_Atlas.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Curve/Curve_particale_color.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Maps/main.umap" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meshs/Leg_armor.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meshs/boots.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meshs/cuirass.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meshs/helmet.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meterials/M_beam.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meterials/M_big_flare.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meterials/M_big_star.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meterials/M_cell.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meterials/M_down.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meterials/M_glow.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meterials/M_height_light.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Meterials/M_star.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Texture/T_Bell.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Texture/T_beam.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Texture/T_normal.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/Texture/T_star.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/VFX/NE_drop_effcts02.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/VFX/NE_drop_effect05.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/VFX/NE_drop_effects01.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/VFX/NE_drop_effects03.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/VFX/NE_drop_effects04.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/VFX/NE_drop_effects06.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/DrapEffet/VFX/NE_drop_effects07.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/UI/NewUpgradePointPopup.uasset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Content/UI/NewWavePopup.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultGameplayTags.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGameplayTags.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Abilities/DefaultAbilities.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Abilities/DefaultAbilities.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_PlayerFighter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Lvl_Arena.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/MixedVFX/Particles/Mix/NS_Mix_03.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MixedVFX/Particles/Mix/NS_Mix_03.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/Hud.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/Hud.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldWest_VOL3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OldWest_VOL4.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/AttributeSystemComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/AttributeSystemComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/InstantHeal.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/InstantHeal.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SecondWindPassive.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SecondWindPassive.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SwordAttack.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/SwordAttack.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EchoBladeGameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EchoBladeGameInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Effects/Hit.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Effects/Hit.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyFighter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyFighter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/PlayerFighter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/PlayerFighter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/SecondWindPassive.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/SecondWindPassive.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/EchoBladeGameInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/EchoBladeGameInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/EnemyWaveSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/EnemyWaveSubsystem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/CustomGameplayEffect.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/CustomGameplayEffect.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/AttributeSystemComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/AttributeSystemComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/CustomGameplayEffect.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/CustomGameplayEffect.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/ThornsPassive.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/ThornsPassive.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/ThornsPassive.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/Abilities/ThornsPassive.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,75 +30,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -184,10 +68,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "C++ Project.EchoBlade.executor": "Run",
+    "C++ Project.EchoBlade.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "Cath",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -738,6 +622,8 @@
       <workItem from="1743696485138" duration="5074000" />
       <workItem from="1743704387521" duration="736000" />
       <workItem from="1743706348298" duration="7150000" />
+      <workItem from="1743720678098" duration="515000" />
+      <workItem from="1743788415518" duration="4622000" />
     </task>
     <servers />
   </component>
