@@ -13,4 +13,12 @@ UCLASS()
 class ECHOBLADE_API UTemporaryInvincibilityPassive : public UAbility
 {
 	GENERATED_BODY()
+public:
+	FOnEffectAdded OnHitDelegate;
+	UPROPERTY()
+	UAttributeSystemComponent* AttributeComp;
+	UTemporaryInvincibilityPassive();
+	virtual void OnAbilityAdded_Implementation(AActor* instigator) override;
+	UFUNCTION()
+	void OnHit(AActor* instigator);
 };

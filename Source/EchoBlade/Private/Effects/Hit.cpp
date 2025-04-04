@@ -58,6 +58,7 @@ void UHit::InitializeValues_Implementation(float inDuration, float inPeriod, FGa
 	TagToAdd = UGameplayTagsManager::Get().RequestGameplayTag("Effect.Hit");
 	BlockingTags.AddTag(UGameplayTagsManager::Get().RequestGameplayTag("Effect.Dodging"));
 	BlockingTags.AddTag(UGameplayTagsManager::Get().RequestGameplayTag("Effect.Blocking"));
+	BlockingTags.AddTag(UGameplayTagsManager::Get().RequestGameplayTag("Effect.Invincibility"));
 	AttributeModifiers.Operation = EModifierOperation::Subtract;
 	AttributeModifiers.Value = effectPower;
 	AttributeModifiers.TargetAttribute = AffectedAttributeTag;
