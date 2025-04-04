@@ -20,6 +20,11 @@ void UEnemyWaveSubsystem::Init(UDataTable* waves, TSubclassOf<AEnemyFighter> cla
 
 void UEnemyWaveSubsystem::SpawnNextWave()
 {
+	//fire delagates for new wave spawning
+	for(FNewWaveDelegate delegate : NewWaveDelegates)
+	{
+		delegate.ExecuteIfBound();
+	}
 	FWaveInfoDataTable* nextWave = WavesTable.LoadSynchronous()->FindRow<FWaveInfoDataTable>(FName(FString::FromInt(WaveNumber)),"");
 
 	if(nextWave)
@@ -94,6 +99,10 @@ void UEnemyWaveSubsystem::OnFighterDefeated()
 		{
 			UPlayerData* thisPlayerData = GameInstance->GetPlayerData(Cast<APlayerController>(Cast<APlayerFighter>(Player)->GetController()));
 			thisPlayerData->CurrentPoints += 1;
+			for (auto delegate : NewUpgradePointsDelegates)
+			{
+				delegate.ExecuteIfBound();
+			}
 		}
 			
 	}
@@ -117,6 +126,10 @@ void UEnemyWaveSubsystem::OnFighterDefeated()
 			{
 				UPlayerData* thisPlayerData = GameInstance->GetPlayerData(Cast<APlayerController>(Cast<APlayerFighter>(Player)->GetController()));
 				thisPlayerData->CurrentPoints += 1;
+				for (auto delegate : NewUpgradePointsDelegates)
+				{
+					delegate.ExecuteIfBound();
+				}
 				GameInstance->BestWaveNumber = WaveNumber;
 			}
 		}
@@ -127,4 +140,14 @@ void UEnemyWaveSubsystem::OnFighterDefeated()
 		
 		
 	
+}
+
+void UEnemyWaveSubsystem::AddNewWaveDelegate(FNewWaveDelegate delegate)
+{
+	NewWaveDelegates.Add(delegate);
+}
+
+void UEnemyWaveSubsystem::AddNewUpgradePointDelegate(FNewUpgradePoint delegate)
+{
+	NewUpgradePointsDelegates.Add(delegate);
 }
