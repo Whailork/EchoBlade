@@ -22,9 +22,15 @@ void UEarthquake::Start_Implementation(AActor* instigator)
 
 	//remove manaCost from instigator
 	UAttributeSystemComponent* AttributeSystemComponent = instigator->GetComponentByClass<UAttributeSystemComponent>();
-	float StaminaValue;
-	AttributeSystemComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),StaminaValue);
-	AttributeSystemComponent->SetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),StaminaValue - ManaCost);
+	if(AttributeSystemComponent)
+	{
+		float StaminaValue;
+		AttributeSystemComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),StaminaValue);
+		AttributeSystemComponent->SetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),StaminaValue - ManaCost);
+		AttributeSystemComponent->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Damage"),EffectPower);
+		EffectPower =EffectPower *1.5;
+	}
+	
 
 }
 
@@ -61,7 +67,7 @@ void UEarthquake::TriggerEarthquake(AActor* instigator)
 	{
 		UHit* hitEffect = NewObject<UHit>();
 				
-		hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),ManaCost*(1.5),false,false);
+		hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),EffectPower,false,false);
 		UAttributeSystemComponent* AttributeSystemComponent = Hit.GetActor()->GetComponentByClass<UAttributeSystemComponent>();
 		if(AttributeSystemComponent)
 		{
