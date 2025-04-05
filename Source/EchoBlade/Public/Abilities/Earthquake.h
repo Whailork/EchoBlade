@@ -20,6 +20,7 @@ public:
 	UNiagaraComponent* SpawnedVFX;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	float EarthquakeRange;
+	float EffectPower;
 	UEarthquake();
 
 	virtual void Start_Implementation(AActor* instigator) override;

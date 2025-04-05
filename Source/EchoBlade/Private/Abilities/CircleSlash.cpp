@@ -86,7 +86,14 @@ void UCircleSlash::OnAbilityStopped_Implementation(AActor* instigator)
 bool UCircleSlash::CanStartAbility_Implementation(AActor* instigator)
 {
 	float outValue;
-	instigator->GetComponentByClass<UAttributeSystemComponent>()->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),outValue);
+	UAttributeSystemComponent* AttributeComp = instigator->GetComponentByClass<UAttributeSystemComponent>();
+	if(AttributeComp)
+	{
+		AttributeComp->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Stamina"),outValue);
+		AttributeComp->GetAttributeValue(UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Damage"),EffectPower);
+		
+	}
+	
 	if(Super::CanStartAbility_Implementation(instigator) && outValue >= ManaCost)
 	{
 		return true;
@@ -119,8 +126,8 @@ void UCircleSlash::Slash()
 	{
 		
 		UHit* hitEffect = NewObject<UHit>();
-				
-		hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),ManaCost*(1),false,false);
+		
+		hitEffect->InitializeValues(0,0.00001,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),EffectPower,false,false);
 		UAttributeSystemComponent* AttributeSystemComponent = Hit.GetActor()->GetComponentByClass<UAttributeSystemComponent>();
 		if(AttributeSystemComponent)
 		{

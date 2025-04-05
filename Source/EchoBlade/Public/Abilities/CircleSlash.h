@@ -32,7 +32,7 @@ public:
 	class UNiagaraSystem* SlashParticles;
 	UPROPERTY()
 	UNiagaraComponent* Trail;
-	TArray<UCustomGameplayEffect*> PassiveEffects;
+	float EffectPower;
 	UCircleSlash();
 	virtual void Start_Implementation(AActor* instigator) override;
 	virtual void Stop_Implementation(AActor* instigator,bool WasInterrupted) override;
