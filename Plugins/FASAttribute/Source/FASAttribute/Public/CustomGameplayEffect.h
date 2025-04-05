@@ -77,6 +77,7 @@ public:
 	TSoftObjectPtr<UAttributeSystemComponent> InstgatorAttributeComponent;
 	FTimerManager* tm; 
 	FTimerHandle effectHandle;
+	float EffectPower;
 	virtual void BeginDestroy() override;
 	UFUNCTION(BlueprintNativeEvent)
 	void OnEffectAdded(AActor* instigator);

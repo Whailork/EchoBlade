@@ -55,12 +55,24 @@ bool UAttributeSystemComponent::HasEffect(FGameplayTag effectTag)
 {
 	for (auto Effect : EffectsContainer)
 	{
-		if(Effect->TagToAdd.MatchesTag(effectTag))
+		if(Effect->TagToAdd.MatchesTagExact(effectTag))
 		{
 			return true;
 		}
 	}
 	return false;
+}
+
+UCustomGameplayEffect* UAttributeSystemComponent::GetEffect(FGameplayTag effectTag)
+{
+	for (auto Effect : EffectsContainer)
+	{
+		if(Effect->TagToAdd.MatchesTagExact(effectTag))
+		{
+			return Effect;
+		}
+	}
+	return nullptr;
 }
 
 TArray<UCustomGameplayEffect*> UAttributeSystemComponent::GetPassiveEffects()
@@ -93,7 +105,7 @@ void UAttributeSystemComponent::LoadDefaultAttributes()
 	{
 		for(FASAttributeData AttributeData : DefaultAttributes->AttributeData)
 		{
-			FAttribute newAttribute = {AttributeData.attributeTag, AttributeData.min, AttributeData.current, AttributeData.max};
+			FAttribute newAttribute = {AttributeData.attributeTag, AttributeData.min, AttributeData.current, AttributeData.max, AttributeData.FillUpOnLoad};
 			AddAttribute(newAttribute);
 		}
 	}
@@ -366,7 +378,10 @@ void UAttributeSystemComponent::FillUpAttributes()
 {
 	for (auto Attribute : Attributes)
 	{
-		SetAttributeValue(Attribute.attributeTag,Attribute.max);
+		if(Attribute.FillUpOnLoad)
+		{
+			SetAttributeValue(Attribute.attributeTag,Attribute.max);
+		}
 	}
 }
 

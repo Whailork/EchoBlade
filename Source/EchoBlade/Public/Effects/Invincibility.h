@@ -3,14 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UAbility.h"
-#include "GrowingRagePassive.generated.h"
+#include "CustomGameplayEffect.h"
+#include "Invincibility.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ECHOBLADE_API UGrowingRagePassive : public UAbility
+class ECHOBLADE_API UInvincibility : public UCustomGameplayEffect
 {
 	GENERATED_BODY()
+public:
+	UInvincibility();
 };

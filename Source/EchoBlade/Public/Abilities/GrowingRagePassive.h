@@ -4,21 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "UAbility.h"
-#include "TemporaryInvincibilityPassive.generated.h"
+#include "GrowingRagePassive.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ECHOBLADE_API UTemporaryInvincibilityPassive : public UAbility
+class ECHOBLADE_API UGrowingRagePassive : public UAbility
 {
 	GENERATED_BODY()
 public:
-	FOnEffectAdded OnHitDelegate;
+	FAttributeChangedDelegate HealthChangedDelegate;
 	UPROPERTY()
 	UAttributeSystemComponent* AttributeComp;
-	UTemporaryInvincibilityPassive();
+	float BaseDamage = -1;
+	UGrowingRagePassive();
 	virtual void OnAbilityAdded_Implementation(AActor* instigator) override;
 	UFUNCTION()
-	void OnHit(AActor* instigator);
+	void OnHealthChanged(FGameplayTag tag, float min, float current, float max);
 };

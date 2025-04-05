@@ -28,6 +28,8 @@ struct FAttribute
 	float current;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float max;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool FillUpOnLoad;
 };
 
 USTRUCT(BlueprintType)
