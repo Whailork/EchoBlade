@@ -2,6 +2,8 @@
 
 
 #include "EnemyWaveSubsystem.h"
+
+#include "GameplayTagsManager.h"
 #include "PlayerFighter.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -25,24 +27,34 @@ void UEnemyWaveSubsystem::SpawnNextWave()
 	{
 		delegate.ExecuteIfBound();
 	}
-	FWaveInfoDataTable* nextWave = WavesTable.LoadSynchronous()->FindRow<FWaveInfoDataTable>(FName(FString::FromInt(WaveNumber)),"");
+	FWaveInfoDataTable* Wave = WavesTable.LoadSynchronous()->FindRow<FWaveInfoDataTable>(FName(FString::FromInt(WaveNumber)),"");
 
-	if(nextWave)
+	if(Wave)
 	{
+		nextWave = *Wave;
+		AutoWaves = false;
+		PremadeWavesNumber = WaveNumber;
+	}
+	else
+	{
+		AutoWaves = true;
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, "AutoWaves");
+	}
+	
 		SpawnTimers.Empty();
 		SpawnNumbers.Empty();
-		for (int i = 0; i < nextWave->enemies.Num();i++)
+		for (int i = 0; i < nextWave.enemies.Num();i++)
 		{
 			FTimerHandle tempTimerHandle;
 			
-			FTimerDelegate SpawnDelegate = FTimerDelegate::CreateUObject(this, &UEnemyWaveSubsystem::SpawnEnemy, nextWave->enemies[i], tempTimerHandle,i);
-			SpawnDelegate.BindUFunction(this,FName("SpawnEnemy"),nextWave->enemies[i],tempTimerHandle,i);
-			GetWorld()->GetTimerManager().SetTimer(tempTimerHandle,SpawnDelegate,nextWave->SpawnRate,true);
+			FTimerDelegate SpawnDelegate = FTimerDelegate::CreateUObject(this, &UEnemyWaveSubsystem::SpawnEnemy, nextWave.enemies[i], tempTimerHandle,i);
+			SpawnDelegate.BindUFunction(this,FName("SpawnEnemy"),nextWave.enemies[i],tempTimerHandle,i);
+			GetWorld()->GetTimerManager().SetTimer(tempTimerHandle,SpawnDelegate,nextWave.SpawnRate,true);
 			SpawnTimers.Add(tempTimerHandle);
-			SpawnNumbers.Add(nextWave->enemies[i].enemyNb);
+			SpawnNumbers.Add(nextWave.enemies[i].enemyNb);
 			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::FromInt(enemyData.enemyNb));
 		}
-	}
+	
 	
 }
 
@@ -62,6 +74,12 @@ void UEnemyWaveSubsystem::SpawnEnemy(FEnemyData spawnData,FTimerHandle SpawnTime
 				if(newActor)
 				{
 					newActor->GetMesh()->SetSkeletalMesh(spawnData.type.EnemyMesh);
+					//add health and damage if in auto waves mode
+					if(AutoWaves)
+					{
+						spawnData.type.enemyUpgrades.Add(FUpgradeData(nullptr,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Health"),nullptr,5,WaveNumber-PremadeWavesNumber));
+						spawnData.type.enemyUpgrades.Add(FUpgradeData(nullptr,UGameplayTagsManager::Get().RequestGameplayTag("Attribute.Damage"),nullptr,2.5,WaveNumber-PremadeWavesNumber));
+					}
 					newActor->ProcessUpgrades(spawnData.type.enemyUpgrades);
 					SpawnNumbers[i]--;
 				}
@@ -94,7 +112,7 @@ void UEnemyWaveSubsystem::OnFighterDefeated()
 	if(GameInstance->CurrentKills == GameInstance->KillsForLevelUp)
 	{
 		GameInstance->CurrentKills = 0;
-		GameInstance->KillsForLevelUp += GameInstance->KillsForLevelUp/2;
+		GameInstance->KillsForLevelUp += GameInstance->KillsForLevelUp/5;
 		for (auto Player : players)
 		{
 			UPlayerData* thisPlayerData = GameInstance->GetPlayerData(Cast<APlayerController>(Cast<APlayerFighter>(Player)->GetController()));

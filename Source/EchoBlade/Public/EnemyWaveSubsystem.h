@@ -60,6 +60,10 @@ class ECHOBLADE_API UEnemyWaveSubsystem : public UWorldSubsystem
 public:
 	UPROPERTY(BlueprintReadOnly)
 	int WaveNumber;
+	UPROPERTY()
+	FWaveInfoDataTable nextWave;
+	bool AutoWaves;
+	int PremadeWavesNumber;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	TArray<FNewWaveDelegate> NewWaveDelegates;
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
