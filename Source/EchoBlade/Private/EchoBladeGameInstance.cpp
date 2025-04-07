@@ -7,7 +7,7 @@
 
 UEchoBladeGameInstance::UEchoBladeGameInstance()
 {
-	KillsForLevelUp = 50;
+	KillsForLevelUp = 25;
 	CurrentKills = 0;
 }
 

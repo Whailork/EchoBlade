@@ -50,10 +50,11 @@ void UAbility::OnAbilityStarted_Implementation(AActor* instigator)
 
 void UAbility::ChangeOpacity()
 {
-	ImageTop->SetOpacity(1.f);
+	//in commentaire because it made the game crash
+	/*ImageTop->SetOpacity(1.f);
 
 	FTimerHandle TimerHandle;
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UAbility::ResetOpacity, AbilityCooldown, false);
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &UAbility::ResetOpacity, AbilityCooldown, false);*/
 }
 
 void UAbility::ResetOpacity()

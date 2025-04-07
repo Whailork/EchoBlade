@@ -13,9 +13,12 @@
   <component name="ChangeListManager">
     <list default="true" id="4c4b9094-a463-4c06-9144-f6ad7dffdf64" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/Hud.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/Hud.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/NewUpgradePointPopup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/NewUpgradePointPopup.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/UI/NewWavePopup.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/NewWavePopup.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/UAbility.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/UAbility.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EchoBladeGameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EchoBladeGameInstance.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/EnemyWaveSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/EnemyWaveSubsystem.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -630,6 +633,7 @@
       <workItem from="1743788415518" duration="14249000" />
       <workItem from="1743869685557" duration="40000" />
       <workItem from="1743872048077" duration="361000" />
+      <workItem from="1744039065883" duration="4686000" />
     </task>
     <servers />
   </component>
