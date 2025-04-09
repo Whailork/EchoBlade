@@ -60,7 +60,7 @@ void UBlock::Stop_Implementation(AActor* instigator,bool WasInterrupted)
 		if(instigator)
 		{
 			BlockingEffect->StopPeriodTimer();
-			instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(BlockingEffect->TagToAdd);
+			instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(BlockingEffect);
 		}
 		
 	}

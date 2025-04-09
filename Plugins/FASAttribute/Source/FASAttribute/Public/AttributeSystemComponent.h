@@ -138,7 +138,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool AddEffect(UCustomGameplayEffect* effect);
 	UFUNCTION(BlueprintCallable)
-	void RemoveEffect(FGameplayTag effectTag);
+	void RemoveEffect(UCustomGameplayEffect* effect);
 	FGameplayTagContainer GetEffectsTagContainer();
 	void ClearAllEffects();
 	bool HasEffect(FGameplayTag effectTag);
