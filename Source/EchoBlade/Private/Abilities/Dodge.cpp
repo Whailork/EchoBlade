@@ -41,7 +41,7 @@ void UDodge::Stop_Implementation(AActor* instigator,bool WasInterrupted)
 	ACharacter* Character = Cast<ACharacter>(instigator);
 	Character->GetMesh()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Ignore);
 	Character->GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn,ECR_Block);
-	instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(DodgeEffect->TagToAdd);
+	instigator->GetComponentByClass<UAttributeSystemComponent>()->RemoveEffect(DodgeEffect);
 }
 
 void UDodge::OnAbilityAdded_Implementation(AActor* instigator)

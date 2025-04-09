@@ -416,36 +416,25 @@ bool UAttributeSystemComponent::AddEffect(UCustomGameplayEffect* effect)
 	return false;
 }
 
-void UAttributeSystemComponent::RemoveEffect(FGameplayTag effectTag)
+void UAttributeSystemComponent::RemoveEffect(UCustomGameplayEffect* effect)
 {
-	UCustomGameplayEffect* EffectToRemove = nullptr;
-	for (auto Effect : EffectsContainer)
+	if(EffectsContainer.Contains(effect))
 	{
-		if(Effect->TagToAdd.MatchesTagExact(effectTag))
-		{
-			EffectToRemove = Effect;
-		}
-		
-	}
-	if(EffectToRemove != nullptr)
-	{
-		EffectsContainer.Remove(EffectToRemove);
+		EffectsContainer.Remove(effect);
 		//on cancel les timers et on destroy l'object
-		GetOwner()->GetWorldTimerManager().ClearAllTimersForObject(EffectToRemove);
+		GetOwner()->GetWorldTimerManager().ClearAllTimersForObject(effect);
 		//fire la delegate
-		if(mapEffectRemoved.Contains(effectTag))
+		if(mapEffectRemoved.Contains(effect->TagToAdd))
 		{
-			for (auto Element : mapEffectRemoved[effectTag])
+			for (auto Element : mapEffectRemoved[effect->TagToAdd])
 			{
 				Element.effectRemovedDelegate.ExecuteIfBound(GetOwner());
 			}
 			
 		}
 	}
-	
-	
-	
 }
+
 void UAttributeSystemComponent::AddEffectAddedDelegate(FGameplayTag effectTag, FOnEffectAdded addedDelegate)
 {
 	FEffectAddedHolder holder = {FEffectAddedHolder::currentHandle++,addedDelegate};

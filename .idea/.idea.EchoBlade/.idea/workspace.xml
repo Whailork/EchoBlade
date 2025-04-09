@@ -13,12 +13,14 @@
   <component name="ChangeListManager">
     <list default="true" id="4c4b9094-a463-4c06-9144-f6ad7dffdf64" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.EchoBlade/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/MixedVFX/Particles/Mix/NS_HealingAura.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MixedVFX/Particles/Mix/NS_HealingAura.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/UI/AbilityNode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityNode.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/UI/AbilityTree.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Waves/WavesData.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/UAbility.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/UAbility.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EchoBladeGameInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EchoBladeGameInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/EnemyWaveSubsystem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Public/EnemyWaveSubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Public/EnemyWaveSubsystem.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/AttributeSystemComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/AttributeSystemComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/CustomGameplayEffect.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Private/CustomGameplayEffect.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/AttributeSystemComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/FASAttribute/Source/FASAttribute/Public/AttributeSystemComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Block.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Block.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Dodge.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/EchoBlade/Private/Abilities/Dodge.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -634,6 +636,8 @@
       <workItem from="1743869685557" duration="40000" />
       <workItem from="1743872048077" duration="361000" />
       <workItem from="1744039065883" duration="4686000" />
+      <workItem from="1744155207252" duration="1270000" />
+      <workItem from="1744162151275" duration="1955000" />
     </task>
     <servers />
   </component>
